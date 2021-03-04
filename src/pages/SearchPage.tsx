@@ -18,7 +18,9 @@ import { SFProDisplayRegular } from '../constants/font';
 const SearchPage = () => {
     const newsAPI = new NewsAPI();
     const [search, setSearch] = useState('');
-    const { refetch, data, isLoading } = newsAPI.searchArticles(search);
+    const { refetch, data, isLoading, isFetching } = newsAPI.searchArticles(
+        search,
+    );
     const options = {
         enableVibrateFallback: true,
         ignoreAndroidSystemSettings: false,
@@ -34,7 +36,7 @@ const SearchPage = () => {
                 value={search}
                 onSubmitEditing={async () => await refetch()}
             />
-            {isLoading ? (
+            {isLoading || isFetching ? (
                 <View style={styles.loading}>
                     <ActivityIndicator color="black" />
                 </View>
