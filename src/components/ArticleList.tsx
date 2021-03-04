@@ -1,10 +1,15 @@
 import React from 'react';
-import {ImageSourcePropType, StyleSheet, Text, View} from 'react-native';
-import {Avatar, ListItem} from 'react-native-elements';
+import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
+import { Avatar, ListItem } from 'react-native-elements';
 import TimeAgo from 'react-native-timeago';
-import {ArticleElement} from '../models/articles';
-import {InAppBrowserAPI} from '../services/in-app-browser';
+import { ArticleElement } from '../models/articles';
+import { InAppBrowserAPI } from '../services/in-app-browser';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import {
+    SFProDisplayBold,
+    SFProDisplayMedium,
+    SFProDisplayRegular,
+} from '../constants/font';
 
 interface ArticleListProps {
     articleItem: ArticleElement;
@@ -29,10 +34,10 @@ const ArticleList = ({
     return (
         <ListItem onPress={handleOnPress} bottomDivider>
             <ListItem.Content>
-                <ListItem.Title style={{marginBottom: 8}}>
+                <ListItem.Title style={styles.title}>
                     {articleItem.title}
                 </ListItem.Title>
-                <ListItem.Subtitle>
+                <ListItem.Subtitle style={styles.subtitle}>
                     Published <TimeAgo time={articleItem.publishedAt} />
                 </ListItem.Subtitle>
             </ListItem.Content>
@@ -43,4 +48,12 @@ const ArticleList = ({
 
 export default ArticleList;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    title: {
+        fontFamily: SFProDisplayMedium,
+        marginBottom: 8,
+    },
+    subtitle: {
+        fontFamily: SFProDisplayRegular,
+    },
+});

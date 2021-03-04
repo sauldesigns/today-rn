@@ -1,11 +1,11 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Icon} from 'react-native-elements';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {QueryClient, QueryClientProvider} from 'react-query';
+import { StyleSheet, Text, View } from 'react-native';
+import { Icon } from 'react-native-elements';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import AccountPage from './pages/AccountPage';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
@@ -18,8 +18,8 @@ const App = () => {
             <QueryClientProvider client={queryClient}>
                 <NavigationContainer>
                     <TabStack.Navigator
-                        screenOptions={({route}) => ({
-                            tabBarIcon: ({focused, color, size}) => {
+                        screenOptions={({ route }) => ({
+                            tabBarIcon: ({ focused, color, size }) => {
                                 let iconName: string = '';
 
                                 if (route.name === 'Home') {
@@ -70,7 +70,7 @@ const HomeNavigation = () => {
             <HomeStack.Screen
                 name="Home"
                 component={HomePage}
-                options={{headerShown: false}}
+                options={{ headerShown: false }}
             />
         </HomeStack.Navigator>
     );
@@ -84,7 +84,7 @@ const AccountNavigation = () => {
             <AccountStack.Screen
                 name="Account"
                 component={AccountPage}
-                options={{headerShown: false}}
+                options={{ headerShown: false }}
             />
         </AccountStack.Navigator>
     );
@@ -98,7 +98,7 @@ const SearchNavigation = () => {
             <SearchStack.Screen
                 name="Search"
                 component={SearchPage}
-                options={{headerShown: false}}
+                options={{ headerShown: false }}
             />
         </SearchStack.Navigator>
     );

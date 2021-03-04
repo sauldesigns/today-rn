@@ -1,4 +1,4 @@
-import {Alert, Linking} from 'react-native';
+import { Alert, Linking } from 'react-native';
 import InAppBrowser from 'react-native-inappbrowser-reborn';
 
 export class InAppBrowserAPI {

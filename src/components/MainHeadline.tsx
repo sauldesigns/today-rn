@@ -1,16 +1,26 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import TimeAgo from 'react-native-timeago';
-import {ArticleElement} from '../models/articles';
-import {InAppBrowserAPI} from '../services/in-app-browser';
+import { ArticleElement } from '../models/articles';
+import { InAppBrowserAPI } from '../services/in-app-browser';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import {
+    SFProDisplayBold,
+    SFProDisplayMedium,
+    SFProDisplayRegular,
+} from '../constants/font';
 interface MainHeadlineProps {
     article: ArticleElement | undefined;
     isLoading: boolean;
+    isFetching?: boolean;
 }
 
-const MainHeadline = ({article, isLoading}: MainHeadlineProps) => {
+const MainHeadline = ({
+    article,
+    isLoading,
+    isFetching = false,
+}: MainHeadlineProps) => {
     const inAppBrowser = new InAppBrowserAPI();
     const handleOnPress = async () => {
         ReactNativeHapticFeedback.trigger('impactMedium', options);
@@ -23,23 +33,32 @@ const MainHeadline = ({article, isLoading}: MainHeadlineProps) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.main_title}>Top Headlines</Text>
-            <View style={styles.header}>
-                <TouchableOpacity onPress={handleOnPress}>
-                    <Text style={styles.title}>{article?.title}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleOnPress}>
-                    <Text style={styles.description}>
-                        {article?.description}
-                    </Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.footer}>
-                <Text style={styles.source}>
-                    Published <TimeAgo time={article?.publishedAt ?? ''} />
-                </Text>
-                <Text style={styles.source}>- {article?.source.name}</Text>
-            </View>
+            {isLoading || isFetching ? (
+                <ActivityIndicator />
+            ) : (
+                <>
+                    <Text style={styles.main_title}>Top Headlines</Text>
+                    <View style={styles.header}>
+                        <TouchableOpacity onPress={handleOnPress}>
+                            <Text style={styles.title}>{article?.title}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={handleOnPress}>
+                            <Text style={styles.description}>
+                                {article?.description}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.footer}>
+                        <Text style={styles.source}>
+                            Published{' '}
+                            <TimeAgo time={article?.publishedAt ?? ''} />
+                        </Text>
+                        <Text style={styles.source}>
+                            - {article?.source.name}
+                        </Text>
+                    </View>
+                </>
+            )}
         </View>
     );
 };
@@ -62,21 +81,25 @@ const styles = StyleSheet.create({
     },
     main_title: {
         fontSize: 22,
+        fontFamily: SFProDisplayMedium,
         color: 'white',
     },
     title: {
         color: 'white',
         fontSize: 28,
+        fontFamily: SFProDisplayBold,
         fontWeight: 'bold',
         marginBottom: 16,
     },
     description: {
         color: 'white',
         fontSize: 18,
+        fontFamily: SFProDisplayRegular,
         marginBottom: 16,
     },
     source: {
         color: 'white',
+        fontFamily: SFProDisplayRegular,
     },
     footer: {
         display: 'flex',

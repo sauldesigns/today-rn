@@ -1,14 +1,14 @@
 import axios from 'axios';
-import {useQuery} from 'react-query';
-import {topHeadlinesEndpoint} from '../constants/newsAPIEndpoints';
-import {Article} from '../models/articles';
+import { useQuery } from 'react-query';
+import { topHeadlinesEndpoint } from '../constants/newsAPIEndpoints';
+import { Article } from '../models/articles';
 
 export class NewsAPI {
     constructor() {}
 
     getTopArticles() {
         return useQuery('topHeadlines', async () => {
-            const {data} = await axios.get<Article>(topHeadlinesEndpoint);
+            const { data } = await axios.get<Article>(topHeadlinesEndpoint);
             return data;
         });
     }

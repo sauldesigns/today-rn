@@ -15,12 +15,15 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* todayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* todayTests.m */; };
+		300C4BB395244F36839B38B4 /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7E5EA2965DC4C11AA7E8F91 /* SFProDisplay-Regular.ttf */; };
 		732B6C2D25C86CC45CD313A4 /* libPods-today-todayTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAEA3C270B43DC228ED21F7 /* libPods-today-todayTests.a */; };
 		7592924AF4CA834917941B46 /* libPods-today.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B186B824A99FA0A92C58EC20 /* libPods-today.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		868CF04EE1845102DAB20E17 /* libPods-today-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C7BDD4C3580D7C4577F43F /* libPods-today-tvOSTests.a */; };
 		906AD35D9DCC3B3BD7C89CE7 /* libPods-today-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 507A24DC83F194513855D2FD /* libPods-today-tvOS.a */; };
 		C73E2D8625F0908300D26D12 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = C73E2D8525F0908200D26D12 /* Fonts */; };
+		CA0910FA070744DF9490EDDB /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7202532BBDEA47ABA71D5C83 /* SFProDisplay-Medium.ttf */; };
+		E421263A55154CF1B1B4F0AC /* SFProDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7811DF4544A54DCD998268D2 /* SFProDisplay-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,13 +63,16 @@
 		507A24DC83F194513855D2FD /* libPods-today-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-today-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D81DDAEF136F23F3939DB20 /* Pods-today-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-today-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-today-tvOS/Pods-today-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		6FAEA3C270B43DC228ED21F7 /* libPods-today-todayTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-today-todayTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7202532BBDEA47ABA71D5C83 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SFProDisplay-Medium.ttf"; path = "../assets/fonts/SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		73326D8199D93115ACB4D285 /* Pods-today.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-today.debug.xcconfig"; path = "Target Support Files/Pods-today/Pods-today.debug.xcconfig"; sourceTree = "<group>"; };
+		7811DF4544A54DCD998268D2 /* SFProDisplay-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SFProDisplay-Bold.ttf"; path = "../assets/fonts/SFProDisplay-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = today/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		870E0D37AD68060F4259A459 /* Pods-today-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-today-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-today-tvOSTests/Pods-today-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		94A3D0153D29F7629485B599 /* Pods-today-todayTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-today-todayTests.debug.xcconfig"; path = "Target Support Files/Pods-today-todayTests/Pods-today-todayTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B186B824A99FA0A92C58EC20 /* libPods-today.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-today.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C73E2D8525F0908200D26D12 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
 		CC156687985E88A32A18CCC0 /* Pods-today-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-today-tvOS.release.xcconfig"; path = "Target Support Files/Pods-today-tvOS/Pods-today-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		E7E5EA2965DC4C11AA7E8F91 /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SFProDisplay-Regular.ttf"; path = "../assets/fonts/SFProDisplay-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -142,6 +148,9 @@
 		2B8B7B70E6C3464A914B73DB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7811DF4544A54DCD998268D2 /* SFProDisplay-Bold.ttf */,
+				7202532BBDEA47ABA71D5C83 /* SFProDisplay-Medium.ttf */,
+				E7E5EA2965DC4C11AA7E8F91 /* SFProDisplay-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -354,6 +363,9 @@
 				C73E2D8625F0908300D26D12 /* Fonts in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				E421263A55154CF1B1B4F0AC /* SFProDisplay-Bold.ttf in Resources */,
+				CA0910FA070744DF9490EDDB /* SFProDisplay-Medium.ttf in Resources */,
+				300C4BB395244F36839B38B4 /* SFProDisplay-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
