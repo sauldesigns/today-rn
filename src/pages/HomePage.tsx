@@ -10,7 +10,7 @@ import {NewsAPI} from '../services/api';
 const HomePage = () => {
     const newsAPI = new NewsAPI();
 
-    const {data, error, isLoading} = newsAPI.useTopArticles();
+    const {data, error, isLoading} = newsAPI.getTopArticles();
 
     return (
         <>
@@ -19,18 +19,19 @@ const HomePage = () => {
                 style={styles.container}
                 keyExtractor={(item, index) => index.toString()}
                 ListHeaderComponent={() => {
-                    return <MainHeadline article={data?.articles[0]} />;
+                    return <MainHeadline article={data?.articles[0]} isLoading={isLoading} />;
                 }}
                 renderItem={({item, index}) => {
                     const articleItem: ArticleElement = item;
                     const imageSource: ImageSourcePropType = {
-                        uri: articleItem.urlToImage ?? "",
+                        uri: articleItem.urlToImage ?? 'https://bit.ly/3sOjwBy',
                     };
                     if (index !== 0) {
                         return (
                             <ArticleList
                                 articleItem={articleItem}
                                 imageSource={imageSource}
+                                isLoading={isLoading}
                             />
                         );
                     } else {

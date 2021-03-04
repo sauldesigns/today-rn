@@ -1,16 +1,14 @@
-import axios from "axios";
-import { useQuery } from "react-query";
-import { Article } from "../models/articles";
-
+import axios from 'axios';
+import {useQuery} from 'react-query';
+import {topHeadlinesEndpoint} from '../constants/newsAPIEndpoints';
+import {Article} from '../models/articles';
 
 export class NewsAPI {
     constructor() {}
 
-    useTopArticles() {
+    getTopArticles() {
         return useQuery('topHeadlines', async () => {
-            const {data} = await axios.get<Article>(
-                'https://newsapi.org/v2/top-headlines?country=us&apiKey=7b9fb000e2244968b0f05ce6dd04c9d2',
-            );
+            const {data} = await axios.get<Article>(topHeadlinesEndpoint);
             return data;
         });
     }
