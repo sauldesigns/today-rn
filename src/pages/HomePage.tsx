@@ -46,7 +46,7 @@ const HomePage = () => {
                         }}
                     />
                 }
-                keyExtractor={(item, index) => index.toString()}
+                keyExtractor={(_, index) => index.toString()}
                 ListHeaderComponent={() => {
                     return (
                         <MainHeadline

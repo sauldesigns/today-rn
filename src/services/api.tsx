@@ -12,4 +12,13 @@ export class NewsAPI {
             return data;
         });
     }
+
+    searchArticles(searchValue: string) {
+        return useQuery('searchArticles', async () => {
+            const { data } = await axios.get<Article>(
+                topHeadlinesEndpoint + '&q=' + searchValue,
+            );
+            return data;
+        });
+    }
 }
