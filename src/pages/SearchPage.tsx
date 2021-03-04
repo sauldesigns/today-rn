@@ -6,12 +6,13 @@ import {
     Text,
     View,
 } from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import { Icon, SearchBar } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { NewsAPI } from '../services/api';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { ArticleElement } from '../models/articles';
 import ArticleList from '../components/ArticleList';
+import { SFProDisplayRegular } from '../constants/font';
 
 const SearchPage = () => {
     const newsAPI = new NewsAPI();
@@ -21,7 +22,7 @@ const SearchPage = () => {
         enableVibrateFallback: true,
         ignoreAndroidSystemSettings: false,
     };
-
+    console.log(data);
     return (
         <View style={styles.container}>
             <SearchBar
@@ -32,6 +33,7 @@ const SearchPage = () => {
                 value={search}
                 onSubmitEditing={async () => await refetch()}
             />
+
             <FlatList
                 data={data?.articles}
                 style={styles.container}
@@ -65,6 +67,19 @@ const SearchPage = () => {
                         return <></>;
                     }
                 }}
+                ListEmptyComponent={() => (
+                    <View style={styles.no_articles_container}>
+                        <Icon
+                            name="article"
+                            type="fontawesome"
+                            color="black"
+                            size={50}
+                        />
+                        <Text style={styles.no_articles_text}>
+                            There are no articles.
+                        </Text>
+                    </View>
+                )}
             />
         </View>
     );
@@ -75,5 +90,17 @@ export default SearchPage;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    no_articles_container: {
+        flex: 1,
+        paddingTop: 100,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    no_articles_text: {
+        textAlign: 'center',
+        marginTop: 16,
+        marginBottom: 26,
+        fontFamily: SFProDisplayRegular,
     },
 });

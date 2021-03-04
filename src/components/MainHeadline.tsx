@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontFamily: SFProDisplayMedium,
         color: 'white',
+        marginBottom: 16
     },
     title: {
         color: 'white',
