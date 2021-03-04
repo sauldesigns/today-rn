@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     ImageSourcePropType,
     RefreshControl,
@@ -13,6 +13,8 @@ import MainHeadline from '../components/MainHeadline';
 import { ArticleElement } from '../models/articles';
 import { NewsAPI } from '../services/api';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import ErrorView from '../components/ErrorView';
+import NoArticlesView from '../components/NoArticlesView';
 
 const HomePage = () => {
     const newsAPI = new NewsAPI();
@@ -20,86 +22,75 @@ const HomePage = () => {
         enableVibrateFallback: true,
         ignoreAndroidSystemSettings: false,
     };
-
-    const { data, error, isLoading, refetch } = newsAPI.getTopArticles();
+    const [pullToRefresh, setPullToRefresh] = useState(false);
+    const {
+        data,
+        error,
+        isLoading,
+        refetch,
+        isError,
+    } = newsAPI.getTopArticles();
 
     return (
         <>
-            {error ? (
-                <View
-                    style={{
-                        flex: 1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}>
-                    <Icon
-                        name="error"
-                        type="fontawesome"
-                        color="red"
-                        size={50}
+            <FlatList
+                data={data?.articles}
+                style={styles.container}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={pullToRefresh}
+                        colors={['black']}
+                        tintColor="black"
+                        onRefresh={async () => {
+                            ReactNativeHapticFeedback.trigger(
+                                'selection',
+                                options,
+                            );
+                            setPullToRefresh(true);
+                            await refetch();
+                            setPullToRefresh(false);
+                        }}
                     />
-                    <Text
-                        style={{
-                            textAlign: 'center',
-                            marginTop: 16,
-                            marginBottom: 26,
-                        }}>
-                        An error occured.{'\n'}Please refresh or try again
-                        later.
-                    </Text>
-                    <Button
-                        raised
-                        titleStyle={{ marginHorizontal: 16, marginVertical: 4 }}
-                        title="Retry"
-                        onPress={async () => await refetch()}
-                    />
-                </View>
-            ) : (
-                <FlatList
-                    data={data?.articles}
-                    style={styles.container}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={isLoading}
-                            onRefresh={async () => {
-                                ReactNativeHapticFeedback.trigger(
-                                    'selection',
-                                    options,
-                                );
-                                await refetch();
-                            }}
+                }
+                keyExtractor={(_, index) => index.toString()}
+                ListHeaderComponent={() => {
+                    return isError ? (
+                        <></>
+                    ) : (
+                        <MainHeadline
+                            article={data?.articles[0]}
+                            isLoading={isLoading}
                         />
-                    }
-                    keyExtractor={(_, index) => index.toString()}
-                    ListHeaderComponent={() => {
+                    );
+                }}
+                renderItem={({ item, index }) => {
+                    const articleItem: ArticleElement = item;
+                    const imageSource: ImageSourcePropType = {
+                        uri: articleItem.urlToImage ?? 'https://bit.ly/3sOjwBy',
+                        cache: 'force-cache',
+                    };
+                    if (index !== 0) {
                         return (
-                            <MainHeadline
-                                article={data?.articles[0]}
+                            <ArticleList
+                                articleItem={articleItem}
+                                imageSource={imageSource}
                                 isLoading={isLoading}
                             />
                         );
-                    }}
-                    renderItem={({ item, index }) => {
-                        const articleItem: ArticleElement = item;
-                        const imageSource: ImageSourcePropType = {
-                            uri:
-                                articleItem.urlToImage ??
-                                'https://bit.ly/3sOjwBy',
-                        };
-                        if (index !== 0) {
-                            return (
-                                <ArticleList
-                                    articleItem={articleItem}
-                                    imageSource={imageSource}
-                                    isLoading={isLoading}
-                                />
-                            );
-                        } else {
-                            return <></>;
-                        }
-                    }}
-                />
-            )}
+                    } else {
+                        return <></>;
+                    }
+                }}
+                ListEmptyComponent={() => {
+                    return isError ? (
+                        <View style={{ paddingTop: 100 }}>
+                            <ErrorView errorMessage={error} />
+                        </View>
+                    ) : (
+                        <NoArticlesView />
+                    );
+                }}
+            />
         </>
     );
 };

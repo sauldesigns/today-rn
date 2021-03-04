@@ -7,20 +7,27 @@ import {
     Text,
     View,
 } from 'react-native';
-import { Icon, SearchBar } from 'react-native-elements';
+import { Button, Icon, SearchBar } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { NewsAPI } from '../services/api';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { ArticleElement } from '../models/articles';
 import ArticleList from '../components/ArticleList';
 import { SFProDisplayRegular } from '../constants/font';
+import ErrorView from '../components/ErrorView';
 
 const SearchPage = () => {
     const newsAPI = new NewsAPI();
     const [search, setSearch] = useState('');
-    const { refetch, data, isLoading, isFetching } = newsAPI.searchArticles(
-        search,
-    );
+    const [pullToRefresh, setPullToRefresh] = useState(false);
+    const {
+        refetch,
+        data,
+        isLoading,
+        isFetching,
+        error,
+        isError,
+    } = newsAPI.searchArticles(search);
     const options = {
         enableVibrateFallback: true,
         ignoreAndroidSystemSettings: false,
@@ -36,7 +43,8 @@ const SearchPage = () => {
                 value={search}
                 onSubmitEditing={async () => await refetch()}
             />
-            {isLoading || isFetching ? (
+
+            {(isLoading || isFetching) && !pullToRefresh ? (
                 <View style={styles.loading}>
                     <ActivityIndicator color="black" />
                 </View>
@@ -46,13 +54,15 @@ const SearchPage = () => {
                     style={styles.container}
                     refreshControl={
                         <RefreshControl
-                            refreshing={isLoading}
+                            refreshing={pullToRefresh}
                             onRefresh={async () => {
                                 ReactNativeHapticFeedback.trigger(
                                     'selection',
                                     options,
                                 );
+                                setPullToRefresh(true);
                                 await refetch();
+                                setPullToRefresh(false);
                             }}
                         />
                     }
@@ -63,32 +73,36 @@ const SearchPage = () => {
                             uri:
                                 articleItem.urlToImage ??
                                 'https://bit.ly/3sOjwBy',
+                            cache: 'force-cache',
                         };
-                        if (index !== 0) {
-                            return (
-                                <ArticleList
-                                    articleItem={articleItem}
-                                    imageSource={imageSource}
-                                    isLoading={isLoading}
-                                />
-                            );
-                        } else {
-                            return <></>;
-                        }
-                    }}
-                    ListEmptyComponent={() => (
-                        <View style={styles.no_articles_container}>
-                            <Icon
-                                name="article"
-                                type="fontawesome"
-                                color="black"
-                                size={50}
+
+                        return (
+                            <ArticleList
+                                articleItem={articleItem}
+                                imageSource={imageSource}
+                                isLoading={isLoading}
                             />
-                            <Text style={styles.no_articles_text}>
-                                There are no articles.
-                            </Text>
-                        </View>
-                    )}
+                        );
+                    }}
+                    ListEmptyComponent={() => {
+                        return isError ? (
+                            <View style={{ paddingTop: 100 }}>
+                                <ErrorView errorMessage={error} />
+                            </View>
+                        ) : (
+                            <View style={styles.no_articles_container}>
+                                <Icon
+                                    name="article"
+                                    type="fontawesome"
+                                    color="black"
+                                    size={50}
+                                />
+                                <Text style={styles.no_articles_text}>
+                                    There are no articles.
+                                </Text>
+                            </View>
+                        );
+                    }}
                 />
             )}
         </View>

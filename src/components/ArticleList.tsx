@@ -41,6 +41,7 @@ const ArticleList = ({
                     Published <TimeAgo time={articleItem.publishedAt} />
                 </ListItem.Subtitle>
             </ListItem.Content>
+
             <Avatar size="large" source={imageSource} />
         </ListItem>
     );

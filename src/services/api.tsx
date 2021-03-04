@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { topHeadlinesEndpoint } from '../constants/newsAPIEndpoints';
+import {
+    searchEndpoint,
+    topHeadlinesEndpoint,
+    apiKey,
+} from '../constants/newsAPIEndpoints';
 import { Article } from '../models/articles';
 
 export class NewsAPI {
@@ -8,7 +12,9 @@ export class NewsAPI {
 
     getTopArticles() {
         return useQuery('topHeadlines', async () => {
-            const { data } = await axios.get<Article>(topHeadlinesEndpoint);
+            const { data } = await axios.get<Article>(
+                topHeadlinesEndpoint + 'country=us&apiKey=' + apiKey,
+            );
             return data;
         });
     }
@@ -16,7 +22,11 @@ export class NewsAPI {
     searchArticles(searchValue: string) {
         return useQuery('searchArticles', async () => {
             const { data } = await axios.get<Article>(
-                topHeadlinesEndpoint + '&q=' + searchValue,
+                searchEndpoint +
+                    '&q=' +
+                    searchValue +
+                    '&sortBy=popularity&apiKey=' +
+                    apiKey,
             );
             return data;
         });
