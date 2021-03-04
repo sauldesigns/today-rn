@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+    ActivityIndicator,
     ImageSourcePropType,
     RefreshControl,
     StyleSheet,
@@ -22,7 +23,7 @@ const SearchPage = () => {
         enableVibrateFallback: true,
         ignoreAndroidSystemSettings: false,
     };
-    console.log(data);
+
     return (
         <View style={styles.container}>
             <SearchBar
@@ -33,54 +34,61 @@ const SearchPage = () => {
                 value={search}
                 onSubmitEditing={async () => await refetch()}
             />
-
-            <FlatList
-                data={data?.articles}
-                style={styles.container}
-                refreshControl={
-                    <RefreshControl
-                        refreshing={isLoading}
-                        onRefresh={async () => {
-                            ReactNativeHapticFeedback.trigger(
-                                'selection',
-                                options,
-                            );
-                            await refetch();
-                        }}
-                    />
-                }
-                keyExtractor={(_, index) => index.toString()}
-                renderItem={({ item, index }) => {
-                    const articleItem: ArticleElement = item;
-                    const imageSource: ImageSourcePropType = {
-                        uri: articleItem.urlToImage ?? 'https://bit.ly/3sOjwBy',
-                    };
-                    if (index !== 0) {
-                        return (
-                            <ArticleList
-                                articleItem={articleItem}
-                                imageSource={imageSource}
-                                isLoading={isLoading}
-                            />
-                        );
-                    } else {
-                        return <></>;
-                    }
-                }}
-                ListEmptyComponent={() => (
-                    <View style={styles.no_articles_container}>
-                        <Icon
-                            name="article"
-                            type="fontawesome"
-                            color="black"
-                            size={50}
+            {isLoading ? (
+                <View style={styles.loading}>
+                    <ActivityIndicator color="black" />
+                </View>
+            ) : (
+                <FlatList
+                    data={data?.articles}
+                    style={styles.container}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={isLoading}
+                            onRefresh={async () => {
+                                ReactNativeHapticFeedback.trigger(
+                                    'selection',
+                                    options,
+                                );
+                                await refetch();
+                            }}
                         />
-                        <Text style={styles.no_articles_text}>
-                            There are no articles.
-                        </Text>
-                    </View>
-                )}
-            />
+                    }
+                    keyExtractor={(_, index) => index.toString()}
+                    renderItem={({ item, index }) => {
+                        const articleItem: ArticleElement = item;
+                        const imageSource: ImageSourcePropType = {
+                            uri:
+                                articleItem.urlToImage ??
+                                'https://bit.ly/3sOjwBy',
+                        };
+                        if (index !== 0) {
+                            return (
+                                <ArticleList
+                                    articleItem={articleItem}
+                                    imageSource={imageSource}
+                                    isLoading={isLoading}
+                                />
+                            );
+                        } else {
+                            return <></>;
+                        }
+                    }}
+                    ListEmptyComponent={() => (
+                        <View style={styles.no_articles_container}>
+                            <Icon
+                                name="article"
+                                type="fontawesome"
+                                color="black"
+                                size={50}
+                            />
+                            <Text style={styles.no_articles_text}>
+                                There are no articles.
+                            </Text>
+                        </View>
+                    )}
+                />
+            )}
         </View>
     );
 };
@@ -102,5 +110,10 @@ const styles = StyleSheet.create({
         marginTop: 16,
         marginBottom: 26,
         fontFamily: SFProDisplayRegular,
+    },
+    loading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
     },
 });
