@@ -15,6 +15,7 @@ import { ArticleElement } from '../models/articles';
 import ArticleList from '../components/ArticleList';
 import { SFProDisplayRegular } from '../constants/font';
 import ErrorView from '../components/ErrorView';
+import NoArticlesView from '../components/NoArticlesView';
 
 const SearchPage = () => {
     const newsAPI = new NewsAPI();
@@ -54,6 +55,8 @@ const SearchPage = () => {
                     style={styles.container}
                     refreshControl={
                         <RefreshControl
+                            colors={['black']}
+                            tintColor="black"
                             refreshing={pullToRefresh}
                             onRefresh={async () => {
                                 ReactNativeHapticFeedback.trigger(
@@ -89,18 +92,10 @@ const SearchPage = () => {
                             <View style={{ paddingTop: 100 }}>
                                 <ErrorView errorMessage={error} />
                             </View>
+                        ) : isLoading ? (
+                            <></>
                         ) : (
-                            <View style={styles.no_articles_container}>
-                                <Icon
-                                    name="article"
-                                    type="fontawesome"
-                                    color="black"
-                                    size={50}
-                                />
-                                <Text style={styles.no_articles_text}>
-                                    There are no articles.
-                                </Text>
-                            </View>
+                            <NoArticlesView />
                         );
                     }}
                 />

@@ -32,7 +32,7 @@ const HomePage = () => {
     } = newsAPI.getTopArticles();
 
     return (
-        <>
+        <View style={{ flex: 1, marginTop: pullToRefresh ? 40 : 0 }}>
             <FlatList
                 data={data?.articles}
                 style={styles.container}
@@ -86,12 +86,14 @@ const HomePage = () => {
                         <View style={{ paddingTop: 100 }}>
                             <ErrorView errorMessage={error} />
                         </View>
+                    ) : isLoading ? (
+                        <></>
                     ) : (
                         <NoArticlesView />
                     );
                 }}
             />
-        </>
+        </View>
     );
 };
 
