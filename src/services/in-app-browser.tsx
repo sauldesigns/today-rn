@@ -9,7 +9,7 @@ export class InAppBrowserAPI {
             if (await InAppBrowser.isAvailable()) {
                 const result = await InAppBrowser.open(url, {
                     // iOS Properties
-                    dismissButtonStyle: 'cancel',
+                    dismissButtonStyle: 'close',
                     preferredBarTintColor: '#453AA4',
                     preferredControlTintColor: 'white',
                     readerMode: false,
