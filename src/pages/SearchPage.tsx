@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     ActivityIndicator,
     ImageSourcePropType,
+    NativeSyntheticEvent,
     RefreshControl,
     StyleSheet,
     Text,
+    TextInputKeyPressEventData,
     View,
 } from 'react-native';
 import { Button, Icon, SearchBar } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { NewsAPI } from '../services/api';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import { ArticleElement } from '../models/articles';
+import { Article, ArticleElement } from '../models/articles';
 import ArticleList from '../components/ArticleList';
 import { SFProDisplayRegular } from '../constants/font';
 import ErrorView from '../components/ErrorView';
 import NoArticlesView from '../components/NoArticlesView';
+import { QueryObserverResult, RefetchOptions } from 'react-query';
+import CustomSearchBar from '../components/CustomSearchBar';
 
 const SearchPage = () => {
     const newsAPI = new NewsAPI();
     const [search, setSearch] = useState('');
+
     const [pullToRefresh, setPullToRefresh] = useState(false);
     const {
         refetch,
@@ -34,15 +39,17 @@ const SearchPage = () => {
         ignoreAndroidSystemSettings: false,
     };
 
+    const getSearchValue = async (value: string) => {
+        setSearch(value);
+        await refetch();
+    };
+
     return (
         <View style={styles.container}>
-            <SearchBar
-                round
-                containerStyle={{ paddingTop: 50 }}
-                placeholder="Search Here..."
-                onChangeText={(value) => setSearch(value)}
-                value={search}
-                onSubmitEditing={async () => await refetch()}
+            <CustomSearchBar
+                onSubmit={(v: string) => {
+                    getSearchValue(v);
+                }}
             />
 
             {(isLoading || isFetching) && !pullToRefresh ? (

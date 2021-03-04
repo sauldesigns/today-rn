@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     ImageSourcePropType,
     RefreshControl,
@@ -23,6 +23,7 @@ const HomePage = () => {
         ignoreAndroidSystemSettings: false,
     };
     const [pullToRefresh, setPullToRefresh] = useState(false);
+  
     const {
         data,
         error,

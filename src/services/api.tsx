@@ -20,11 +20,14 @@ export class NewsAPI {
     }
 
     searchArticles(searchValue: string) {
+        if (searchValue.trim() === '') {
+            return this.getTopArticles();
+        }
         return useQuery('searchArticles', async () => {
             const { data } = await axios.get<Article>(
                 searchEndpoint +
-                    '&q=' +
-                    searchValue +
+                    'q=' +
+                    searchValue.trim() +
                     '&sortBy=popularity&apiKey=' +
                     apiKey,
             );
