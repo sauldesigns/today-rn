@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactChild } from 'react';
 import {
     Dimensions,
     GestureResponderEvent,
@@ -15,6 +15,7 @@ interface ProfileHeaderProps {
     backgroundImageSource: ImageSourcePropType;
     avatarImageSource: ImageSourcePropType;
     onPress?: CallableFunction;
+    children: ReactChild;
 }
 
 const WIDTH = Dimensions.get('window').width;
@@ -23,6 +24,7 @@ const ProfileHeader = ({
     backgroundImageSource,
     avatarImageSource,
     onPress = () => {},
+    children,
 }: ProfileHeaderProps) => {
     return (
         <>
@@ -34,25 +36,11 @@ const ProfileHeader = ({
                         style={{
                             width: '100%',
                             height: '100%',
-                            backgroundColor: 'rgba(0,0,0,0.2)',
-                        }}></View>
-                    <Avatar
-                        rounded
-                        size="xlarge"
-                        source={avatarImageSource}
-                        containerStyle={styles.avatarContainer}
-                    />
+                            backgroundColor: 'rgba(0,0,0,0.3)',
+                        }}>
+                        {children}
+                    </View>
                 </ImageBackground>
-            </View>
-            <View style={{ position: 'absolute', top: 55, right: 26 }}>
-                <TouchableOpacity onPress={() => onPress()}>
-                    <Icon
-                        name="settings"
-                        type="fontawesome"
-                        size={35}
-                        color="white"
-                    />
-                </TouchableOpacity>
             </View>
         </>
     );
