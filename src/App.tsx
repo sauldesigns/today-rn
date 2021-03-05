@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import AccountPage from './pages/AccountPage';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
+import SettingsPage from './pages/SettingsPage';
 
 const queryClient = new QueryClient();
 
@@ -86,6 +87,7 @@ const AccountNavigation = () => {
                 component={AccountPage}
                 options={{ headerShown: false }}
             />
+            <AccountStack.Screen name="Settings" component={SettingsPage} />
         </AccountStack.Navigator>
     );
 };
