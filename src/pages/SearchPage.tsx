@@ -41,7 +41,9 @@ const SearchPage = () => {
 
     const getSearchValue = async (value: string) => {
         setSearch(value);
-        await refetch();
+        // Timeout needed in order to set the search value first before
+        // fetching
+        setTimeout(async () => await refetch(), 150);
     };
 
     return (
@@ -79,12 +81,18 @@ const SearchPage = () => {
                     keyExtractor={(_, index) => index.toString()}
                     renderItem={({ item, index }) => {
                         const articleItem: ArticleElement = item;
+                        // Article will sometimes return "" instead of null
+                        // This will handle the case
+                        if (articleItem.urlToImage === '') {
+                            articleItem.urlToImage = 'https://bit.ly/3sOjwBy';
+                        }
                         const imageSource: ImageSourcePropType = {
                             uri:
                                 articleItem.urlToImage ??
                                 'https://bit.ly/3sOjwBy',
                             cache: 'force-cache',
                         };
+                        console.log(imageSource);
 
                         return (
                             <ArticleList

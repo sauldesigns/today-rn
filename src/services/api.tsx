@@ -28,7 +28,7 @@ export class NewsAPI {
                 searchEndpoint +
                     'qInTitle=' +
                     searchValue.trim() +
-                    '&sortBy=popularity&apiKey=' +
+                    '&sortBy=relevancy&apiKey=' +
                     apiKey,
             );
             return data;

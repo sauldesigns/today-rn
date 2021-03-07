@@ -49,12 +49,12 @@ const MainHeadline = ({
                         </TouchableOpacity>
                     </View>
                     <View style={styles.footer}>
-                        <Text style={styles.source}>
+                        <Text style={{...styles.source, marginRight: 8}}>
                             Published{' '}
                             <TimeAgo time={article?.publishedAt ?? ''} />
                         </Text>
                         <Text style={styles.source}>
-                            - {article?.source.name}
+                            Author: {article?.author}
                         </Text>
                     </View>
                 </>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontFamily: SFProDisplayMedium,
         color: 'white',
-        marginBottom: 16
+        marginBottom: 16,
     },
     title: {
         color: 'white',
