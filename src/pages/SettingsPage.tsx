@@ -45,7 +45,6 @@ const SettingsPage = () => {
             icon: 'lock',
             onPress: async () => {
                 await firebaseAPI.resetPassword();
-                console.log('reset password');
             },
         },
         {
@@ -53,7 +52,6 @@ const SettingsPage = () => {
             icon: 'logout',
             onPress: async () => {
                 await firebaseAPI.signOut();
-                console.log('Signed Out');
             },
         },
     ];

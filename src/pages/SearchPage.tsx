@@ -92,8 +92,6 @@ const SearchPage = () => {
                                 'https://bit.ly/3sOjwBy',
                             cache: 'force-cache',
                         };
-                        console.log(imageSource);
-
                         return (
                             <ArticleList
                                 articleItem={articleItem}
