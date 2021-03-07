@@ -4,7 +4,7 @@ import { Avatar } from 'react-native-elements';
 import { SFProDisplayBold, SFProDisplayRegular } from '../constants/font';
 
 interface UserDetailsProps {
-    avatarImageSource: ImageSourcePropType;
+    avatarImageSource?: ImageSourcePropType;
     username: string;
     location: string;
 }
@@ -17,16 +17,15 @@ const UserDetails = ({
     return (
         <View style={styles.container}>
             <View style={styles.details_container}>
-                <Avatar
+                {/* <Avatar
                     rounded
                     size={120}
                     source={avatarImageSource}
                     containerStyle={styles.avatar_container}
-                />
-                <View style={{ paddingRight: 100 }}>
-                    <Text style={styles.username}>{username}</Text>
-                    <Text style={styles.location}>{location}</Text>
-                </View>
+                /> */}
+
+                <Text style={styles.username}>{username}</Text>
+                <Text style={styles.location}>{location}</Text>
             </View>
         </View>
     );
@@ -37,7 +36,10 @@ export default UserDetails;
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 16,
-        paddingTop: 55,
+        display: 'flex',
+        flex: 1,
+        // alignItems: 'center',
+        // justifyContent: 'center',
     },
     avatar_container: {
         borderWidth: 4,
@@ -51,19 +53,18 @@ const styles = StyleSheet.create({
     },
     details_container: {
         display: 'flex',
-        flexDirection: 'row',
         alignItems: 'center',
     },
     username: {
         fontFamily: SFProDisplayBold,
-        fontSize: 22,
+        fontSize: 32,
         textTransform: 'uppercase',
         marginBottom: 8,
         color: 'white',
     },
     location: {
         fontFamily: SFProDisplayRegular,
-        fontSize: 16,
+        fontSize: 18,
         color: 'white',
     },
 });

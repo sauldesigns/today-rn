@@ -10,39 +10,27 @@ import {
 } from 'react-native';
 import { Avatar, Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { black } from '../constants/colors';
 
 interface ProfileHeaderProps {
-    backgroundImageSource: ImageSourcePropType;
-    avatarImageSource: ImageSourcePropType;
+    backgroundImageSource?: ImageSourcePropType;
+    avatarImageSource?: ImageSourcePropType;
     onPress?: CallableFunction;
-    children: ReactChild;
+    children?: ReactChild;
 }
 
 const WIDTH = Dimensions.get('window').width;
 
-const ProfileHeader = ({
-    backgroundImageSource,
-    avatarImageSource,
-    onPress = () => {},
-    children,
-}: ProfileHeaderProps) => {
+const ProfileHeader = ({ children }: ProfileHeaderProps) => {
     return (
-        <>
-            <View>
-                <ImageBackground
-                    style={{ width: WIDTH, height: 200, position: 'relative' }}
-                    source={backgroundImageSource}>
-                    <View
-                        style={{
-                            width: '100%',
-                            height: '100%',
-                            backgroundColor: 'rgba(0,0,0,0.3)',
-                        }}>
-                        {children}
-                    </View>
-                </ImageBackground>
-            </View>
-        </>
+        <View
+            style={{
+                width: WIDTH,
+                height: 250,
+                backgroundColor: black,
+            }}>
+            {children}
+        </View>
     );
 };
 

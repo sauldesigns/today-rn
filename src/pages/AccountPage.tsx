@@ -6,7 +6,7 @@ import {
     StyleSheet,
     View,
 } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import ProfileHeader from '../components/ProfileHeader';
 import UserDetails from '../components/UserDetails';
@@ -14,15 +14,15 @@ import { ACCOUNT_NAVIGATION } from '../constants/navigation';
 
 const AccountPage = () => {
     const navigation = useNavigation();
-    const backgroundImageSource: ImageSourcePropType = {
-        uri: 'https://bit.ly/2MLjriq',
-        cache: 'force-cache',
-    };
+    // const backgroundImageSource: ImageSourcePropType = {
+    //     uri: 'https://bit.ly/2MLjriq',
+    //     cache: 'force-cache',
+    // };
 
-    const avatarImageSource: ImageSourcePropType = {
-        uri: 'https://bit.ly/38bn9tr',
-        cache: 'force-cache',
-    };
+    // const avatarImageSource: ImageSourcePropType = {
+    //     uri: 'https://bit.ly/38bn9tr',
+    //     cache: 'force-cache',
+    // };
     return (
         <>
             <ScrollView style={styles.container}>
@@ -30,46 +30,40 @@ const AccountPage = () => {
                     onPress={() => {
                         navigation.navigate('Settings');
                     }}
-                    avatarImageSource={avatarImageSource}
-                    backgroundImageSource={backgroundImageSource}>
-                    <UserDetails
-                        avatarImageSource={avatarImageSource}
-                        username="John Smith"
-                        location="Riverside, CA"
-                    />
+                    // avatarImageSource={avatarImageSource}
+                    // backgroundImageSource={backgroundImageSource}
+                >
+                    <>
+                        <View style={{flex: 1, marginTop: 60}}>
+                            <UserDetails
+                                // avatarImageSource={avatarImageSource}
+                                username="John Smith"
+                                location="Riverside, CA"
+                            />
+                        </View>
+                        <Button
+                            type="outline"
+                            icon={
+                                <Icon
+                                    name="settings"
+                                    type="fontawesome"
+                                    color="white"
+                                />
+                            }
+                            title="Settings"
+                            containerStyle={{
+                                width: '75%',
+                                marginBottom: 16,
+                                alignSelf: 'center',
+                            }}
+                            titleStyle={{ color: 'white', marginLeft: 8 }}
+                            buttonStyle={{ borderColor: 'white' }}
+                            onPress={() =>
+                                navigation.navigate(ACCOUNT_NAVIGATION.Settings)
+                            }
+                        />
+                    </>
                 </ProfileHeader>
-                <View
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        flex: 1,
-                        justifyContent: 'center',
-                        marginTop: 26,
-                    }}>
-                    <Button
-                        raised
-                        title="Edit Profile"
-                        containerStyle={{
-                            marginRight: 8,
-                            width: '45%',
-                        }}
-                        onPress={() =>
-                            navigation.navigate(ACCOUNT_NAVIGATION.EditProfile)
-                        }
-                    />
-                    <Button
-                        raised
-                        title="Settings"
-                        containerStyle={{
-                            width: '45%',
-                        }}
-                        titleStyle={{ color: 'black' }}
-                        buttonStyle={{ backgroundColor: 'white' }}
-                        onPress={() =>
-                            navigation.navigate(ACCOUNT_NAVIGATION.Settings)
-                        }
-                    />
-                </View>
             </ScrollView>
         </>
     );

@@ -1,25 +1,20 @@
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { MAIN_NAVIGATION_TABS } from './constants/navigation';
 import {
-    ACCOUNT_NAVIGATION,
-    HOME_NAVIGATION,
-    MAIN_NAVIGATION_TABS,
-    SEARCH_NAVIGATION,
-} from './constants/navigation';
-import AccountInformationPage from './pages/AccountInformationPage';
-import AccountPage from './pages/AccountPage';
-import EditProfilePage from './pages/EditProfilePage';
-import HomePage from './pages/HomePage';
-import SearchPage from './pages/SearchPage';
-import SettingsPage from './pages/SettingsPage';
+    HomeNavigation,
+    SearchNavigation,
+    AccountNavigation,
+} from './navigation/navigation';
+import { black } from './constants/colors';
 
 const queryClient = new QueryClient();
+
+const TabStack = createBottomTabNavigator();
 
 const App = () => {
     return (
@@ -27,6 +22,7 @@ const App = () => {
             <QueryClientProvider client={queryClient}>
                 <NavigationContainer>
                     <TabStack.Navigator
+                        tabBarOptions={{ activeTintColor: black }}
                         screenOptions={({ route }) => ({
                             tabBarIcon: ({ color, size }) => {
                                 let iconName: string = '';
@@ -74,59 +70,3 @@ const App = () => {
 };
 
 export default App;
-
-const HomeStack = createStackNavigator();
-
-const HomeNavigation = () => {
-    return (
-        <HomeStack.Navigator>
-            <HomeStack.Screen
-                name={HOME_NAVIGATION.Home}
-                component={HomePage}
-                options={{ headerShown: false }}
-            />
-        </HomeStack.Navigator>
-    );
-};
-
-const AccountStack = createStackNavigator();
-
-const AccountNavigation = () => {
-    return (
-        <AccountStack.Navigator>
-            <AccountStack.Screen
-                name={ACCOUNT_NAVIGATION.Account}
-                component={AccountPage}
-                options={{ headerShown: false }}
-            />
-            <AccountStack.Screen
-                name={ACCOUNT_NAVIGATION.Settings}
-                component={SettingsPage}
-            />
-            <AccountStack.Screen
-                name={ACCOUNT_NAVIGATION.EditProfile}
-                component={EditProfilePage}
-            />
-            <AccountStack.Screen
-                name={ACCOUNT_NAVIGATION.AccountInformation}
-                component={AccountInformationPage}
-            />
-        </AccountStack.Navigator>
-    );
-};
-
-const SearchStack = createStackNavigator();
-
-const SearchNavigation = () => {
-    return (
-        <SearchStack.Navigator>
-            <SearchStack.Screen
-                name={SEARCH_NAVIGATION.Search}
-                component={SearchPage}
-                options={{ headerShown: false }}
-            />
-        </SearchStack.Navigator>
-    );
-};
-
-const TabStack = createBottomTabNavigator();
