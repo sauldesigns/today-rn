@@ -2,17 +2,16 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
     Dimensions,
-    ImageBackground,
     ImageSourcePropType,
     StyleSheet,
-    Text,
     View,
 } from 'react-native';
-import { Avatar, Button, Icon } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import ProfileHeader from '../components/ProfileHeader';
-import { SFProDisplayBold, SFProDisplayRegular } from '../constants/font';
-const WIDTH = Dimensions.get('window').width;
+import UserDetails from '../components/UserDetails';
+import { ACCOUNT_NAVIGATION } from '../constants/navigation';
+
 const AccountPage = () => {
     const navigation = useNavigation();
     const backgroundImageSource: ImageSourcePropType = {
@@ -33,54 +32,11 @@ const AccountPage = () => {
                     }}
                     avatarImageSource={avatarImageSource}
                     backgroundImageSource={backgroundImageSource}>
-                    <View
-                        style={{
-                            paddingHorizontal: 16,
-                            paddingTop: 55,
-                        }}>
-                        <View
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                            }}>
-                            <Avatar
-                                rounded
-                                size={120}
-                                source={avatarImageSource}
-                                containerStyle={{
-                                    borderWidth: 4,
-                                    borderColor: 'white',
-                                    shadowColor: 'rgba(0,0,0,0.3)',
-                                    shadowOffset: { width: 0, height: 2 },
-                                    shadowOpacity: 0.8,
-                                    shadowRadius: 5,
-                                    elevation: 3,
-                                    marginRight: 18,
-                                }}
-                            />
-                            <View style={{ paddingRight: 100 }}>
-                                <Text
-                                    style={{
-                                        fontFamily: SFProDisplayBold,
-                                        fontSize: 22,
-                                        textTransform: 'uppercase',
-                                        marginBottom: 8,
-                                        color: 'white',
-                                    }}>
-                                    John Smith
-                                </Text>
-                                <Text
-                                    style={{
-                                        fontFamily: SFProDisplayRegular,
-                                        fontSize: 16,
-                                        color: 'white',
-                                    }}>
-                                    Riverside, CA
-                                </Text>
-                            </View>
-                        </View>
-                    </View>
+                    <UserDetails
+                        avatarImageSource={avatarImageSource}
+                        username="John Smith"
+                        location="Riverside, CA"
+                    />
                 </ProfileHeader>
                 <View
                     style={{
@@ -97,16 +53,21 @@ const AccountPage = () => {
                             marginRight: 8,
                             width: '45%',
                         }}
+                        onPress={() =>
+                            navigation.navigate(ACCOUNT_NAVIGATION.EditProfile)
+                        }
                     />
                     <Button
                         raised
                         title="Settings"
-                        onPress={() => navigation.navigate('Settings')}
                         containerStyle={{
                             width: '45%',
                         }}
                         titleStyle={{ color: 'black' }}
                         buttonStyle={{ backgroundColor: 'white' }}
+                        onPress={() =>
+                            navigation.navigate(ACCOUNT_NAVIGATION.Settings)
+                        }
                     />
                 </View>
             </ScrollView>

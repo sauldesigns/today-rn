@@ -6,7 +6,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import {
+    ACCOUNT_NAVIGATION,
+    HOME_NAVIGATION,
+    MAIN_NAVIGATION_TABS,
+    SEARCH_NAVIGATION,
+} from './constants/navigation';
+import AccountInformationPage from './pages/AccountInformationPage';
 import AccountPage from './pages/AccountPage';
+import EditProfilePage from './pages/EditProfilePage';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
 import SettingsPage from './pages/SettingsPage';
@@ -20,14 +28,18 @@ const App = () => {
                 <NavigationContainer>
                     <TabStack.Navigator
                         screenOptions={({ route }) => ({
-                            tabBarIcon: ({ focused, color, size }) => {
+                            tabBarIcon: ({ color, size }) => {
                                 let iconName: string = '';
 
-                                if (route.name === 'Home') {
+                                if (route.name === MAIN_NAVIGATION_TABS.Home) {
                                     iconName = 'home';
-                                } else if (route.name === 'Account') {
+                                } else if (
+                                    route.name === MAIN_NAVIGATION_TABS.Account
+                                ) {
                                     iconName = 'person';
-                                } else if (route.name === 'Search') {
+                                } else if (
+                                    route.name === MAIN_NAVIGATION_TABS.Search
+                                ) {
                                     iconName = 'search';
                                 }
 
@@ -43,15 +55,15 @@ const App = () => {
                             },
                         })}>
                         <TabStack.Screen
-                            name="Home"
+                            name={MAIN_NAVIGATION_TABS.Home}
                             component={HomeNavigation}
                         />
                         <TabStack.Screen
-                            name="Search"
+                            name={MAIN_NAVIGATION_TABS.Search}
                             component={SearchNavigation}
                         />
                         <TabStack.Screen
-                            name="Account"
+                            name={MAIN_NAVIGATION_TABS.Account}
                             component={AccountNavigation}
                         />
                     </TabStack.Navigator>
@@ -69,7 +81,7 @@ const HomeNavigation = () => {
     return (
         <HomeStack.Navigator>
             <HomeStack.Screen
-                name="Home"
+                name={HOME_NAVIGATION.Home}
                 component={HomePage}
                 options={{ headerShown: false }}
             />
@@ -83,11 +95,22 @@ const AccountNavigation = () => {
     return (
         <AccountStack.Navigator>
             <AccountStack.Screen
-                name="Account"
+                name={ACCOUNT_NAVIGATION.Account}
                 component={AccountPage}
                 options={{ headerShown: false }}
             />
-            <AccountStack.Screen name="Settings" component={SettingsPage} />
+            <AccountStack.Screen
+                name={ACCOUNT_NAVIGATION.Settings}
+                component={SettingsPage}
+            />
+            <AccountStack.Screen
+                name={ACCOUNT_NAVIGATION.EditProfile}
+                component={EditProfilePage}
+            />
+            <AccountStack.Screen
+                name={ACCOUNT_NAVIGATION.AccountInformation}
+                component={AccountInformationPage}
+            />
         </AccountStack.Navigator>
     );
 };
@@ -98,7 +121,7 @@ const SearchNavigation = () => {
     return (
         <SearchStack.Navigator>
             <SearchStack.Screen
-                name="Search"
+                name={SEARCH_NAVIGATION.Search}
                 component={SearchPage}
                 options={{ headerShown: false }}
             />
