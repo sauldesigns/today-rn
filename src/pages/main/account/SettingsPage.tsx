@@ -3,10 +3,10 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
-import { privacy_policy_link } from '../constants/links';
-import { ACCOUNT_NAVIGATION } from '../constants/navigation';
-import { FirebaseAPI } from '../services/firebase';
-import { InAppBrowserAPI } from '../services/in-app-browser';
+import { privacy_policy_link } from '../../../constants/links';
+import { ACCOUNT_NAVIGATION } from '../../../constants/navigation';
+import { FirebaseAPI } from '../../../services/firebase';
+import { InAppBrowserAPI } from '../../../services/in-app-browser';
 
 interface listItem {
     title: string;

@@ -8,14 +8,14 @@ import {
     HOME_NAVIGATION,
     SEARCH_NAVIGATION,
 } from '../constants/navigation';
-import AccountInformationPage from '../pages/AccountInformationPage';
-import AccountPage from '../pages/AccountPage';
-import EditProfilePage from '../pages/EditProfilePage';
-import HomePage from '../pages/HomePage';
-import SearchPage from '../pages/SearchPage';
-import SettingsPage from '../pages/SettingsPage';
-import Login from '../pages/Login';
-import SignUp from '../pages/SignUp';
+import AccountInformationPage from '../pages/main/account/AccountInformationPage';
+import AccountPage from '../pages/main/AccountPage';
+import EditProfilePage from '../pages/main/account/EditProfilePage';
+import HomePage from '../pages/main/HomePage';
+import SearchPage from '../pages/main/SearchPage';
+import SettingsPage from '../pages/main/account/SettingsPage';
+import Login from '../pages/auth/Login';
+import SignUp from '../pages/auth/SignUp';
 
 //
 const AuthStack = createStackNavigator();

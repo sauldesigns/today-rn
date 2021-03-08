@@ -8,11 +8,11 @@ import {
 } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
-import ProfileHeader from '../components/ProfileHeader';
-import UserDetails from '../components/UserDetails';
-import { ACCOUNT_NAVIGATION } from '../constants/navigation';
-import { useStateValue } from '../context/StateProvider';
-import { User } from '../models/user';
+import ProfileHeader from '../../components/profile/ProfileHeader';
+import UserDetails from '../../components/profile/UserDetails';
+import { ACCOUNT_NAVIGATION } from '../../constants/navigation';
+import { useStateValue } from '../../context/StateProvider';
+import { User } from '../../models/user';
 
 const AccountPage = () => {
     const navigation = useNavigation();

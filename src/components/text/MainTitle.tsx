@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleProp, StyleSheet, Text, TextStyle } from 'react-native';
-import { SFProDisplayBold } from '../constants/font';
+import { SFProDisplayBold } from '../../constants/font';
 
 interface MainTitleProps {
     style?: StyleProp<TextStyle>;

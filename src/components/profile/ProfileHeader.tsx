@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Avatar, Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { black } from '../constants/colors';
+import { black } from '../../constants/colors';
 
 interface ProfileHeaderProps {
     backgroundImageSource?: ImageSourcePropType;

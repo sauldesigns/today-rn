@@ -8,13 +8,13 @@ import {
 } from 'react-native';
 import { Avatar, Button, Icon, ListItem } from 'react-native-elements';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
-import ArticleList from '../components/ArticleList';
-import MainHeadline from '../components/MainHeadline';
-import { ArticleElement } from '../models/articles';
-import { NewsAPI } from '../services/api';
+import ArticleList from '../../components/list/ArticleList';
+import MainHeadline from '../../components/article/MainHeadline';
+import { ArticleElement } from '../../models/articles';
+import { NewsAPI } from '../../services/api';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import ErrorView from '../components/ErrorView';
-import NoArticlesView from '../components/NoArticlesView';
+import ErrorView from '../../components/error/ErrorView';
+import NoArticlesView from '../../components/error/NoArticlesView';
 
 const HomePage = () => {
     const newsAPI = new NewsAPI();

@@ -4,14 +4,13 @@ import {
     OpaqueColorValue,
     StyleProp,
     StyleSheet,
-    StyleSheetProperties,
     TextInputFocusEventData,
     TextStyle,
 } from 'react-native';
 import { Input } from 'react-native-elements';
-import { SFProDisplayRegular } from '../constants/font';
+import { SFProDisplayRegular } from '../../constants/font';
 
-interface MainInputProps {
+interface SecureInputProps {
     style?: StyleProp<TextStyle>;
     placeholderTextColor?: string | typeof OpaqueColorValue | undefined;
     placeholder?: string | undefined;
@@ -33,21 +32,7 @@ interface MainInputProps {
         | undefined;
     autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
     textContentType?: any;
-    returnKeyType?:
-        | 'default'
-        | 'none'
-        | 'done'
-        | 'go'
-        | 'next'
-        | 'search'
-        | 'send'
-        | 'previous'
-        | 'google'
-        | 'join'
-        | 'route'
-        | 'yahoo'
-        | 'emergency-call'
-        | undefined;
+
     ref?:
         | string
         | ((instance: Input | null) => void)
@@ -60,42 +45,33 @@ interface MainInputProps {
     onChange?: (text: string) => void | undefined;
 }
 
-const MainInput = ({
-    style,
-    placeholder = 'Enter here...',
+const SecureInput = ({
+    placeholder = 'Password',
     placeholderTextColor = 'white',
-    autoCorrect = false,
-    keyboardType = 'default',
-    autoCapitalize = 'none',
+    style,
     textContentType = 'none',
-    returnKeyType = 'default',
-    ref,
     onBlur,
     onChange = () => {},
-}: MainInputProps) => {
+}: SecureInputProps) => {
     return (
         <Input
             style={style ? style : styles.input_style}
+            secureTextEntry
             placeholderTextColor={placeholderTextColor}
             placeholder={placeholder}
-            autoCorrect={autoCorrect}
-            keyboardType={keyboardType}
-            autoCapitalize={autoCapitalize}
+            autoCapitalize={'none'}
             textContentType={textContentType}
-            returnKeyType={returnKeyType}
-            ref={ref}
             onBlur={onBlur}
             onChangeText={(value) => onChange(value)}
         />
     );
 };
 
-export default MainInput;
+export default SecureInput;
 
 const styles = StyleSheet.create({
     input_style: {
         color: 'white',
         fontFamily: SFProDisplayRegular,
-        borderBottomColor: 'black',
     },
 });

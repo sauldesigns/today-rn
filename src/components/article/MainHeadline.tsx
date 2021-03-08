@@ -2,14 +2,14 @@ import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import TimeAgo from 'react-native-timeago';
-import { ArticleElement } from '../models/articles';
-import { InAppBrowserAPI } from '../services/in-app-browser';
+import { ArticleElement } from '../../models/articles';
+import { InAppBrowserAPI } from '../../services/in-app-browser';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import {
     SFProDisplayBold,
     SFProDisplayMedium,
     SFProDisplayRegular,
-} from '../constants/font';
+} from '../../constants/font';
 interface MainHeadlineProps {
     article: ArticleElement | undefined;
     isLoading: boolean;

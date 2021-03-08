@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleProp, StyleSheet, Text, TextStyle } from 'react-native';
-import { SFProDisplayRegular } from '../constants/font';
+import { SFProDisplayRegular } from '../../constants/font';
 
 interface GreetingTextProps {
     style?: StyleProp<TextStyle>;

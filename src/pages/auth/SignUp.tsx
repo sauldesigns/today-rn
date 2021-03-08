@@ -6,14 +6,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { useRef } from 'react';
 import { forwardRef } from 'react';
-import { FirebaseAPI } from '../services/firebase';
+import { FirebaseAPI } from '../../services/firebase';
 import { ScrollView } from 'react-native-gesture-handler';
-import SecureInput from '../components/SecureInput';
-import GreetingText from '../components/GreetingText';
-import MainTitle from '../components/MainTitle';
-import MainInput from '../components/MainInput';
+import SecureInput from '../../components/input/SecureInput';
+import GreetingText from '../../components/text/GreetingText';
+import MainTitle from '../../components/text/MainTitle';
+import MainInput from '../../components/input/MainInput';
 import { Button } from 'react-native-elements';
-import { black } from '../constants/colors';
+import { black } from '../../constants/colors';
 
 const options = {
     enableVibrateFallback: true,

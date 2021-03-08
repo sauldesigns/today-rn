@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { SFProDisplayRegular } from '../constants/font';
+import { SFProDisplayRegular } from '../../constants/font';
 
 const NoArticlesView = () => {
     return (

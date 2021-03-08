@@ -1,7 +1,7 @@
 import React from 'react';
 import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
 import { Avatar } from 'react-native-elements';
-import { SFProDisplayBold, SFProDisplayRegular } from '../constants/font';
+import { SFProDisplayBold, SFProDisplayRegular } from '../../constants/font';
 
 interface UserDetailsProps {
     avatarImageSource?: ImageSourcePropType;
