@@ -53,9 +53,9 @@ const MainHeadline = ({
                             Published{' '}
                             <TimeAgo time={article?.publishedAt ?? ''} />
                         </Text>
-                        <Text style={styles.source}>
+                        {/* <Text style={styles.source}>
                             Author: {article?.author}
-                        </Text>
+                        </Text> */}
                     </View>
                 </>
             )}

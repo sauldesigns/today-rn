@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ImageSourcePropType } from 'react-native';
 import { useQuery } from 'react-query';
 import {
     searchEndpoint,
@@ -33,5 +34,16 @@ export class NewsAPI {
             );
             return data;
         });
+    }
+
+    handleImages(uri: string | null): ImageSourcePropType {
+        if (uri === '') {
+            uri = 'https://bit.ly/3sOjwBy';
+        }
+        const imageSource: ImageSourcePropType = {
+            uri: uri ?? 'https://bit.ly/3sOjwBy',
+            cache: 'force-cache',
+        };
+        return imageSource;
     }
 }

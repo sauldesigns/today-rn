@@ -83,15 +83,9 @@ const SearchPage = () => {
                         const articleItem: ArticleElement = item;
                         // Article will sometimes return "" instead of null
                         // This will handle the case
-                        if (articleItem.urlToImage === '') {
-                            articleItem.urlToImage = 'https://bit.ly/3sOjwBy';
-                        }
-                        const imageSource: ImageSourcePropType = {
-                            uri:
-                                articleItem.urlToImage ??
-                                'https://bit.ly/3sOjwBy',
-                            cache: 'force-cache',
-                        };
+                        const imageSource: ImageSourcePropType = newsAPI.handleImages(
+                            articleItem.urlToImage,
+                        );
                         return (
                             <ArticleList
                                 articleItem={articleItem}

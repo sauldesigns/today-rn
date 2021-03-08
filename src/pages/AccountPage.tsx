@@ -11,9 +11,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 import ProfileHeader from '../components/ProfileHeader';
 import UserDetails from '../components/UserDetails';
 import { ACCOUNT_NAVIGATION } from '../constants/navigation';
+import { useStateValue } from '../context/StateProvider';
 
 const AccountPage = () => {
     const navigation = useNavigation();
+    const [{ user }] = useStateValue();
     // const backgroundImageSource: ImageSourcePropType = {
     //     uri: 'https://bit.ly/2MLjriq',
     //     cache: 'force-cache',
@@ -34,11 +36,11 @@ const AccountPage = () => {
                     // backgroundImageSource={backgroundImageSource}
                 >
                     <>
-                        <View style={{flex: 1, marginTop: 60}}>
+                        <View style={{ flex: 1, marginTop: 60 }}>
                             <UserDetails
                                 // avatarImageSource={avatarImageSource}
-                                username="John Smith"
-                                location="Riverside, CA"
+                                username={user?.username ?? ''}
+                                location={user?.bio ?? ''}
                             />
                         </View>
                         <Button

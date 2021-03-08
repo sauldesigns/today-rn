@@ -23,7 +23,7 @@ const HomePage = () => {
         ignoreAndroidSystemSettings: false,
     };
     const [pullToRefresh, setPullToRefresh] = useState(false);
-  
+
     const {
         data,
         error,
@@ -66,10 +66,10 @@ const HomePage = () => {
                 }}
                 renderItem={({ item, index }) => {
                     const articleItem: ArticleElement = item;
-                    const imageSource: ImageSourcePropType = {
-                        uri: articleItem.urlToImage ?? 'https://bit.ly/3sOjwBy',
-                        cache: 'force-cache',
-                    };
+
+                    const imageSource: ImageSourcePropType = newsAPI.handleImages(
+                        articleItem?.urlToImage,
+                    );
                     if (index !== 0) {
                         return (
                             <ArticleList
