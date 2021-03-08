@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     ImageSourcePropType,
     RefreshControl,
     StyleSheet,
-    Text,
     View,
 } from 'react-native';
-import { Avatar, Button, Icon, ListItem } from 'react-native-elements';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import ArticleList from '../../components/list/ArticleList';
 import MainHeadline from '../../components/article/MainHeadline';

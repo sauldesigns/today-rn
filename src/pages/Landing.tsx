@@ -1,6 +1,5 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
@@ -15,7 +14,6 @@ import {
     SearchNavigation,
 } from '../navigation/navigation';
 import { actionTypes } from '../context/reducer';
-import { TransitionPresets } from '@react-navigation/stack';
 
 const TabStack = createBottomTabNavigator();
 

@@ -1,24 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     ActivityIndicator,
     ImageSourcePropType,
-    NativeSyntheticEvent,
     RefreshControl,
     StyleSheet,
-    Text,
-    TextInputKeyPressEventData,
     View,
 } from 'react-native';
-import { Button, Icon, SearchBar } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { NewsAPI } from '../../services/api';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import { Article, ArticleElement } from '../../models/articles';
+import { ArticleElement } from '../../models/articles';
 import ArticleList from '../../components/list/ArticleList';
 import { SFProDisplayRegular } from '../../constants/font';
 import ErrorView from '../../components/error/ErrorView';
 import NoArticlesView from '../../components/error/NoArticlesView';
-import { QueryObserverResult, RefetchOptions } from 'react-query';
 import CustomSearchBar from '../../components/input/CustomSearchBar';
 
 const SearchPage = () => {

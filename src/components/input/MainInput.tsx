@@ -4,7 +4,6 @@ import {
     OpaqueColorValue,
     StyleProp,
     StyleSheet,
-    StyleSheetProperties,
     TextInputFocusEventData,
     TextStyle,
 } from 'react-native';

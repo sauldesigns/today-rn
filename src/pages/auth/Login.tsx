@@ -1,11 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import { useRef } from 'react';
-import { forwardRef } from 'react';
 import { FirebaseAPI } from '../../services/firebase';
 import { ScrollView } from 'react-native-gesture-handler';
 import SecureInput from '../../components/input/SecureInput';

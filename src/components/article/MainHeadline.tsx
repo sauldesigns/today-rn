@@ -49,7 +49,7 @@ const MainHeadline = ({
                         </TouchableOpacity>
                     </View>
                     <View style={styles.footer}>
-                        <Text style={{...styles.source, marginRight: 8}}>
+                        <Text style={{ ...styles.source, marginRight: 8 }}>
                             Published{' '}
                             <TimeAgo time={article?.publishedAt ?? ''} />
                         </Text>

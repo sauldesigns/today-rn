@@ -1,11 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {
-    Dimensions,
-    ImageSourcePropType,
-    StyleSheet,
-    View,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import ProfileHeader from '../../components/profile/ProfileHeader';

@@ -1,15 +1,10 @@
 import React, { ReactChild } from 'react';
 import {
     Dimensions,
-    GestureResponderEvent,
-    ImageBackground,
     ImageSourcePropType,
     StyleSheet,
-    Text,
     View,
 } from 'react-native';
-import { Avatar, Icon } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { black } from '../../constants/colors';
 
 interface ProfileHeaderProps {

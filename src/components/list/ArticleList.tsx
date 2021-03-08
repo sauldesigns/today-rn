@@ -5,11 +5,7 @@ import TimeAgo from 'react-native-timeago';
 import { ArticleElement } from '../../models/articles';
 import { InAppBrowserAPI } from '../../services/in-app-browser';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import {
-    SFProDisplayBold,
-    SFProDisplayMedium,
-    SFProDisplayRegular,
-} from '../../constants/font';
+import { SFProDisplayMedium, SFProDisplayRegular } from '../../constants/font';
 
 interface ArticleListProps {
     articleItem: ArticleElement;
