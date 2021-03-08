@@ -1,3 +1,5 @@
+import { User } from '../models/user';
+
 export const initialState = {
     user: null,
 };

@@ -1,9 +1,7 @@
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import React, { createContext, useContext, useReducer } from 'react';
-
-export type StateContextType = {
-    user: FirebaseAuthTypes.User | null;
-};
+import { User } from '../models/user';
+import reducer, { initialState } from '../context/reducer';
 
 export const StateContext = createContext<any>({});
 

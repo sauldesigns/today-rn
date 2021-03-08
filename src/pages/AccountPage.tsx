@@ -12,10 +12,13 @@ import ProfileHeader from '../components/ProfileHeader';
 import UserDetails from '../components/UserDetails';
 import { ACCOUNT_NAVIGATION } from '../constants/navigation';
 import { useStateValue } from '../context/StateProvider';
+import { User } from '../models/user';
 
 const AccountPage = () => {
     const navigation = useNavigation();
     const [{ user }] = useStateValue();
+    const userObj: User = user;
+
     // const backgroundImageSource: ImageSourcePropType = {
     //     uri: 'https://bit.ly/2MLjriq',
     //     cache: 'force-cache',
@@ -39,8 +42,8 @@ const AccountPage = () => {
                         <View style={{ flex: 1, marginTop: 60 }}>
                             <UserDetails
                                 // avatarImageSource={avatarImageSource}
-                                username={user?.username ?? ''}
-                                location={user?.bio ?? ''}
+                                username={userObj?.username ?? ''}
+                                location={userObj?.bio ?? ''}
                             />
                         </View>
                         <Button

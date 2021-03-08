@@ -1,6 +1,5 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import { ErrorInfo } from 'react';
 
 export class FirebaseAPI {
     usersCollection = firestore().collection('users');
