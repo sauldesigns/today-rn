@@ -6,23 +6,22 @@ The application was built with simplicity in mind and help deliver the latest ne
 
 The app uses an easy to use UI so that only necessary information is displayed. Making it easier for one to find the top headlines, or search for news articles in a quick and efficient mannar. 
 
-| Login                                                 | Sign Up                                                |
-| ----------------------------------------------------- | ------------------------------------------------------ |
-| <img src="images/Login.png" width="400" height="800"> | <img src="images/SignUp.png" width="400" height="800"> |
+| Login                                      | Sign Up                                     |
+| ------------------------------------------ | ------------------------------------------- |
+| <img src="images/Login.png" width="50%" /> | <img src="images/SignUp.png" width="50%" /> |
 
-| Home                                                     | Search                                                     |
-| -------------------------------------------------------- | ---------------------------------------------------------- |
-| <img src="images/Homepage.png" width="400" height="800"> | <img src="images/SearchPage.png" width="400" height="800"> |
+| Home                                          | Search                                          |
+| --------------------------------------------- | ----------------------------------------------- |
+| <img src="images/Homepage.png" width="50%" /> | <img src="images/SearchPage.png" width="50%" /> |
 
-| Settings                                                     | In-App Browser                                                 |
-| ------------------------------------------------------------ | -------------------------------------------------------------- |
-| <img src="images/SettingsPage.png" width="400" height="800"> | <img src="images/In-App-Browser.png" width="400" height="800"> |
+| Settings                                          | In-App Browser                                      |
+| ------------------------------------------------- | --------------------------------------------------- |
+| <img src="images/SettingsPage.png" width="50%" /> | <img src="images/In-App-Browser.png" width="50%" /> |
 
-| More Information                                         |
-| -------------------------------------------------------- |
-| <img src="images/MoreInfo.png" width="400" height="800"> |
+| More Information                              |
+| --------------------------------------------- |
+| <img src="images/MoreInfo.png" width="30%" /> |
 This page will only appear when a user sign's up with a third party such as google or apple
-
 
 ### Authenthication Methods
 - [x] Email & Password
