@@ -18,7 +18,9 @@ const LoginButtons = ({ isLogin = false }: LoginButtonsProps) => {
             <Divider style={{ marginTop: 22, marginBottom: 22 }} />
             {PLATFORM === 'ios' ? (
                 <SocialIcon
-                    title="Sign In With Apple"
+                    title={
+                        isLogin ? 'Sign In With Google' : 'Sign Up With Apple'
+                    }
                     button
                     //@ts-ignore
                     type="apple"
@@ -52,7 +54,7 @@ const LoginButtons = ({ isLogin = false }: LoginButtonsProps) => {
                 <></>
             )}
             <SocialIcon
-                title="Sign In With Google"
+                title={isLogin ? 'Sign In With Google' : 'Sign Up With Google'}
                 button
                 type="google"
                 onPress={async () => {
