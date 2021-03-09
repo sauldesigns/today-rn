@@ -3,8 +3,11 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
+import Snackbar from 'react-native-snackbar';
 import { privacy_policy_link } from '../../../constants/links';
 import { ACCOUNT_NAVIGATION } from '../../../constants/navigation';
+import { actionTypes } from '../../../context/reducer';
+import { useStateValue } from '../../../context/StateProvider';
 import { FirebaseAPI } from '../../../services/firebase';
 import { InAppBrowserAPI } from '../../../services/in-app-browser';
 
@@ -18,6 +21,7 @@ const SettingsPage = () => {
     const firebaseAPI = new FirebaseAPI();
     const inAppBrowserAPI = new InAppBrowserAPI();
     const navigation = useNavigation();
+    const [_, dispatch] = useStateValue();
     const list: listItem[] = [
         {
             title: 'Edit Profile',
@@ -44,7 +48,18 @@ const SettingsPage = () => {
             title: 'Sign Out',
             icon: 'logout',
             onPress: async () => {
-                await firebaseAPI.signOut();
+                try {
+                    await firebaseAPI.signOut();
+                    dispatch({
+                        type: actionTypes.SET_USER,
+                        user: null,
+                    });
+                } catch (err) {
+                    Snackbar.show({
+                        text: 'An error occured.',
+                        duration: Snackbar.LENGTH_LONG,
+                    });
+                }
             },
         },
     ];

@@ -18,3 +18,7 @@ export enum MAIN_NAVIGATION_TABS {
     'Search' = 'Search',
     'Account' = 'Account',
 }
+
+export enum SETUSER_NAVIGATION {
+    'SetUserInfo' = 'Set User Info',
+}

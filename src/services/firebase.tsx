@@ -11,7 +11,15 @@ export class FirebaseAPI {
     constructor() {}
 
     async signOut() {
+        const provider = auth().currentUser?.providerData;
+        console.log(provider);
         try {
+            provider?.forEach((value) => {
+                if (value.providerId === 'google.com') {
+                    GoogleSignin.signOut();
+                }
+            });
+
             await auth().signOut();
         } catch (err) {
             console.log(err?.code);
@@ -77,7 +85,10 @@ export class FirebaseAPI {
             return false;
         }
     }
-    async setupUserDBInfo(username: string) {
+    async setupUserDBInfo(
+        username: string,
+        bio: string = '',
+    ): Promise<boolean> {
         const user = auth().currentUser;
         let image = 'https://bit.ly/3pnIBkI';
 
@@ -87,7 +98,7 @@ export class FirebaseAPI {
             avatar: image,
             createdOn: firestore.Timestamp.now().toDate(),
             username: username,
-            bio: '',
+            bio: bio,
         };
         try {
             await this.usersCollection.doc(user?.uid).set(userData);
@@ -139,7 +150,7 @@ export class FirebaseAPI {
             );
 
             // Sign-in the user with the credential
-            return auth().signInWithCredential(googleCredential);
+            return await auth().signInWithCredential(googleCredential);
         } catch {}
     }
 
@@ -167,7 +178,7 @@ export class FirebaseAPI {
             );
 
             // Sign the user in with the credential
-            return auth().signInWithCredential(appleCredential);
+            return await auth().signInWithCredential(appleCredential);
         } catch {}
     }
 }

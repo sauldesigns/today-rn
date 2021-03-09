@@ -12,6 +12,7 @@ import {
     AuthNavigation,
     HomeNavigation,
     SearchNavigation,
+    SetUserNavigation,
 } from '../navigation/navigation';
 import { actionTypes } from '../context/reducer';
 
@@ -70,6 +71,10 @@ const Landing = () => {
 
     if (!user) {
         return <AuthNavigation />;
+    }
+
+    if (needsUserInfo) {
+        return <SetUserNavigation />;
     }
 
     return (

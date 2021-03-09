@@ -7,6 +7,7 @@ import {
     ACCOUNT_NAVIGATION,
     HOME_NAVIGATION,
     SEARCH_NAVIGATION,
+    SETUSER_NAVIGATION,
 } from '../constants/navigation';
 import AccountInformationPage from '../pages/main/account/AccountInformationPage';
 import AccountPage from '../pages/main/AccountPage';
@@ -16,6 +17,7 @@ import SearchPage from '../pages/main/SearchPage';
 import SettingsPage from '../pages/main/account/SettingsPage';
 import Login from '../pages/auth/Login';
 import SignUp from '../pages/auth/SignUp';
+import SetUserInfo from '../pages/auth/SetUserInfo';
 
 //
 const AuthStack = createStackNavigator();
@@ -63,6 +65,49 @@ export const AuthNavigation = () => {
                 options={{ headerShown: false }}
             />
         </AuthStack.Navigator>
+    );
+};
+
+const SetUserStack = createStackNavigator();
+
+export const SetUserNavigation = () => {
+    return (
+        <SetUserStack.Navigator
+            initialRouteName={SETUSER_NAVIGATION.SetUserInfo}
+            mode="modal"
+            screenOptions={(route) => {
+                const routeName = route.route.name;
+                // if (!isAndroid) {
+                if (routeName === SETUSER_NAVIGATION.SetUserInfo) {
+                    return {
+                        cardOverlayEnabled: true,
+                        gestureEnabled: true,
+                        useNativeDrivers: true,
+                    };
+                }
+                // else if (isAndroid) {
+                //     return {
+                //         cardOverlayEnabled: true,
+                //         gestureEnabled: true,
+                //         useNativeDrivers: true,
+                //         ...TransitionPresets.SlideFromRightIOS,
+                //     };
+                // }
+                return {
+                    gestureEnabled: true,
+                    cardOverlayEnabled: true,
+                    useNativeDrivers: true,
+                    ...TransitionPresets.ModalPresentationIOS,
+                };
+                // }
+                // return {};
+            }}>
+            <SetUserStack.Screen
+                name={SETUSER_NAVIGATION.SetUserInfo}
+                component={SetUserInfo}
+                options={{ headerShown: false }}
+            />
+        </SetUserStack.Navigator>
     );
 };
 

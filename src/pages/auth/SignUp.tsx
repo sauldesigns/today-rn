@@ -18,6 +18,7 @@ import MainTitle from '../../components/text/MainTitle';
 import MainInput from '../../components/input/MainInput';
 import { Button } from 'react-native-elements';
 import { black } from '../../constants/colors';
+import LoginButtons from '../../components/auth/LoginButtons';
 
 const options = {
     enableVibrateFallback: true,
@@ -119,11 +120,10 @@ const SignUp = () => {
                     <Button
                         onPress={handleSubmit(onSubmit)}
                         loading={isLoading}
-                        style={{ marginTop: 50 }}
                         title="Create"
                     />
 
-                    {/* <LoginButtons isLogin /> */}
+                    <LoginButtons />
                 </View>
             </ScrollView>
             <TouchableOpacity
