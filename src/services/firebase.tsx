@@ -2,6 +2,8 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { User } from '../models/user';
 import Snackbar from 'react-native-snackbar';
+import { GoogleSignin } from '@react-native-community/google-signin';
+import appleAuth from '@invertase/react-native-apple-authentication';
 export class FirebaseAPI {
     usersCollection = firestore().collection('users');
     currentUser = auth().currentUser;
@@ -124,5 +126,48 @@ export class FirebaseAPI {
         } catch (err) {
             console.log(err?.message);
         }
+    }
+
+    async signInWithGoogle() {
+        try {
+            // Get the users ID token
+            const { idToken } = await GoogleSignin.signIn();
+
+            // Create a Google credential with the token
+            const googleCredential = auth.GoogleAuthProvider.credential(
+                idToken,
+            );
+
+            // Sign-in the user with the credential
+            return auth().signInWithCredential(googleCredential);
+        } catch {}
+    }
+
+    async onAppleButtonPress() {
+        // Start the sign-in request
+        try {
+            const appleAuthRequestResponse = await appleAuth.performRequest({
+                requestedOperation: appleAuth.Operation.LOGIN,
+                requestedScopes: [
+                    appleAuth.Scope.EMAIL,
+                    appleAuth.Scope.FULL_NAME,
+                ],
+            });
+
+            // Ensure Apple returned a user identityToken
+            if (!appleAuthRequestResponse.identityToken) {
+                throw 'Apple Sign-In failed - no identify token returned';
+            }
+
+            // Create a Firebase credential from the response
+            const { identityToken, nonce } = appleAuthRequestResponse;
+            const appleCredential = auth.AppleAuthProvider.credential(
+                identityToken,
+                nonce,
+            );
+
+            // Sign the user in with the credential
+            return auth().signInWithCredential(appleCredential);
+        } catch {}
     }
 }

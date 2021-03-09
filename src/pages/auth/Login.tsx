@@ -2,7 +2,13 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+    Keyboard,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { FirebaseAPI } from '../../services/firebase';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -10,8 +16,9 @@ import SecureInput from '../../components/input/SecureInput';
 import GreetingText from '../../components/text/GreetingText';
 import MainTitle from '../../components/text/MainTitle';
 import MainInput from '../../components/input/MainInput';
-import { Button } from 'react-native-elements';
+import { Button, Divider } from 'react-native-elements';
 import { black } from '../../constants/colors';
+import LoginButtons from '../../components/auth/LoginButtons';
 
 const options = {
     enableVibrateFallback: true,
@@ -24,6 +31,7 @@ const Login = () => {
     const navigation = useNavigation();
 
     const onSubmit = async (data: any) => {
+        Keyboard.dismiss();
         ReactNativeHapticFeedback.trigger('selection', options);
         setIsLoading(true);
         try {
@@ -101,7 +109,7 @@ const Login = () => {
                         Create an Account
                     </Text>
                 </TouchableOpacity>
-                {/* <LoginButtons isLogin /> */}
+                <LoginButtons isLogin />
             </View>
         </ScrollView>
     );

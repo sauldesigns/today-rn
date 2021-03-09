@@ -2,7 +2,13 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+    Keyboard,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { FirebaseAPI } from '../../services/firebase';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -24,6 +30,7 @@ const SignUp = () => {
     const navigation = useNavigation();
 
     const onSubmit = async (data: any) => {
+        Keyboard.dismiss();
         ReactNativeHapticFeedback.trigger('selection', options);
         setIsLoading(true);
         try {
