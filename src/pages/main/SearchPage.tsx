@@ -87,7 +87,7 @@ const SearchPage = () => {
                             <ArticleList
                                 articleItem={articleItem}
                                 imageSource={imageSource}
-                                isLoading={isLoading}
+                                showSource
                             />
                         );
                     }}

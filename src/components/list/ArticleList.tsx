@@ -17,13 +17,13 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 interface ArticleListProps {
     articleItem: ArticleElement;
     imageSource: ImageSourcePropType;
-    isLoading: boolean;
+    showSource: boolean;
 }
 
 const ArticleList = ({
     articleItem,
     imageSource,
-    isLoading,
+    showSource = false,
 }: ArticleListProps) => {
     const inAppBrowser = new InAppBrowserAPI();
     const handleOnPress = async () => {
@@ -43,6 +43,8 @@ const ArticleList = ({
                     </ListItem.Title>
                 </TouchableOpacity>
                 <ListItem.Subtitle style={styles.subtitle}>
+                    {showSource ? `Source: ${articleItem.source.name}` : ''}
+                    {showSource ? '\n' : ''}
                     Published <TimeAgo time={articleItem.publishedAt} />
                 </ListItem.Subtitle>
             </ListItem.Content>
