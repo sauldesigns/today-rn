@@ -48,6 +48,9 @@ This page will only appear when a user sign's up with a third party such as goog
 - That will navigate you to the settings page where you will be able to edit your profile information, view privacy policy, reset password, or sign out.
 - More feature will be added to the settings page in a future update.
 
+
+## Setting up the project
+- GUIDE IN PROGRESS
 ## Database
   - Powered By Google Firebase:
     - Authenticaion
