@@ -27,6 +27,7 @@ This page will only appear when a user sign's up with a third party such as goog
 - [x] Email & Password
 - [x] Google Sign In
 - [x] Apple Sign In
+- [x] Facebook Sign In
 
 ## App Features
 
