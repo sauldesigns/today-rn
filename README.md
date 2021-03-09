@@ -59,6 +59,7 @@ You can also:
 
 ### API
   - Powered by Firebase Database
+  - API Fetching is done using React Query and Axios
 
 >Today uses Firebase Database as the backend in order to store user bookmarks and user details. 
 
@@ -70,6 +71,10 @@ Today uses a number of open source projects to work properly:
   - [React Native Elements] - Cross Platform React Native UI Toolkit
   - [React Hook Form] - Performant, flexible and extensible forms with easy-to-use vali
   - [React Query] - Fetch, cache and update data in your React and React Native applications all without touching any "global state".
+  - [Axios] - Promise based HTTP client for the browser and node.js
+  - [React Native Snackbar] - Material Design "Snackbar" component for Android and iOS. Supports custom colors, fonts, and languages.
+  - [React Native Timeago] - An auto-updating timeago component for React Native using moment.js.
+  - [Moment] - A JavaScript date library for parsing, validating, manipulating, and formatting dates.
   - And Others...
 ### Mobile Application Installation
 
@@ -92,5 +97,9 @@ Application in progress of being uploaded to both the iOS and Android App store.
   [react native elements]: <https://reactnativeelements.com/>
   [react hook form]: <https://react-hook-form.com/>
   [react query]: <https://react-query.tanstack.com/>
+  [axios]: <https://github.com/axios/axios>
+  [react native snackbar]: <https://github.com/cooperka/react-native-snackbar>
+  [react native timeago]: <https://github.com/TylerLH/react-native-timeago>
+  [moment]: <https://github.com/moment/moment>
 
   
