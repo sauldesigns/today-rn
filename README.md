@@ -18,11 +18,11 @@ The app uses an easy to use UI so that only necessary information is displayed. 
 | ------------------------------------------------------------ | -------------------------------------------------------------- |
 | <img src="images/SettingsPage.png" width="400" height="800"> | <img src="images/In-App-Browser.png" width="400" height="800"> |
 
-| More Information                                         |     |
-| -------------------------------------------------------- | --- |
+| More Information                                         |
+| -------------------------------------------------------- |
 | <img src="images/MoreInfo.png" width="400" height="800"> |
 This page will only appear when a user sign's up with a third party such as google or apple
-|
+
 
 ### Authenthication Methods
 - [x] Email & Password
