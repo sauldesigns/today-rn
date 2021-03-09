@@ -99,7 +99,6 @@ const Login = () => {
                 <Button
                     onPress={handleSubmit(onSubmit)}
                     loading={isLoading}
-                    style={{ marginTop: 50 }}
                     title="Login"
                 />
                 <TouchableOpacity
