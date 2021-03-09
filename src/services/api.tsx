@@ -14,7 +14,9 @@ export class NewsAPI {
     getTopArticles() {
         return useQuery('topHeadlines', async () => {
             const { data } = await axios.get<Article>(
-                topHeadlinesEndpoint + 'country=us&apiKey=' + apiKey,
+                topHeadlinesEndpoint +
+                    'country=us&pageSize=100&apiKey=' +
+                    apiKey,
             );
             return data;
         });

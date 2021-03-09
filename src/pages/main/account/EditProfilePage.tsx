@@ -8,7 +8,7 @@ import React, {
     useState,
 } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { StyleSheet, Text, View } from 'react-native';
+import { Keyboard, StyleSheet, Text, View } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import Snackbar from 'react-native-snackbar';
@@ -38,6 +38,7 @@ const EditProfilePage = () => {
     });
 
     const onSubmit = async (data: any) => {
+        Keyboard.dismiss();
         setIsLoading(true);
         let tempUser = userObj;
         tempUser.username = data?.username;

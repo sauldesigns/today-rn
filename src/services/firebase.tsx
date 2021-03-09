@@ -22,7 +22,21 @@ export class FirebaseAPI {
 
             return true;
         } catch (error) {
-            console.error(error?.code);
+            console.log(error?.code);
+            if (error?.code === 'auth/wrong-password') {
+                Snackbar.show({
+                    text: 'Invalid email or password.',
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor: 'red',
+                });
+            } else {
+                Snackbar.show({
+                    text: error?.code,
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor: 'red',
+                });
+            }
+
             return false;
         }
     }
@@ -39,13 +53,25 @@ export class FirebaseAPI {
             return true;
         } catch (error) {
             if (error?.code === 'auth/email-already-in-use') {
-                console.log('That email address is already in use!');
+                Snackbar.show({
+                    text: 'That email address is already in use!',
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor: 'red',
+                });
+            } else if (error?.code === 'auth/invalid-email') {
+                Snackbar.show({
+                    text: 'That email address is invalid!',
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor: 'red',
+                });
+            } else {
+                Snackbar.show({
+                    text: error?.code,
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor: 'red',
+                });
             }
 
-            if (error?.code === 'auth/invalid-email') {
-                console.log('That email address is invalid!');
-            }
-            console.error(error?.code);
             return false;
         }
     }
@@ -65,7 +91,11 @@ export class FirebaseAPI {
             await this.usersCollection.doc(user?.uid).set(userData);
             return true;
         } catch (error) {
-            console.log(error);
+            Snackbar.show({
+                text: 'An error occured.',
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor: 'red',
+            });
             return false;
         }
     }
@@ -75,10 +105,14 @@ export class FirebaseAPI {
             await this.usersCollection.doc(user.uid).update(user);
             Snackbar.show({
                 text: 'Successfully Updated Profile',
-                duration: Snackbar.LENGTH_SHORT,
+                duration: Snackbar.LENGTH_LONG,
             });
         } catch (err) {
-            console.log(`An error occured. ${err?.code}`);
+            Snackbar.show({
+                text: 'An error occured.',
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor: 'red',
+            });
         }
     }
 

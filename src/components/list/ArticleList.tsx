@@ -1,11 +1,18 @@
 import React from 'react';
-import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
-import { Avatar, ListItem } from 'react-native-elements';
+import {
+    ActivityIndicator,
+    ImageSourcePropType,
+    StyleSheet,
+    Text,
+    View,
+} from 'react-native';
+import { Avatar, Image, ListItem } from 'react-native-elements';
 import TimeAgo from 'react-native-timeago';
 import { ArticleElement } from '../../models/articles';
 import { InAppBrowserAPI } from '../../services/in-app-browser';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { SFProDisplayMedium, SFProDisplayRegular } from '../../constants/font';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface ArticleListProps {
     articleItem: ArticleElement;
@@ -28,17 +35,24 @@ const ArticleList = ({
         ignoreAndroidSystemSettings: false,
     };
     return (
-        <ListItem onPress={handleOnPress} bottomDivider>
+        <ListItem bottomDivider>
             <ListItem.Content>
-                <ListItem.Title style={styles.title}>
-                    {articleItem.title}
-                </ListItem.Title>
+                <TouchableOpacity onPress={handleOnPress}>
+                    <ListItem.Title style={styles.title}>
+                        {articleItem.title}
+                    </ListItem.Title>
+                </TouchableOpacity>
                 <ListItem.Subtitle style={styles.subtitle}>
                     Published <TimeAgo time={articleItem.publishedAt} />
                 </ListItem.Subtitle>
             </ListItem.Content>
 
-            <Avatar size="large" source={imageSource} />
+            <Image
+                onPress={handleOnPress}
+                style={styles.imageContainer}
+                source={imageSource}
+                PlaceholderContent={<ActivityIndicator />}
+            />
         </ListItem>
     );
 };
@@ -46,6 +60,11 @@ const ArticleList = ({
 export default ArticleList;
 
 const styles = StyleSheet.create({
+    imageContainer: {
+        width: 85,
+        height: 85,
+        borderRadius: 10,
+    },
     title: {
         fontFamily: SFProDisplayMedium,
         marginBottom: 8,
