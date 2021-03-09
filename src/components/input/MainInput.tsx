@@ -8,6 +8,7 @@ import {
     TextStyle,
 } from 'react-native';
 import { Input } from 'react-native-elements';
+import { black } from '../../constants/colors';
 import { SFProDisplayRegular } from '../../constants/font';
 
 interface MainInputProps {
@@ -57,6 +58,12 @@ interface MainInputProps {
         | ((e: NativeSyntheticEvent<TextInputFocusEventData>) => void)
         | undefined;
     onChange?: (text: string) => void | undefined;
+    dark?: boolean;
+    value?: string;
+    label?: string;
+    disabled?: boolean;
+    maxLength?: number;
+    onSubmit?: CallableFunction;
 }
 
 const MainInput = ({
@@ -69,12 +76,24 @@ const MainInput = ({
     textContentType = 'none',
     returnKeyType = 'default',
     ref,
+    label = '',
+    dark = false,
+    disabled = false,
+    maxLength,
+    value,
+    onSubmit = () => {},
     onBlur,
     onChange = () => {},
 }: MainInputProps) => {
     return (
         <Input
-            style={style ? style : styles.input_style}
+            style={
+                style
+                    ? style
+                    : { ...styles.input_style, color: dark ? black : 'white' }
+            }
+            label={label}
+            disabled={disabled}
             placeholderTextColor={placeholderTextColor}
             placeholder={placeholder}
             autoCorrect={autoCorrect}
@@ -82,9 +101,13 @@ const MainInput = ({
             autoCapitalize={autoCapitalize}
             textContentType={textContentType}
             returnKeyType={returnKeyType}
+            maxLength={maxLength ? maxLength : undefined}
             ref={ref}
+            value={value}
             onBlur={onBlur}
             onChangeText={(value) => onChange(value)}
+            onSubmitEditing={() => onSubmit()}
+            blurOnSubmit={true}
         />
     );
 };
@@ -93,7 +116,6 @@ export default MainInput;
 
 const styles = StyleSheet.create({
     input_style: {
-        color: 'white',
         fontFamily: SFProDisplayRegular,
         borderBottomColor: 'black',
     },

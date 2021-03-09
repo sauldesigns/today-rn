@@ -20,13 +20,6 @@ const SettingsPage = () => {
     const navigation = useNavigation();
     const list: listItem[] = [
         {
-            title: 'Account Information',
-            icon: 'person',
-            onPress: () => {
-                navigation.navigate(ACCOUNT_NAVIGATION.AccountInformation);
-            },
-        },
-        {
             title: 'Edit Profile',
             icon: 'edit',
             onPress: () => {

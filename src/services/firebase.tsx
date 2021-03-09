@@ -1,6 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-
+import { User } from '../models/user';
+import Snackbar from 'react-native-snackbar';
 export class FirebaseAPI {
     usersCollection = firestore().collection('users');
     currentUser = auth().currentUser;
@@ -66,6 +67,18 @@ export class FirebaseAPI {
         } catch (error) {
             console.log(error);
             return false;
+        }
+    }
+
+    async updateUserDBInfo(user: User) {
+        try {
+            await this.usersCollection.doc(user.uid).update(user);
+            Snackbar.show({
+                text: 'Successfully Updated Profile',
+                duration: Snackbar.LENGTH_SHORT,
+            });
+        } catch (err) {
+            console.log(`An error occured. ${err?.code}`);
         }
     }
 

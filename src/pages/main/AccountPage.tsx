@@ -25,7 +25,9 @@ const AccountPage = () => {
     // };
     return (
         <>
-            <ScrollView style={styles.container}>
+            <ScrollView
+                style={styles.container}
+                keyboardShouldPersistTaps="handled">
                 <ProfileHeader
                     onPress={() => {
                         navigation.navigate('Settings');

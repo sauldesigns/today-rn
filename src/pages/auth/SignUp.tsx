@@ -49,7 +49,9 @@ const SignUp = () => {
 
     return (
         <>
-            <ScrollView style={styles.container}>
+            <ScrollView
+                style={styles.container}
+                keyboardShouldPersistTaps="handled">
                 <View style={styles.content}>
                     <GreetingText text="Hey! Nice to meet you!" />
                     <MainTitle text="Sign Up" />

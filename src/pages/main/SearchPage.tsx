@@ -57,6 +57,8 @@ const SearchPage = () => {
                 <FlatList
                     data={data?.articles}
                     style={styles.container}
+                    keyboardShouldPersistTaps="handled"
+                    keyboardDismissMode="on-drag"
                     refreshControl={
                         <RefreshControl
                             colors={['black']}

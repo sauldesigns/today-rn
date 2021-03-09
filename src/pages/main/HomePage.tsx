@@ -5,7 +5,7 @@ import {
     StyleSheet,
     View,
 } from 'react-native';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import ArticleList from '../../components/list/ArticleList';
 import MainHeadline from '../../components/article/MainHeadline';
 import { ArticleElement } from '../../models/articles';

@@ -47,7 +47,9 @@ const Login = () => {
     };
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView
+            style={styles.container}
+            keyboardShouldPersistTaps="handled">
             <View style={styles.content}>
                 <GreetingText text="Hey! Welcome Back!" />
                 <MainTitle text="Login" />
