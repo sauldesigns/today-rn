@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     createStackNavigator,
+    HeaderBackground,
     TransitionPresets,
 } from '@react-navigation/stack';
 import {
@@ -18,8 +19,11 @@ import SettingsPage from '../pages/main/account/SettingsPage';
 import Login from '../pages/auth/Login';
 import SignUp from '../pages/auth/SignUp';
 import SetUserInfo from '../pages/auth/SetUserInfo';
+import { StyleSheet, View } from 'react-native';
+import { black } from '../constants/colors';
 
-//
+//------------- AUTH ROUTES -----------------------------
+
 const AuthStack = createStackNavigator();
 
 export const AuthNavigation = () => {
@@ -67,6 +71,8 @@ export const AuthNavigation = () => {
         </AuthStack.Navigator>
     );
 };
+
+//------------- SET USER ROUTES -----------------------------
 
 const SetUserStack = createStackNavigator();
 
@@ -148,7 +154,13 @@ const AccountStack = createStackNavigator();
 
 export const AccountNavigation = () => {
     return (
-        <AccountStack.Navigator>
+        <AccountStack.Navigator
+            screenOptions={{
+                headerTitleStyle: { color: 'white' },
+                headerBackground: () => (
+                    <View style={{ flex: 1, backgroundColor: black }} />
+                ),
+            }}>
             <AccountStack.Screen
                 name={ACCOUNT_NAVIGATION.Account}
                 component={AccountPage}
