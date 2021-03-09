@@ -40,7 +40,8 @@ This page will only appear when a user sign's up with a third party such as goog
 - Once logged in you head to the seach tab
 - You will then be able to search for particular news articles. 
 - If any found a list will be displayed. Click on either the title or image in order to open up the built-in browser.
-
+### Profile Page
+- Still in progress.
 ### Settings
 - Once logged in head over to the Account tab.
 - There you will find a settings button. 
@@ -79,6 +80,7 @@ Today uses a number of open source projects to work properly:
 Application in progress of being uploaded to both the iOS and Android App store.
 
 ### Todos
+  - Profile Page 
   - Write MORE Tests
   - Implement profile pictures
   - Add smoother transitions/animations. 
