@@ -66,7 +66,7 @@ You can also:
 >Today uses Firebase Database as the backend in order to store user bookmarks and user details. 
 
 ### Open Source Projects
-Today uses a number of open source projects to work properly:
+Today uses a number of open source projects:
 
   - [React Native] - React Native combines the best parts of native development with React, a best-in-class JavaScript library for building user interfaces.
   - [React Native Firebase] - React Native Firebase is the officially recommended collection of packages that brings React Native support for all Firebase services on both Android and iOS apps.
