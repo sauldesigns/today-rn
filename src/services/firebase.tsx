@@ -12,7 +12,7 @@ export class FirebaseAPI {
 
     async signOut() {
         const provider = auth().currentUser?.providerData;
-        console.log(provider);
+
         try {
             provider?.forEach((value) => {
                 if (value.providerId === 'google.com') {
@@ -32,7 +32,6 @@ export class FirebaseAPI {
 
             return true;
         } catch (error) {
-            console.log(error?.code);
             if (error?.code === 'auth/wrong-password') {
                 Snackbar.show({
                     text: 'Invalid email or password.',
