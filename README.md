@@ -1,6 +1,6 @@
 # Today
 
-Today is a cross-platform cloud-enabled mobile application powered by React Native (Front-End) and Google Firebase (Back-End).
+Today is a cross-platform cloud-enabled mobile application powered by React Native (Frontend) and Google Firebase (Backend).
 
 The application was built with simplicity in mind and help deliver the latest news. 
 
