@@ -3,6 +3,7 @@ import firestore from '@react-native-firebase/firestore';
 import { User } from '../models/user';
 import Snackbar from 'react-native-snackbar';
 import { GoogleSignin } from '@react-native-community/google-signin';
+import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import appleAuth from '@invertase/react-native-apple-authentication';
 export class FirebaseAPI {
     usersCollection = firestore().collection('users');
@@ -72,6 +73,14 @@ export class FirebaseAPI {
                     text: 'That email address is invalid!',
                     duration: Snackbar.LENGTH_LONG,
                     backgroundColor: 'red',
+                });
+            } else if (
+                error?.code === 'auth/account-exists-with-different-credential'
+            ) {
+                Snackbar.show({
+                    text:
+                        'An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.',
+                    duration: Snackbar.LENGTH_LONG,
                 });
             } else {
                 Snackbar.show({
@@ -149,8 +158,57 @@ export class FirebaseAPI {
             );
 
             // Sign-in the user with the credential
-            return await auth().signInWithCredential(googleCredential);
-        } catch {}
+            await auth().signInWithCredential(googleCredential);
+            return true;
+        } catch (err) {
+            if (err?.code === 'auth/account-exists-with-different-credential') {
+                Snackbar.show({
+                    text:
+                        'An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.',
+                    duration: Snackbar.LENGTH_LONG,
+                });
+            }
+            return false;
+        }
+    }
+
+    async signInWithFacebook() {
+        try {
+            // Attempt login with permissions
+            const result = await LoginManager.logInWithPermissions([
+                'public_profile',
+                'email',
+            ]);
+
+            if (result.isCancelled) {
+                throw 'User cancelled the login process';
+            }
+
+            // Once signed in, get the users AccesToken
+            const data = await AccessToken.getCurrentAccessToken();
+
+            if (!data) {
+                throw 'Something went wrong obtaining access token';
+            }
+
+            // Create a Firebase credential with the AccessToken
+            const facebookCredential = auth.FacebookAuthProvider.credential(
+                data.accessToken,
+            );
+
+            // Sign-in the user with the credential
+            await auth().signInWithCredential(facebookCredential);
+            return true;
+        } catch (err) {
+            if (err?.code === 'auth/account-exists-with-different-credential') {
+                Snackbar.show({
+                    text:
+                        'An account already exists with the same email address but different sign-in credentials. Sign in using a provider associated with this email address.',
+                    duration: Snackbar.LENGTH_LONG,
+                });
+            }
+            return false;
+        }
     }
 
     async onAppleButtonPress() {
@@ -177,7 +235,17 @@ export class FirebaseAPI {
             );
 
             // Sign the user in with the credential
-            return await auth().signInWithCredential(appleCredential);
-        } catch {}
+            await auth().signInWithCredential(appleCredential);
+            return true;
+        } catch (err) {
+            if (err?.code === 'auth/account-exists-with-different-credential') {
+                Snackbar.show({
+                    text:
+                        'An account already exists with the same email address but different sign-in credentials.',
+                    duration: Snackbar.LENGTH_LONG,
+                });
+            }
+            return false;
+        }
     }
 }

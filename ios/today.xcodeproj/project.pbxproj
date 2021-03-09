@@ -23,6 +23,9 @@
 		906AD35D9DCC3B3BD7C89CE7 /* libPods-today-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 507A24DC83F194513855D2FD /* libPods-today-tvOS.a */; };
 		C706FA3925F5F76D00B2B658 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C706FA3825F5F76D00B2B658 /* GoogleService-Info.plist */; };
 		C73E2D8625F0908300D26D12 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = C73E2D8525F0908200D26D12 /* Fonts */; };
+		C772F18525F835EB0056E618 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C772F18425F835EB0056E618 /* AuthenticationServices.framework */; };
+		C772F19125F83A140056E618 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C772F19025F83A140056E618 /* File.swift */; };
+		C772F19225F83A140056E618 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = C772F19025F83A140056E618 /* File.swift */; };
 		CA0910FA070744DF9490EDDB /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7202532BBDEA47ABA71D5C83 /* SFProDisplay-Medium.ttf */; };
 		E421263A55154CF1B1B4F0AC /* SFProDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7811DF4544A54DCD998268D2 /* SFProDisplay-Bold.ttf */; };
 /* End PBXBuildFile section */
@@ -74,6 +77,10 @@
 		C706FA3825F5F76D00B2B658 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "today/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C71672AA25F70480003083A4 /* today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = today.entitlements; path = today/today.entitlements; sourceTree = "<group>"; };
 		C73E2D8525F0908200D26D12 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
+		C772F18425F835EB0056E618 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
+		C772F18E25F83A140056E618 /* today-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "today-Bridging-Header.h"; sourceTree = "<group>"; };
+		C772F18F25F83A140056E618 /* today-tvOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "today-tvOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		C772F19025F83A140056E618 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		CC156687985E88A32A18CCC0 /* Pods-today-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-today-tvOS.release.xcconfig"; path = "Target Support Files/Pods-today-tvOS/Pods-today-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		E7E5EA2965DC4C11AA7E8F91 /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SFProDisplay-Regular.ttf"; path = "../assets/fonts/SFProDisplay-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -93,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C772F18525F835EB0056E618 /* AuthenticationServices.framework in Frameworks */,
 				7592924AF4CA834917941B46 /* libPods-today.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,6 +154,9 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				C772F19025F83A140056E618 /* File.swift */,
+				C772F18E25F83A140056E618 /* today-Bridging-Header.h */,
+				C772F18F25F83A140056E618 /* today-tvOS-Bridging-Header.h */,
 			);
 			name = today;
 			sourceTree = "<group>";
@@ -163,6 +174,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C772F18425F835EB0056E618 /* AuthenticationServices.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				B186B824A99FA0A92C58EC20 /* libPods-today.a */,
@@ -320,10 +332,11 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = F8ZAQ3DXZ6;
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1240;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 1240;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
@@ -505,6 +518,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-today-todayTests/Pods-today-todayTests-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
@@ -527,6 +541,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
@@ -559,6 +574,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-today/Pods-today-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
@@ -581,6 +597,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
@@ -682,6 +699,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				C772F19125F83A140056E618 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -691,6 +709,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */,
+				C772F19225F83A140056E618 /* File.swift in Sources */,
 				2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -723,6 +742,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 94A3D0153D29F7629485B599 /* Pods-today-todayTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -746,6 +766,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2330BA376ECDA18CCEDAA475 /* Pods-today-todayTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = todayTests/Info.plist;
@@ -781,6 +802,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.sauldesigns.today;
 				PRODUCT_NAME = today;
+				SWIFT_OBJC_BRIDGING_HEADER = "today-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -805,6 +827,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = me.sauldesigns.today;
 				PRODUCT_NAME = today;
+				SWIFT_OBJC_BRIDGING_HEADER = "today-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -817,6 +840,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -833,6 +857,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.today-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "today-tvOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
 			};
@@ -845,6 +872,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -861,6 +889,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.today-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "today-tvOS-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 10.0;
 			};
@@ -870,6 +900,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 870E0D37AD68060F4259A459 /* Pods-today-tvOSTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -897,6 +928,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 06E6A5F3C3BE4217DADBC854 /* Pods-today-tvOSTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;

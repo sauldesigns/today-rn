@@ -12,7 +12,9 @@ interface LoginButtonsProps {
 }
 const LoginButtons = ({ isLogin = false }: LoginButtonsProps) => {
     const firebaseAPI = new FirebaseAPI();
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingFB, setIsLoadingFB] = useState(false);
+    const [isLoadingGoogle, setIsLoadingGoogle] = useState(false);
+    const [isLoadingApple, setIsLoadingApple] = useState(false);
     return (
         <>
             <Divider style={{ marginTop: 22, marginBottom: 22 }} />
@@ -25,55 +27,50 @@ const LoginButtons = ({ isLogin = false }: LoginButtonsProps) => {
                     //@ts-ignore
                     type="apple"
                     //@ts-check
-                    loading={isLoading}
+                    loading={isLoadingApple}
                     style={{ backgroundColor: 'white', marginBottom: 16 }}
                     fontStyle={{ color: black }}
                     iconColor={black}
                     onPress={async () => {
-                        setIsLoading(true);
-                        firebaseAPI.onAppleButtonPress();
-                        setIsLoading(false);
+                        setIsLoadingApple(true);
+                        const value = await firebaseAPI.onAppleButtonPress();
+                        if (!value) {
+                            setIsLoadingApple(false);
+                        }
                     }}
                 />
             ) : (
-                // <AppleButton
-                //     buttonStyle={AppleButton.Style.WHITE}
-                //     buttonType={
-                //         isLogin
-                //             ? AppleButton.Type.SIGN_IN
-                //             : AppleButton.Type.SIGN_UP
-                //     }
-                //     style={{
-                //         marginTop: 24,
-                //         width: 160,
-                //         height: 45,
-                //         alignSelf: 'center',
-                //     }}
-                //     onPress={async () => await firebaseAPI.onAppleButtonPress()}
-                // />
                 <></>
             )}
             <SocialIcon
                 title={isLogin ? 'Sign In With Google' : 'Sign Up With Google'}
                 button
+                loading={isLoadingGoogle}
                 type="google"
+                style={{ marginBottom: 16 }}
                 onPress={async () => {
-                    setIsLoading(true);
-                    firebaseAPI.signInWithGoogle();
-                    setIsLoading(false);
+                    setIsLoadingGoogle(true);
+                    const value = await firebaseAPI.signInWithGoogle();
+                    if (!value) {
+                        setIsLoadingGoogle(false);
+                    }
                 }}
             />
-            {/* <GoogleSigninButton
-                style={{
-                    marginTop: 24,
-                    width: 192,
-                    height: 48,
-                    alignSelf: 'center',
+            <SocialIcon
+                title={
+                    isLogin ? 'Sign In With Facebook' : 'Sign Up With Facebook'
+                }
+                button
+                loading={isLoadingFB}
+                type="facebook"
+                onPress={async () => {
+                    setIsLoadingFB(true);
+                    const value = await firebaseAPI.signInWithFacebook();
+                    if (!value) {
+                        setIsLoadingFB(false);
+                    }
                 }}
-                size={GoogleSigninButton.Size.Wide}
-                color={GoogleSigninButton.Color.Light}
-                onPress={() => firebaseAPI.signInWithGoogle()}
-            /> */}
+            />
         </>
     );
 };
