@@ -14,13 +14,13 @@ interface ProfileHeaderProps {
     children?: ReactChild;
 }
 
-const WIDTH = Dimensions.get('window').width;
+const WIDTH = Dimensions.get('screen').width;
 
 const ProfileHeader = ({ children }: ProfileHeaderProps) => {
     return (
         <View
             style={{
-                width: WIDTH,
+                width: '100%',
                 height: 250,
                 backgroundColor: black,
             }}>
