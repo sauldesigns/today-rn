@@ -8,8 +8,8 @@
 	</array>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>webcredentials:example.com</string>
-		<string>applinks:example.com</string>
+		<string>applinks:sauldesigns.me?mode=&lt;alternate mode&gt;</string>
+		<string>webcredentials:sauldesigns.me?mode=&lt;alternate mode&gt;</string>
 	</array>
 	<key>com.apple.developer.authentication-services.autofill-credential-provider</key>
 	<true/>
