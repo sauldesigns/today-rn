@@ -8,7 +8,7 @@ import React, {
     useState,
 } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Keyboard, StyleSheet, Text, View } from 'react-native';
+import { Keyboard, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import Snackbar from 'react-native-snackbar';
@@ -56,6 +56,7 @@ const EditProfilePage = () => {
         <ScrollView
             style={styles.container}
             keyboardShouldPersistTaps="handled">
+            <StatusBar barStyle="light-content" animated />
             <View style={styles.input_container}>
                 <Controller
                     control={control}

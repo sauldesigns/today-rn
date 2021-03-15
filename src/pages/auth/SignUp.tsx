@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
     Keyboard,
+    StatusBar,
     StyleSheet,
     Text,
     TouchableOpacity,
@@ -60,6 +61,7 @@ const SignUp = () => {
             <ScrollView
                 style={styles.container}
                 keyboardShouldPersistTaps="handled">
+                <StatusBar barStyle="light-content" animated />
                 <View style={styles.content}>
                     <GreetingText text="Hey! Nice to meet you!" />
                     <MainTitle text="Sign Up" />

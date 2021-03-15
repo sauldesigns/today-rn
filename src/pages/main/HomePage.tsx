@@ -36,7 +36,7 @@ const HomePage = () => {
 
     return (
         <View style={{ flex: 1, marginTop: pullToRefresh ? 40 : 0 }}>
-            <StatusBar barStyle="light-content" />
+            <StatusBar barStyle="light-content" animated />
             <FlatList
                 data={data?.articles}
                 ref={ref}

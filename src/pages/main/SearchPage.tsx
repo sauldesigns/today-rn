@@ -46,7 +46,7 @@ const SearchPage = () => {
 
     return (
         <View style={styles.container}>
-            <StatusBar barStyle="light-content" />
+            <StatusBar barStyle="light-content" animated />
             <CustomSearchBar
                 onSubmit={(v: string) => {
                     getSearchValue(v);

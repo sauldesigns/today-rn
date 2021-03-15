@@ -28,7 +28,7 @@ const AccountPage = () => {
     // };
     return (
         <>
-            <StatusBar barStyle="light-content" />
+            <StatusBar barStyle="light-content" animated />
             <ScrollView
                 ref={ref}
                 style={styles.container}

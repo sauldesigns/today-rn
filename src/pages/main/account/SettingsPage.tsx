@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import Snackbar from 'react-native-snackbar';
@@ -65,6 +65,7 @@ const SettingsPage = () => {
     ];
     return (
         <>
+            <StatusBar barStyle="light-content" animated />
             <FlatList
                 keyExtractor={(_, index) => index.toString()}
                 data={list}
