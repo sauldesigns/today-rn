@@ -17,7 +17,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 interface ArticleListProps {
     articleItem: ArticleElement;
     imageSource: ImageSourcePropType;
-    showSource: boolean;
+    showSource?: boolean;
 }
 
 const ArticleList = ({

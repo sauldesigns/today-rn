@@ -13,13 +13,16 @@ import { NewsAPI } from '../../services/api';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import ErrorView from '../../components/error/ErrorView';
 import NoArticlesView from '../../components/error/NoArticlesView';
+import { useScrollToTop } from '@react-navigation/native';
 
 const HomePage = () => {
     const newsAPI = new NewsAPI();
+    const ref = React.useRef(null);
     const options = {
         enableVibrateFallback: true,
         ignoreAndroidSystemSettings: false,
     };
+    useScrollToTop(ref);
     const [pullToRefresh, setPullToRefresh] = useState(false);
 
     const {
@@ -34,6 +37,7 @@ const HomePage = () => {
         <View style={{ flex: 1, marginTop: pullToRefresh ? 40 : 0 }}>
             <FlatList
                 data={data?.articles}
+                ref={ref}
                 style={styles.container}
                 refreshControl={
                     <RefreshControl
@@ -73,7 +77,6 @@ const HomePage = () => {
                             <ArticleList
                                 articleItem={articleItem}
                                 imageSource={imageSource}
-                                isLoading={isLoading}
                             />
                         );
                     } else {

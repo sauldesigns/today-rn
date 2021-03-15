@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
@@ -10,9 +10,12 @@ import { useStateValue } from '../../context/StateProvider';
 import { User } from '../../models/user';
 
 const AccountPage = () => {
+    const ref = React.useRef(null);
     const navigation = useNavigation();
     const [{ user }] = useStateValue();
     const userObj: User = user;
+
+    useScrollToTop(ref);
 
     // const backgroundImageSource: ImageSourcePropType = {
     //     uri: 'https://bit.ly/2MLjriq',
@@ -26,6 +29,7 @@ const AccountPage = () => {
     return (
         <>
             <ScrollView
+                ref={ref}
                 style={styles.container}
                 keyboardShouldPersistTaps="handled">
                 <ProfileHeader

@@ -15,12 +15,14 @@ import { SFProDisplayRegular } from '../../constants/font';
 import ErrorView from '../../components/error/ErrorView';
 import NoArticlesView from '../../components/error/NoArticlesView';
 import CustomSearchBar from '../../components/input/CustomSearchBar';
+import { useScrollToTop } from '@react-navigation/native';
 
 const SearchPage = () => {
     const newsAPI = new NewsAPI();
+    const ref = React.useRef(null);
     const [search, setSearch] = useState('');
-
     const [pullToRefresh, setPullToRefresh] = useState(false);
+    useScrollToTop(ref);
     const {
         refetch,
         data,
@@ -57,6 +59,7 @@ const SearchPage = () => {
                 <FlatList
                     data={data?.articles}
                     style={styles.container}
+                    ref={ref}
                     keyboardShouldPersistTaps="handled"
                     keyboardDismissMode="on-drag"
                     refreshControl={
