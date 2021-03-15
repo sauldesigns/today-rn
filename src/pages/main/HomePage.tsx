@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
     ImageSourcePropType,
     RefreshControl,
+    StatusBar,
     StyleSheet,
     View,
 } from 'react-native';
@@ -35,6 +36,7 @@ const HomePage = () => {
 
     return (
         <View style={{ flex: 1, marginTop: pullToRefresh ? 40 : 0 }}>
+            <StatusBar barStyle="light-content" />
             <FlatList
                 data={data?.articles}
                 ref={ref}

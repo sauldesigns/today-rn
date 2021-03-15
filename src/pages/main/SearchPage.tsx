@@ -3,6 +3,7 @@ import {
     ActivityIndicator,
     ImageSourcePropType,
     RefreshControl,
+    StatusBar,
     StyleSheet,
     View,
 } from 'react-native';
@@ -45,6 +46,7 @@ const SearchPage = () => {
 
     return (
         <View style={styles.container}>
+            <StatusBar barStyle="light-content" />
             <CustomSearchBar
                 onSubmit={(v: string) => {
                     getSearchValue(v);

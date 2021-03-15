@@ -1,6 +1,6 @@
 import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import ProfileHeader from '../../components/profile/ProfileHeader';
@@ -28,6 +28,7 @@ const AccountPage = () => {
     // };
     return (
         <>
+            <StatusBar barStyle="light-content" />
             <ScrollView
                 ref={ref}
                 style={styles.container}
