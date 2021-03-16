@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Platform, StyleSheet } from 'react-native';
 import { Divider, SocialIcon } from 'react-native-elements';
 import { black } from '../../constants/colors';
+import { SFProDisplayBold } from '../../constants/font';
 import { FirebaseAPI } from '../../services/firebase';
 const PLATFORM = Platform.OS;
 
@@ -20,6 +21,7 @@ const LoginButtons = ({ isLogin = false }: LoginButtonsProps) => {
             <Divider style={{ marginTop: 22, marginBottom: 22 }} />
             {PLATFORM === 'ios' ? (
                 <SocialIcon
+                    fontStyle={{ ...styles.font_style, color: black }}
                     title={
                         isLogin ? 'Sign In With Google' : 'Sign Up With Apple'
                     }
@@ -29,7 +31,6 @@ const LoginButtons = ({ isLogin = false }: LoginButtonsProps) => {
                     //@ts-check
                     loading={isLoadingApple}
                     style={{ backgroundColor: 'white', marginBottom: 16 }}
-                    fontStyle={{ color: black }}
                     iconColor={black}
                     onPress={async () => {
                         setIsLoadingApple(true);
@@ -43,6 +44,7 @@ const LoginButtons = ({ isLogin = false }: LoginButtonsProps) => {
                 <></>
             )}
             <SocialIcon
+                fontStyle={styles.font_style}
                 title={isLogin ? 'Sign In With Google' : 'Sign Up With Google'}
                 button
                 loading={isLoadingGoogle}
@@ -57,6 +59,7 @@ const LoginButtons = ({ isLogin = false }: LoginButtonsProps) => {
                 }}
             />
             <SocialIcon
+                fontStyle={styles.font_style}
                 title={
                     isLogin ? 'Sign In With Facebook' : 'Sign Up With Facebook'
                 }
@@ -77,4 +80,6 @@ const LoginButtons = ({ isLogin = false }: LoginButtonsProps) => {
 
 export default LoginButtons;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    font_style: { fontFamily: SFProDisplayBold, fontSize: 15 },
+});

@@ -20,6 +20,8 @@ import MainInput from '../../components/input/MainInput';
 import { Button, Divider } from 'react-native-elements';
 import { black } from '../../constants/colors';
 import LoginButtons from '../../components/auth/LoginButtons';
+import { SFProDisplayRegular } from '../../constants/font';
+import { AUTH_NAVIGATION } from '../../constants/navigation';
 
 const options = {
     enableVibrateFallback: true,
@@ -98,13 +100,23 @@ const Login = () => {
                         defaultValue=""
                     />
                 </View>
+                <TouchableOpacity
+                    style={styles.forgot_password_container}
+                    onPress={() =>
+                        navigation.navigate(AUTH_NAVIGATION.ForgotPassword)
+                    }>
+                    <Text style={styles.forgot_password_text}>
+                        Forgot Password
+                    </Text>
+                </TouchableOpacity>
                 <Button
+                    titleStyle={{ fontFamily: SFProDisplayRegular }}
                     onPress={handleSubmit(onSubmit)}
                     loading={isLoading}
                     title="Login"
                 />
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('SignUp')}
+                    onPress={() => navigation.navigate(AUTH_NAVIGATION.SignUp)}
                     style={styles.create_account_button}>
                     <Text style={styles.create_account_button_text}>
                         Create an Account
@@ -128,7 +140,16 @@ const styles = StyleSheet.create({
         paddingTop: 65,
     },
     input_container: {
-        marginBottom: 26,
+        marginBottom: 18,
+    },
+    forgot_password_container: {
+        marginBottom: 29,
+        marginRight: 4,
+        alignSelf: 'flex-end',
+    },
+    forgot_password_text: {
+        color: 'white',
+        fontFamily: SFProDisplayRegular,
     },
     create_account_button: {
         marginTop: 26,
@@ -136,5 +157,6 @@ const styles = StyleSheet.create({
     },
     create_account_button_text: {
         color: 'white',
+        fontFamily: SFProDisplayRegular,
     },
 });

@@ -21,12 +21,13 @@ import { Button } from 'react-native-elements';
 import { black } from '../../constants/colors';
 import LoginButtons from '../../components/auth/LoginButtons';
 import { SFProDisplayRegular } from '../../constants/font';
+import Snackbar from 'react-native-snackbar';
 
 const options = {
     enableVibrateFallback: true,
     ignoreAndroidSystemSettings: false,
 };
-const SignUp = () => {
+const ForgotPassword = () => {
     const authService = new FirebaseAPI();
     const { control, handleSubmit } = useForm();
     const [isLoading, setIsLoading] = useState(false);
@@ -37,13 +38,8 @@ const SignUp = () => {
         ReactNativeHapticFeedback.trigger('selection', options);
         setIsLoading(true);
         try {
-            const value = await authService.signUpWithEmail(
-                data?.email,
-                data?.password,
-                data?.username,
-            );
+            const value = await authService.resetPasswordWithEmail(data?.email);
             if (!value) {
-                setIsLoading(false);
                 ReactNativeHapticFeedback.trigger('notificationError', options);
             } else {
                 ReactNativeHapticFeedback.trigger(
@@ -51,6 +47,12 @@ const SignUp = () => {
                     options,
                 );
             }
+            Snackbar.show({
+                text: 'A request has been sent to reset email.',
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor: 'green',
+            });
+            setIsLoading(false);
         } catch {
             setIsLoading(false);
             ReactNativeHapticFeedback.trigger('notificationError', options);
@@ -64,27 +66,7 @@ const SignUp = () => {
                 keyboardShouldPersistTaps="handled">
                 <StatusBar barStyle="light-content" animated />
                 <View style={styles.content}>
-                    <GreetingText text="Hey! Nice to meet you!" />
-                    <MainTitle text="Sign Up" />
-                    <View style={styles.input_container}>
-                        <Controller
-                            control={control}
-                            render={({ onChange, onBlur }) => (
-                                <MainInput
-                                    placeholder="Username"
-                                    keyboardType="default"
-                                    textContentType="username"
-                                    onBlur={onBlur}
-                                    onChange={onChange}
-                                />
-                            )}
-                            name="username"
-                            rules={{
-                                required: true,
-                            }}
-                            defaultValue=""
-                        />
-                    </View>
+                    <MainTitle text="Forgot Password" />
                     <View style={styles.input_container}>
                         <Controller
                             control={control}
@@ -105,29 +87,12 @@ const SignUp = () => {
                             defaultValue=""
                         />
                     </View>
-                    <View style={styles.input_container}>
-                        <Controller
-                            control={control}
-                            render={({ onChange, onBlur }) => (
-                                <SecureInput
-                                    textContentType="password"
-                                    onBlur={onBlur}
-                                    onChange={onChange}
-                                />
-                            )}
-                            name="password"
-                            rules={{ required: true, minLength: 6 }}
-                            defaultValue=""
-                        />
-                    </View>
                     <Button
                         titleStyle={{ fontFamily: SFProDisplayRegular }}
                         onPress={handleSubmit(onSubmit)}
                         loading={isLoading}
-                        title="Create"
+                        title="Submit"
                     />
-
-                    <LoginButtons />
                 </View>
             </ScrollView>
             <TouchableOpacity
@@ -144,7 +109,7 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default ForgotPassword;
 
 const styles = StyleSheet.create({
     container: {
@@ -157,12 +122,5 @@ const styles = StyleSheet.create({
     },
     input_container: {
         marginBottom: 26,
-    },
-    create_account_button: {
-        marginTop: 26,
-        alignSelf: 'center',
-    },
-    create_account_button_text: {
-        color: 'white',
     },
 });

@@ -41,7 +41,7 @@ export class FirebaseAPI {
                 });
             } else {
                 Snackbar.show({
-                    text: error?.code,
+                    text: 'An error occured.',
                     duration: Snackbar.LENGTH_LONG,
                     backgroundColor: 'red',
                 });
@@ -84,7 +84,7 @@ export class FirebaseAPI {
                 });
             } else {
                 Snackbar.show({
-                    text: error?.code,
+                    text: 'An error occured.',
                     duration: Snackbar.LENGTH_LONG,
                     backgroundColor: 'red',
                 });
@@ -144,6 +144,15 @@ export class FirebaseAPI {
             );
         } catch (err) {
             console.log(err?.message);
+        }
+    }
+
+    async resetPasswordWithEmail(email: string) {
+        try {
+            await auth().sendPasswordResetEmail(email);
+            return true;
+        } catch (err) {
+            return false;
         }
     }
 

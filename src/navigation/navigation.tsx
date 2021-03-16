@@ -1,11 +1,11 @@
 import React from 'react';
 import {
     createStackNavigator,
-    HeaderBackground,
     TransitionPresets,
 } from '@react-navigation/stack';
 import {
     ACCOUNT_NAVIGATION,
+    AUTH_NAVIGATION,
     HOME_NAVIGATION,
     SEARCH_NAVIGATION,
     SETUSER_NAVIGATION,
@@ -21,6 +21,7 @@ import SignUp from '../pages/auth/SignUp';
 import SetUserInfo from '../pages/auth/SetUserInfo';
 import { StyleSheet, View } from 'react-native';
 import { black } from '../constants/colors';
+import ForgotPassword from '../pages/auth/ForgotPassword';
 
 //------------- AUTH ROUTES -----------------------------
 
@@ -29,7 +30,7 @@ const AuthStack = createStackNavigator();
 export const AuthNavigation = () => {
     return (
         <AuthStack.Navigator
-            initialRouteName="Login"
+            initialRouteName={AUTH_NAVIGATION.Login}
             mode="modal"
             screenOptions={(route) => {
                 const routeName = route.route.name;
@@ -59,13 +60,18 @@ export const AuthNavigation = () => {
                 // return {};
             }}>
             <AuthStack.Screen
-                name="Login"
+                name={AUTH_NAVIGATION.Login}
                 component={Login}
                 options={{ headerShown: false }}
             />
             <AuthStack.Screen
-                name="SignUp"
+                name={AUTH_NAVIGATION.SignUp}
                 component={SignUp}
+                options={{ headerShown: false }}
+            />
+            <AuthStack.Screen
+                name={AUTH_NAVIGATION.ForgotPassword}
+                component={ForgotPassword}
                 options={{ headerShown: false }}
             />
         </AuthStack.Navigator>

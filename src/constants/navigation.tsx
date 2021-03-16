@@ -22,3 +22,9 @@ export enum MAIN_NAVIGATION_TABS {
 export enum SETUSER_NAVIGATION {
     'SetUserInfo' = 'Set User Info',
 }
+
+export enum AUTH_NAVIGATION {
+    'ForgotPassword' = 'Forgot Password',
+    'Login' = 'Login',
+    'SignUp' = 'Sign Up',
+}
