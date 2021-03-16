@@ -24,7 +24,18 @@ export class NewsAPI {
 
     searchArticles(searchValue: string) {
         if (searchValue.trim() === '') {
-            return this.getTopArticles();
+            return useQuery(
+                'topHeadlines',
+                async () => {
+                    const { data } = await axios.get<Article>(
+                        topHeadlinesEndpoint +
+                            'country=us&pageSize=100&apiKey=' +
+                            apiKey,
+                    );
+                    return data;
+                },
+                { refetchOnMount: false },
+            );
         }
         return useQuery('searchArticles', async () => {
             const { data } = await axios.get<Article>(
