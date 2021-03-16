@@ -10,7 +10,7 @@ export class InAppBrowserAPI {
                 const result = await InAppBrowser.open(url, {
                     // iOS Properties
                     dismissButtonStyle: 'close',
-                    preferredBarTintColor: '#453AA4',
+                    preferredBarTintColor: '#000',
                     preferredControlTintColor: 'white',
                     readerMode: false,
                     animated: true,
@@ -20,7 +20,7 @@ export class InAppBrowserAPI {
                     enableBarCollapsing: false,
                     // Android Properties
                     showTitle: true,
-                    toolbarColor: '#6200EE',
+                    toolbarColor: '#000',
                     secondaryToolbarColor: 'black',
                     enableUrlBarHiding: true,
                     enableDefaultShare: true,
