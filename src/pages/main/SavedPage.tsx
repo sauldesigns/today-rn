@@ -2,10 +2,17 @@ import React, { useState } from 'react';
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import { ButtonGroup, Header } from 'react-native-elements';
 import { black } from '../../constants/colors';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 const SavedPage = () => {
     const buttons = ['Bookmarks', 'Read Later'];
     const [buttonIndex, setButtonIndex] = useState(0);
+
+    const options = {
+        enableVibrateFallback: true,
+        ignoreAndroidSystemSettings: false,
+    };
+
     return (
         <>
             <StatusBar barStyle="light-content" animated />
@@ -13,7 +20,13 @@ const SavedPage = () => {
                 backgroundColor={black}
                 centerComponent={
                     <ButtonGroup
-                        onPress={(value) => setButtonIndex(value)}
+                        onPress={(value) => {
+                            ReactNativeHapticFeedback.trigger(
+                                'selection',
+                                options,
+                            );
+                            setButtonIndex(value);
+                        }}
                         buttons={buttons}
                         selectedIndex={buttonIndex}
                         textStyle={styles.button_text}
