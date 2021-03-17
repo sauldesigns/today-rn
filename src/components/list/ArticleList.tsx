@@ -149,7 +149,7 @@ const ArticleList = ({
     return (
         <Swipeable
             ref={updateRef}
-            friction={1.5}
+            friction={1.25}
             renderLeftActions={isSavedData ? undefined : LeftActionBookmark}
             onSwipeableLeftOpen={
                 isSavedData ? undefined : LeftActionOpenBookmark
