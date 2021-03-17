@@ -14,14 +14,15 @@ The app uses an easy to use UI so that only necessary information is displayed. 
 | --------------------------------------------- | ----------------------------------------------- |
 | <img src="images/Homepage.png" width="50%" /> | <img src="images/SearchPage.png" width="50%" /> |
 
-| Settings                                          | In-App Browser                                      |
-| ------------------------------------------------- | --------------------------------------------------- |
-| <img src="images/SettingsPage.png" width="50%" /> | <img src="images/In-App-Browser.png" width="50%" /> |
+| Account                                          | Saved Articles                                 |
+| ------------------------------------------------ | ---------------------------------------------- |
+| <img src="images/AccountPage.png" width="50%" /> | <img src="images/SavedPage.png" width="50%" /> |
 
-| More Information                              |
-| --------------------------------------------- |
-| <img src="images/MoreInfo.png" width="30%" /> |
-This page will only appear when a user sign's up with a third party such as google or apple
+| More Information                                     | In-App Browser                                      |
+| ---------------------------------------------------- | --------------------------------------------------- |
+| <img src="images/MoreInfo.png" width="50%" /> <br /> | <img src="images/In-App-Browser.png" width="50%" /> |
+
+
 
 ### Authenthication Methods
 - [x] Email & Password
@@ -36,15 +37,23 @@ This page will only appear when a user sign's up with a third party such as goog
   - If you used a third party sign in then you will be prompted to enter additional information such as username and an optional bio. This will not be prompted if you created an account using email and password. 
   - You will then be navigated to the home page this will contain the latest headlines based on the US. A future update will allow the user to choose a country as well as the news sources to filter by.
 
+### How To Bookmark or Save For Later
+- Once you are logged in you will see a list or articles
+- Either on the homepage or on the search page.
+- In order to **bookmark** an article simply swipe the article item to the right.
+- In order to **save for later** an article simply swipe the article item to the left.
+- You will be able to see this list in the saved articles page (bookmark icon on bottom tab bar)
+
 ### Search For An Article
 - Once logged in you head to the seach tab
 - You will then be able to search for particular news articles. 
 - If any found a list will be displayed. Click on either the title or image in order to open up the built-in browser.
-### Profile Page
-- Still in progress.
+### Account Page
+- This page will show user profile details
+- The main purpose of this page is to show list of settings such as signing out, edit profile, privacy policy, etc. 
 ### Settings
-- Once logged in head over to the Account tab.
-- There you will find a settings button. 
+- Go to account page
+- There you will find a list of setting options 
 - That will navigate you to the settings page where you will be able to edit your profile information, view privacy policy, reset password, or sign out.
 - More feature will be added to the settings page in a future update.
 
