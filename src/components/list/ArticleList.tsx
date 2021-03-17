@@ -26,12 +26,16 @@ interface ArticleListProps {
     articleItem: ArticleElement;
     imageSource: ImageSourcePropType;
     showSource?: boolean;
+    isSavedData?: boolean;
+    isBookmark?: boolean;
 }
 
 const ArticleList = ({
     articleItem,
     imageSource,
     showSource = false,
+    isSavedData = false,
+    isBookmark = false,
 }: ArticleListProps) => {
     const inAppBrowser = new InAppBrowserAPI();
     const databaseAPI = new DatabaseAPI();
@@ -49,7 +53,7 @@ const ArticleList = ({
         ignoreAndroidSystemSettings: false,
     };
 
-    const LeftAction = () => {
+    const LeftActionBookmark = () => {
         return (
             <View style={styles.left_action_container}>
                 <Text style={styles.left_action_title}>Bookmark</Text>
@@ -57,7 +61,7 @@ const ArticleList = ({
         );
     };
 
-    const RightAction = () => {
+    const RightActionReadLater = () => {
         return (
             <View style={styles.right_action_container}>
                 <Text style={styles.right_action_title}>Read Later</Text>
@@ -65,7 +69,15 @@ const ArticleList = ({
         );
     };
 
-    const LeftActionOpen = async () => {
+    const RightActionDelete = () => {
+        return (
+            <View style={styles.right_action_delete_container}>
+                <Text style={styles.right_action_title}>Delete</Text>
+            </View>
+        );
+    };
+
+    const LeftActionOpenBookmark = async () => {
         ReactNativeHapticFeedback.trigger('selection', options);
         try {
             const value = await databaseAPI.addBookmark(articleItem);
@@ -86,7 +98,34 @@ const ArticleList = ({
         swipeableRow.close();
     };
 
-    const RightActionOpen = async () => {
+    const RightActionOpenDelete = async () => {
+        ReactNativeHapticFeedback.trigger('selection', options);
+        try {
+            const value = await databaseAPI.deleteSaved(
+                articleItem.id ?? '',
+                isBookmark,
+            );
+            if (value) {
+                ReactNativeHapticFeedback.trigger(
+                    'notificationSuccess',
+                    options,
+                );
+                Snackbar.show({
+                    text: 'Successfully deleted saved article.',
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor: 'green',
+                });
+            }
+        } catch (err) {
+            ReactNativeHapticFeedback.trigger('notificationError', options);
+        }
+
+        if (swipeableRow) {
+            swipeableRow.close();
+        }
+    };
+
+    const RightActionOpenReadLater = async () => {
         ReactNativeHapticFeedback.trigger('selection', options);
         try {
             const value = await databaseAPI.addReadLater(articleItem);
@@ -110,13 +149,19 @@ const ArticleList = ({
     return (
         <Swipeable
             ref={updateRef}
-            friction={2}
-            renderLeftActions={LeftAction}
-            onSwipeableLeftOpen={LeftActionOpen}
-            renderRightActions={RightAction}
-            onSwipeableRightOpen={RightActionOpen}
-            leftThreshold={150}
-            rightThreshold={150}>
+            friction={1.5}
+            renderLeftActions={isSavedData ? undefined : LeftActionBookmark}
+            onSwipeableLeftOpen={
+                isSavedData ? undefined : LeftActionOpenBookmark
+            }
+            renderRightActions={
+                isSavedData ? RightActionDelete : RightActionReadLater
+            }
+            onSwipeableRightOpen={
+                isSavedData ? RightActionOpenDelete : RightActionOpenReadLater
+            }
+            leftThreshold={isSavedData ? 10000 : 130}
+            rightThreshold={isSavedData ? 250 : 130}>
             <ListItem bottomDivider>
                 <ArticleListItem
                     imageSource={imageSource}
@@ -155,5 +200,12 @@ const styles = StyleSheet.create({
         fontFamily: SFProDisplayBold,
         fontSize: 16,
         color: 'white',
+    },
+    right_action_delete_container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        paddingRight: 16,
+        backgroundColor: 'red',
     },
 });

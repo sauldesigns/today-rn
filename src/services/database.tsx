@@ -36,7 +36,22 @@ export class DatabaseAPI {
         }
     }
 
-    async deleteBookmark(docID: string) {}
+    async deleteSaved(docID: string, isBookmark = false) {
+        try {
+            isBookmark
+                ? await this.bookmarksCollection.doc(docID).delete()
+                : await this.readLaterCollection.doc(docID).delete();
+            return true;
+        } catch (err) {
+            Snackbar.show({
+                text: 'An error occured.',
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor: 'red',
+            });
+            console.log(err?.code);
+            return false;
+        }
+    }
 
     async addReadLater(item: ArticleElement) {
         try {
