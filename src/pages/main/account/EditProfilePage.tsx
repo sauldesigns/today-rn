@@ -1,17 +1,8 @@
-import React, {
-    createRef,
-    ElementRef,
-    ElementType,
-    forwardRef,
-    useEffect,
-    useRef,
-    useState,
-} from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Keyboard, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
-import Snackbar from 'react-native-snackbar';
 import MainInput from '../../../components/input/MainInput';
 import { black } from '../../../constants/colors';
 import { useStateValue } from '../../../context/StateProvider';
