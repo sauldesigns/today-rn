@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import ArticleList from '../../components/list/ArticleList';
-import MainHeadline from '../../components/article/MainHeadline';
+import MainHeadline from '../../components/headline/MainHeadline';
 import { ArticleElement } from '../../models/articles';
 import { NewsAPI } from '../../services/api';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import TimeAgo from 'react-native-timeago';
@@ -10,6 +10,9 @@ import {
     SFProDisplayMedium,
     SFProDisplayRegular,
 } from '../../constants/font';
+import { DatabaseAPI } from '../../services/database';
+import { Icon } from 'react-native-elements';
+import Snackbar from 'react-native-snackbar';
 interface MainHeadlineProps {
     article: ArticleElement | undefined;
     isLoading: boolean;
@@ -22,9 +25,30 @@ const MainHeadline = ({
     isFetching = false,
 }: MainHeadlineProps) => {
     const inAppBrowser = new InAppBrowserAPI();
+    const databaseAPI = new DatabaseAPI();
     const handleOnPress = async () => {
         ReactNativeHapticFeedback.trigger('impactMedium', options);
         inAppBrowser.openLink(article?.url ?? 'http://google.com');
+    };
+
+    const handleLongPress = async () => {
+        ReactNativeHapticFeedback.trigger('selection', options);
+        try {
+            const value = await databaseAPI.addBookmark(article);
+            if (value) {
+                ReactNativeHapticFeedback.trigger(
+                    'notificationSuccess',
+                    options,
+                );
+                Snackbar.show({
+                    text: 'Successfully added to bookmarks.',
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor: 'green',
+                });
+            }
+        } catch (err) {
+            ReactNativeHapticFeedback.trigger('notificationError', options);
+        }
     };
     const options = {
         enableVibrateFallback: true,
@@ -53,9 +77,14 @@ const MainHeadline = ({
                             Published{' '}
                             <TimeAgo time={article?.publishedAt ?? ''} />
                         </Text>
-                        {/* <Text style={styles.source}>
+                        <Icon
+                            onPress={handleLongPress}
+                            type="fontawesome"
+                            name="bookmark"
+                            color="white"
+                            style={styles.source}>
                             Author: {article?.author}
-                        </Text> */}
+                        </Icon>
                     </View>
                 </>
             )}
