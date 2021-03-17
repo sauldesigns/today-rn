@@ -1,7 +1,13 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { useEffect, useState } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import {
+    ActivityIndicator,
+    Platform,
+    StyleSheet,
+    Text,
+    View,
+} from 'react-native';
 import { Icon } from 'react-native-elements';
 import firestore from '@react-native-firebase/firestore';
 import { black } from '../constants/colors';
@@ -66,7 +72,7 @@ const Landing = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                <Text style={{ color: 'white' }}>Loading</Text>
+                <ActivityIndicator size="large" />
             </View>
         );
 
