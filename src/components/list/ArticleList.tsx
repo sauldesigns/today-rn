@@ -13,6 +13,7 @@ import { InAppBrowserAPI } from '../../services/in-app-browser';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { SFProDisplayMedium, SFProDisplayRegular } from '../../constants/font';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import ArticleListItem from './ArticleListItem';
 
 interface ArticleListProps {
     articleItem: ArticleElement;
@@ -36,24 +37,11 @@ const ArticleList = ({
     };
     return (
         <ListItem bottomDivider>
-            <ListItem.Content>
-                <TouchableOpacity onPress={handleOnPress}>
-                    <ListItem.Title style={styles.title}>
-                        {articleItem.title}
-                    </ListItem.Title>
-                </TouchableOpacity>
-                <ListItem.Subtitle style={styles.subtitle}>
-                    {showSource ? `Source: ${articleItem.source.name}` : ''}
-                    {showSource ? '\n' : ''}
-                    Published <TimeAgo time={articleItem.publishedAt} />
-                </ListItem.Subtitle>
-            </ListItem.Content>
-
-            <Image
-                onPress={handleOnPress}
-                style={styles.imageContainer}
-                source={imageSource}
-                PlaceholderContent={<ActivityIndicator />}
+            <ArticleListItem
+                imageSource={imageSource}
+                articleItem={articleItem}
+                showSource={showSource}
+                handleOnPress={handleOnPress}
             />
         </ListItem>
     );
