@@ -5,6 +5,7 @@ export interface Article {
 }
 
 export interface ArticleElement {
+    id?: string;
     source: Source;
     author: null | string;
     title: string;
