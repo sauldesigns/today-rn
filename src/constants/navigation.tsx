@@ -16,6 +16,7 @@ export enum SEARCH_NAVIGATION {
 export enum MAIN_NAVIGATION_TABS {
     'Home' = 'Home',
     'Search' = 'Search',
+    'Saved' = 'Saved',
     'Account' = 'Account',
 }
 

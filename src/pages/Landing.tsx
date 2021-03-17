@@ -15,6 +15,7 @@ import {
     SetUserNavigation,
 } from '../navigation/navigation';
 import { actionTypes } from '../context/reducer';
+import SavedPage from './main/SavedPage';
 
 const TabStack = createBottomTabNavigator();
 
@@ -79,7 +80,7 @@ const Landing = () => {
 
     return (
         <TabStack.Navigator
-            tabBarOptions={{ activeTintColor: black }}
+            tabBarOptions={{ activeTintColor: black, showLabel: false }}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ color, size }) => {
                     let iconName: string = '';
@@ -90,6 +91,8 @@ const Landing = () => {
                         iconName = 'person';
                     } else if (route.name === MAIN_NAVIGATION_TABS.Search) {
                         iconName = 'search';
+                    } else if (route.name === MAIN_NAVIGATION_TABS.Saved) {
+                        iconName = 'bookmark';
                     }
 
                     // You can return any component that you like here!
@@ -110,6 +113,10 @@ const Landing = () => {
             <TabStack.Screen
                 name={MAIN_NAVIGATION_TABS.Search}
                 component={SearchNavigation}
+            />
+            <TabStack.Screen
+                name={MAIN_NAVIGATION_TABS.Saved}
+                component={SavedPage}
             />
             <TabStack.Screen
                 name={MAIN_NAVIGATION_TABS.Account}
