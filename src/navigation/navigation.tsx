@@ -15,7 +15,6 @@ import AccountPage from '../pages/main/AccountPage';
 import EditProfilePage from '../pages/main/account/EditProfilePage';
 import HomePage from '../pages/main/HomePage';
 import SearchPage from '../pages/main/SearchPage';
-import SettingsPage from '../pages/main/account/SettingsPage';
 import Login from '../pages/auth/Login';
 import SignUp from '../pages/auth/SignUp';
 import SetUserInfo from '../pages/auth/SetUserInfo';
@@ -162,6 +161,8 @@ export const AccountNavigation = () => {
     return (
         <AccountStack.Navigator
             screenOptions={{
+                headerTintColor: 'white',
+                headerPressColorAndroid: 'white',
                 headerTitleStyle: { color: 'white' },
                 headerBackground: () => (
                     <View style={{ flex: 1, backgroundColor: black }} />
@@ -171,10 +172,6 @@ export const AccountNavigation = () => {
                 name={ACCOUNT_NAVIGATION.Account}
                 component={AccountPage}
                 options={{ headerShown: false }}
-            />
-            <AccountStack.Screen
-                name={ACCOUNT_NAVIGATION.Settings}
-                component={SettingsPage}
             />
             <AccountStack.Screen
                 name={ACCOUNT_NAVIGATION.EditProfile}

@@ -21,7 +21,8 @@ const ProfileHeader = ({ children }: ProfileHeaderProps) => {
         <View
             style={{
                 width: '100%',
-                height: 250,
+                minHeight: 180,
+                maxHeight: 250,
                 backgroundColor: black,
             }}>
             {children}

@@ -1,77 +1,136 @@
 import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import React from 'react';
 import { StatusBar, StyleSheet, View } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
-import { ScrollView } from 'react-native-gesture-handler';
-import ProfileHeader from '../../components/profile/ProfileHeader';
+import { Icon, ListItem } from 'react-native-elements';
+import { FlatList } from 'react-native-gesture-handler';
 import UserDetails from '../../components/profile/UserDetails';
 import { ACCOUNT_NAVIGATION } from '../../constants/navigation';
 import { useStateValue } from '../../context/StateProvider';
 import { User } from '../../models/user';
+import { InAppBrowserAPI } from '../../services/in-app-browser';
+import { FirebaseAPI } from '../../services/firebase';
+import { privacy_policy_link } from '../../constants/links';
+import { actionTypes } from '../../context/reducer';
+import Snackbar from 'react-native-snackbar';
+import { black } from '../../constants/colors';
+
+interface listItem {
+    title: string;
+    icon: string;
+    onPress: CallableFunction;
+}
 
 const AccountPage = () => {
     const ref = React.useRef(null);
     const navigation = useNavigation();
     const [{ user }] = useStateValue();
     const userObj: User = user;
+    const inAppBrowserAPI = new InAppBrowserAPI();
+    const firebaseAPI = new FirebaseAPI();
+    const [_, dispatch] = useStateValue();
 
     useScrollToTop(ref);
 
-    // const backgroundImageSource: ImageSourcePropType = {
-    //     uri: 'https://bit.ly/2MLjriq',
-    //     cache: 'force-cache',
-    // };
+    const settings_list: listItem[] = [
+        {
+            title: 'Edit Profile',
+            icon: 'edit',
+            onPress: () => {
+                navigation.navigate(ACCOUNT_NAVIGATION.EditProfile);
+            },
+        },
+        {
+            title: 'Privacy Policy',
+            icon: 'policy',
+            onPress: async () => {
+                try {
+                    await inAppBrowserAPI.openLink(privacy_policy_link);
+                } catch (err) {
+                    Snackbar.show({
+                        text: 'An error occured.',
+                        duration: Snackbar.LENGTH_LONG,
+                        backgroundColor: 'red',
+                    });
+                }
+            },
+        },
+        {
+            title: 'Reset Password',
+            icon: 'lock',
+            onPress: async () => {
+                try {
+                    await firebaseAPI.resetPassword();
+                    Snackbar.show({
+                        text: 'A reset link has been sent to your email.',
+                        duration: Snackbar.LENGTH_LONG,
+                        backgroundColor: 'green',
+                    });
+                } catch (err) {
+                    Snackbar.show({
+                        text: 'An error occured.',
+                        duration: Snackbar.LENGTH_LONG,
+                        backgroundColor: 'red',
+                    });
+                }
+            },
+        },
+        {
+            title: 'Sign Out',
+            icon: 'logout',
+            onPress: async () => {
+                try {
+                    await firebaseAPI.signOut();
+                    dispatch({
+                        type: actionTypes.SET_USER,
+                        user: null,
+                    });
+                } catch (err) {
+                    Snackbar.show({
+                        text: 'An error occured.',
+                        duration: Snackbar.LENGTH_LONG,
+                    });
+                }
+            },
+        },
+    ];
 
-    // const avatarImageSource: ImageSourcePropType = {
-    //     uri: 'https://bit.ly/38bn9tr',
-    //     cache: 'force-cache',
-    // };
     return (
         <>
             <StatusBar barStyle="light-content" animated />
-            <ScrollView
+            <FlatList
                 ref={ref}
-                style={styles.container}
-                keyboardShouldPersistTaps="handled">
-                <ProfileHeader
-                    onPress={() => {
-                        navigation.navigate('Settings');
-                    }}
-                    // avatarImageSource={avatarImageSource}
-                    // backgroundImageSource={backgroundImageSource}
-                >
-                    <>
-                        <View style={{ flex: 1, marginTop: 60 }}>
-                            <UserDetails
-                                // avatarImageSource={avatarImageSource}
-                                username={userObj?.username ?? ''}
-                                location={userObj?.bio ?? ''}
-                            />
-                        </View>
-                        <Button
-                            type="outline"
-                            icon={
-                                <Icon
-                                    name="settings"
-                                    type="fontawesome"
-                                    color="white"
+                ListHeaderComponent={() => {
+                    return (
+                        <>
+                            <View
+                                style={{
+                                    flex: 1,
+                                    paddingTop: 60,
+                                    backgroundColor: black,
+                                    paddingBottom: 36,
+                                }}>
+                                <UserDetails
+                                    username={userObj?.username ?? ''}
+                                    location={userObj?.bio ?? ''}
                                 />
-                            }
-                            title="Settings"
-                            containerStyle={{
-                                width: '75%',
-                                marginBottom: 16,
-                                alignSelf: 'center',
-                            }}
-                            titleStyle={{ color: 'white', marginLeft: 8 }}
-                            buttonStyle={{ borderColor: 'white' }}
-                            onPress={() =>
-                                navigation.navigate(ACCOUNT_NAVIGATION.Settings)
-                            }
-                        />
-                    </>
-                </ProfileHeader>
-            </ScrollView>
+                            </View>
+                        </>
+                    );
+                }}
+                keyExtractor={(_, index) => index.toString()}
+                data={settings_list}
+                renderItem={({ item }) => {
+                    return (
+                        <ListItem onPress={() => item?.onPress()} bottomDivider>
+                            <Icon name={item?.icon} />
+                            <ListItem.Content>
+                                <ListItem.Title>{item?.title}</ListItem.Title>
+                            </ListItem.Content>
+                            <ListItem.Chevron />
+                        </ListItem>
+                    );
+                }}
+            />
         </>
     );
 };
