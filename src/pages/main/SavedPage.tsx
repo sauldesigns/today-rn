@@ -1,14 +1,46 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import { ButtonGroup, Header } from 'react-native-elements';
+import { black } from '../../constants/colors';
 
 const SavedPage = () => {
+    const buttons = ['Bookmarks', 'Read Later'];
+    const [buttonIndex, setButtonIndex] = useState(0);
     return (
-        <View>
-            <Text></Text>
-        </View>
-    )
-}
+        <>
+            <StatusBar barStyle="light-content" animated />
+            <Header
+                backgroundColor={black}
+                centerComponent={
+                    <ButtonGroup
+                        onPress={(value) => setButtonIndex(value)}
+                        buttons={buttons}
+                        selectedIndex={buttonIndex}
+                        textStyle={styles.button_text}
+                        selectedTextStyle={styles.active_button_text}
+                        selectedButtonStyle={styles.active_button}
+                        containerStyle={styles.button}
+                    />
+                }
+            />
+            <Text>{buttonIndex === 0 ? 'Test' : 'other'}</Text>
+        </>
+    );
+};
 
-export default SavedPage
+export default SavedPage;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    active_button_text: {
+        color: black,
+    },
+    button_text: {
+        color: 'white',
+    },
+    button: {
+        backgroundColor: black,
+    },
+    active_button: {
+        backgroundColor: 'white',
+    },
+});
