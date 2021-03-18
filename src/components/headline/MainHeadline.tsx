@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
         paddingTop: isAndroid ? 18 : 50,
         paddingBottom: 16,
     },
+    
     header: {
         flex: 1,
         justifyContent: 'center',
