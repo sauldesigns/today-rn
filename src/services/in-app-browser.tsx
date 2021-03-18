@@ -20,7 +20,7 @@ export class InAppBrowserAPI {
                     enableBarCollapsing: false,
                     // Android Properties
                     showTitle: true,
-                    toolbarColor: '#000',
+                    toolbarColor: 'black',
                     secondaryToolbarColor: 'black',
                     enableUrlBarHiding: true,
                     enableDefaultShare: true,

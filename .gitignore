@@ -28,6 +28,7 @@ build/
 .gradle
 local.properties
 *.iml
+*.hprof
 
 # Visual Studio Code
 #
@@ -63,3 +64,4 @@ buck-out/
 /ios/Pods/
 .env
 ios/today/GoogleService-Info.plist
+android/app/google-services.json

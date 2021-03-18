@@ -21,6 +21,7 @@ import { Button } from 'react-native-elements';
 import { black } from '../../constants/colors';
 import LoginButtons from '../../components/auth/LoginButtons';
 import { SFProDisplayRegular } from '../../constants/font';
+import { isAndroid } from '../../constants/misc';
 
 const options = {
     enableVibrateFallback: true,
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
     },
     content: {
         marginHorizontal: 28,
-        paddingTop: 65,
+        paddingTop: isAndroid ? 18 : 65,
     },
     input_container: {
         marginBottom: 26,

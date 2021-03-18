@@ -1,23 +1,11 @@
 import React from 'react';
-import {
-    ActivityIndicator,
-    Animated,
-    ImageSourcePropType,
-    StyleSheet,
-    Text,
-    View,
-} from 'react-native';
-import { Avatar, Image, ListItem } from 'react-native-elements';
-import TimeAgo from 'react-native-timeago';
+import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
+import { ListItem } from 'react-native-elements';
 import { ArticleElement } from '../../models/articles';
 import { InAppBrowserAPI } from '../../services/in-app-browser';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import {
-    SFProDisplayBold,
-    SFProDisplayMedium,
-    SFProDisplayRegular,
-} from '../../constants/font';
-import { Swipeable, TouchableOpacity } from 'react-native-gesture-handler';
+import { SFProDisplayBold } from '../../constants/font';
+import { Swipeable } from 'react-native-gesture-handler';
 import ArticleListItem from './ArticleListItem';
 import Snackbar from 'react-native-snackbar';
 import { DatabaseAPI } from '../../services/database';
@@ -149,7 +137,7 @@ const ArticleList = ({
     return (
         <Swipeable
             ref={updateRef}
-            friction={1.5}
+            friction={1.25}
             renderLeftActions={isSavedData ? undefined : LeftActionBookmark}
             onSwipeableLeftOpen={
                 isSavedData ? undefined : LeftActionOpenBookmark

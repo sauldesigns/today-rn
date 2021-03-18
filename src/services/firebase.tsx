@@ -127,6 +127,7 @@ export class FirebaseAPI {
             Snackbar.show({
                 text: 'Successfully Updated Profile',
                 duration: Snackbar.LENGTH_LONG,
+                backgroundColor: 'green',
             });
         } catch (err) {
             Snackbar.show({

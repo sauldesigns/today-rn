@@ -1,13 +1,7 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { useEffect, useState } from 'react';
-import {
-    ActivityIndicator,
-    Platform,
-    StyleSheet,
-    Text,
-    View,
-} from 'react-native';
+import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import firestore from '@react-native-firebase/firestore';
 import { black } from '../constants/colors';
@@ -31,7 +25,6 @@ const Landing = () => {
 
     const [, dispatch] = useStateValue();
     const [needsUserInfo, setNeedsUserInfo] = useState(false);
-    const isAndroid = Platform.OS === 'android';
 
     // Handle user state changes
     function onAuthStateChanged(user: FirebaseAuthTypes.User | null) {
@@ -44,6 +37,7 @@ const Landing = () => {
     }, []);
 
     useEffect(() => {
+
         const subscriber = firestore()
             .collection('users')
             .doc(user?.uid)
@@ -55,12 +49,16 @@ const Landing = () => {
                     });
                     setNeedsUserInfo(false);
                 } else {
-                    setNeedsUserInfo(true);
+                    if (user) {
+                        setNeedsUserInfo(true);
+                    }
                 }
                 if (initializing) setInitializing(false);
             });
 
         return () => subscriber();
+
+
     }, [user]);
 
     if (initializing)

@@ -21,6 +21,7 @@ import SetUserInfo from '../pages/auth/SetUserInfo';
 import { StyleSheet, View } from 'react-native';
 import { black } from '../constants/colors';
 import ForgotPassword from '../pages/auth/ForgotPassword';
+import { isAndroid } from '../constants/misc';
 
 //------------- AUTH ROUTES -----------------------------
 
@@ -33,22 +34,22 @@ export const AuthNavigation = () => {
             mode="modal"
             screenOptions={(route) => {
                 const routeName = route.route.name;
-                // if (!isAndroid) {
-                if (routeName === 'Login') {
+                if (!isAndroid) {
+                    if (routeName === 'Login') {
+                        return {
+                            cardOverlayEnabled: true,
+                            gestureEnabled: true,
+                            useNativeDrivers: true,
+                        };
+                    }
+                }
+                else if (isAndroid) {
                     return {
                         cardOverlayEnabled: true,
                         gestureEnabled: true,
                         useNativeDrivers: true,
                     };
                 }
-                // else if (isAndroid) {
-                //     return {
-                //         cardOverlayEnabled: true,
-                //         gestureEnabled: true,
-                //         useNativeDrivers: true,
-                //         ...TransitionPresets.SlideFromRightIOS,
-                //     };
-                // }
                 return {
                     gestureEnabled: true,
                     cardOverlayEnabled: true,
@@ -57,7 +58,8 @@ export const AuthNavigation = () => {
                 };
                 // }
                 // return {};
-            }}>
+            }
+            }>
             <AuthStack.Screen
                 name={AUTH_NAVIGATION.Login}
                 component={Login}
@@ -88,22 +90,22 @@ export const SetUserNavigation = () => {
             mode="modal"
             screenOptions={(route) => {
                 const routeName = route.route.name;
-                // if (!isAndroid) {
-                if (routeName === SETUSER_NAVIGATION.SetUserInfo) {
+                if (!isAndroid) {
+                    if (routeName === SETUSER_NAVIGATION.SetUserInfo) {
+                        return {
+                            cardOverlayEnabled: true,
+                            gestureEnabled: true,
+                            useNativeDrivers: true,
+                        };
+                    }
+                }
+                else if (isAndroid) {
                     return {
                         cardOverlayEnabled: true,
                         gestureEnabled: true,
                         useNativeDrivers: true,
                     };
                 }
-                // else if (isAndroid) {
-                //     return {
-                //         cardOverlayEnabled: true,
-                //         gestureEnabled: true,
-                //         useNativeDrivers: true,
-                //         ...TransitionPresets.SlideFromRightIOS,
-                //     };
-                // }
                 return {
                     gestureEnabled: true,
                     cardOverlayEnabled: true,
@@ -112,7 +114,8 @@ export const SetUserNavigation = () => {
                 };
                 // }
                 // return {};
-            }}>
+            }
+            }>
             <SetUserStack.Screen
                 name={SETUSER_NAVIGATION.SetUserInfo}
                 component={SetUserInfo}

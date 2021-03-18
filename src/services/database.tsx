@@ -21,16 +21,56 @@ export class DatabaseAPI {
 
     constructor() {}
 
-    async addBookmark(item: ArticleElement) {
+    async addBookmark(item: ArticleElement | undefined) {
         try {
-            await this.bookmarksCollection.add(item);
-            return true;
+            if (item) {
+                const doesNotExist = await this.checkIfBookmarkExists(item);
+                if (doesNotExist) {
+                    await this.bookmarksCollection.add(item);
+                    return true;
+                }
+                Snackbar.show({
+                    text: 'This article has already been bookmarked.',
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor: 'red',
+                });
+                return false;
+            }
+            return false;
         } catch (err) {
             Snackbar.show({
                 text: 'An error occured.',
                 duration: Snackbar.LENGTH_LONG,
                 backgroundColor: 'red',
             });
+            console.log(err?.code);
+            return false;
+        }
+    }
+
+    async checkIfBookmarkExists(item: ArticleElement | undefined) {
+        try {
+            if (item) {
+                const result = await this.bookmarksCollection
+                    .where('title', '==', item.title)
+                    .get();
+                return result.empty;
+            }
+        } catch (err) {
+            console.log(err?.code);
+            return false;
+        }
+    }
+
+    async checkIfReaadLaterExists(item: ArticleElement | undefined) {
+        try {
+            if (item) {
+                const result = await this.readLaterCollection
+                    .where('title', '==', item.title)
+                    .get();
+                return result.empty;
+            }
+        } catch (err) {
             console.log(err?.code);
             return false;
         }
@@ -55,8 +95,17 @@ export class DatabaseAPI {
 
     async addReadLater(item: ArticleElement) {
         try {
-            await this.readLaterCollection.add(item);
-            return true;
+            const doesNotExist = await this.checkIfReaadLaterExists(item);
+            if (doesNotExist) {
+                await this.readLaterCollection.add(item);
+                return true;
+            }
+            Snackbar.show({
+                text: 'This article has already been saved.',
+                duration: Snackbar.LENGTH_LONG,
+                backgroundColor: 'red',
+            });
+            return false;
         } catch (err) {
             Snackbar.show({
                 text: 'An error occured.',

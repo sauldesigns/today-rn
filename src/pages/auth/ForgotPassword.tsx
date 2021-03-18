@@ -13,15 +13,13 @@ import {
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { FirebaseAPI } from '../../services/firebase';
 import { ScrollView } from 'react-native-gesture-handler';
-import SecureInput from '../../components/input/SecureInput';
-import GreetingText from '../../components/text/GreetingText';
 import MainTitle from '../../components/text/MainTitle';
 import MainInput from '../../components/input/MainInput';
 import { Button } from 'react-native-elements';
 import { black } from '../../constants/colors';
-import LoginButtons from '../../components/auth/LoginButtons';
 import { SFProDisplayRegular } from '../../constants/font';
 import Snackbar from 'react-native-snackbar';
+import { isAndroid } from '../../constants/misc';
 
 const options = {
     enableVibrateFallback: true,
@@ -118,7 +116,7 @@ const styles = StyleSheet.create({
     },
     content: {
         marginHorizontal: 28,
-        paddingTop: 65,
+        paddingTop: isAndroid ? 18 : 65,
     },
     input_container: {
         marginBottom: 26,

@@ -1,4 +1,4 @@
-package com.today;
+package me.sauldesigns.today;
 
 import com.facebook.react.ReactActivity;
 
