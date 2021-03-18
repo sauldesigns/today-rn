@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SearchBar } from 'react-native-elements';
 import { black } from '../../constants/colors';
+import { isAndroid } from '../../constants/misc';
 
 interface CustomSearchBarProps {
     refetch?: void;
@@ -9,15 +10,15 @@ interface CustomSearchBarProps {
 
 const CustomSearchBar = ({
     refetch,
-    onSubmit = () => {},
+    onSubmit = () => { },
 }: CustomSearchBarProps) => {
     const [search, setSearch] = useState('');
     return (
         <SearchBar
             round
-            containerStyle={{ paddingTop: 50, backgroundColor: black }}
+            containerStyle={{ paddingTop: isAndroid ? 40 : 50, backgroundColor: black }}
             inputContainerStyle={{ backgroundColor: 'white' }}
-            inputStyle={{color: black}}
+            inputStyle={{ color: black }}
             placeholder="Search Here..."
             autoCorrect={false}
             onChangeText={(value) => setSearch(value)}
