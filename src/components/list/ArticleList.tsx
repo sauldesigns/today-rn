@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { Icon, ListItem } from 'react-native-elements';
 import { ArticleElement } from '../../models/articles';
 import { InAppBrowserAPI } from '../../services/in-app-browser';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
@@ -44,7 +44,10 @@ const ArticleList = ({
     const LeftActionBookmark = () => {
         return (
             <View style={styles.left_action_container}>
-                <Text style={styles.left_action_title}>Bookmark</Text>
+                <Icon type="fontawesome" name="bookmark" color="white">
+                    Bookmark
+                </Icon>
+                <Text style={styles.left_action_title}> Bookmark</Text>
             </View>
         );
     };
@@ -52,7 +55,10 @@ const ArticleList = ({
     const RightActionReadLater = () => {
         return (
             <View style={styles.right_action_container}>
-                <Text style={styles.right_action_title}>Read Later</Text>
+                <Text style={styles.left_action_title}>Read Later </Text>
+                <Icon type="fontawesome" name="book" color="white">
+                    Book
+                </Icon>
             </View>
         );
     };
@@ -148,8 +154,8 @@ const ArticleList = ({
             onSwipeableRightOpen={
                 isSavedData ? RightActionOpenDelete : RightActionOpenReadLater
             }
-            leftThreshold={isSavedData ? 10000 : 130}
-            rightThreshold={isSavedData ? 250 : 130}>
+            leftThreshold={isSavedData ? 10000 : 140}
+            rightThreshold={isSavedData ? 250 : 140}>
             <ListItem bottomDivider>
                 <ArticleListItem
                     imageSource={imageSource}
@@ -166,9 +172,11 @@ export default ArticleList;
 
 const styles = StyleSheet.create({
     left_action_container: {
+        display: 'flex',
+        flexDirection: 'row',
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
         paddingLeft: 16,
         backgroundColor: '#810000',
     },
@@ -178,9 +186,11 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     right_action_container: {
+        flexDirection: 'row',
+
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
         paddingRight: 16,
         backgroundColor: '#007580',
     },
