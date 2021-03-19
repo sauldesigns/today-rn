@@ -74,6 +74,7 @@ const ArticleList = ({
     const LeftActionOpenBookmark = async () => {
         ReactNativeHapticFeedback.trigger('selection', options);
         try {
+            swipeableRow.close();
             const value = await databaseAPI.addBookmark(articleItem);
             if (value) {
                 ReactNativeHapticFeedback.trigger(
@@ -89,7 +90,6 @@ const ArticleList = ({
         } catch (err) {
             ReactNativeHapticFeedback.trigger('notificationError', options);
         }
-        swipeableRow.close();
     };
 
     const RightActionOpenDelete = async () => {
@@ -122,6 +122,7 @@ const ArticleList = ({
     const RightActionOpenReadLater = async () => {
         ReactNativeHapticFeedback.trigger('selection', options);
         try {
+            swipeableRow.close();
             const value = await databaseAPI.addReadLater(articleItem);
             if (value) {
                 ReactNativeHapticFeedback.trigger(
@@ -137,7 +138,6 @@ const ArticleList = ({
         } catch (err) {
             ReactNativeHapticFeedback.trigger('notificationError', options);
         }
-        swipeableRow.close();
     };
 
     return (
