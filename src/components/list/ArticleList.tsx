@@ -155,7 +155,9 @@ const ArticleList = ({
                 isSavedData ? RightActionOpenDelete : RightActionOpenReadLater
             }
             leftThreshold={isSavedData ? 10000 : 140}
-            rightThreshold={isSavedData ? 250 : 140}>
+            rightThreshold={isSavedData ? 200 : 140}
+            
+            >
             <ListItem bottomDivider>
                 <ArticleListItem
                     imageSource={imageSource}
