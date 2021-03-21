@@ -1,11 +1,17 @@
 import React from 'react';
-import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
+import {
+    Animated,
+    ImageSourcePropType,
+    StyleSheet,
+    Text,
+    View,
+} from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
 import { ArticleElement } from '../../models/articles';
 import { InAppBrowserAPI } from '../../services/in-app-browser';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { SFProDisplayBold } from '../../constants/font';
-import { Swipeable } from 'react-native-gesture-handler';
+import { Swipeable, TouchableOpacity } from 'react-native-gesture-handler';
 import ArticleListItem from './ArticleListItem';
 import Snackbar from 'react-native-snackbar';
 import { DatabaseAPI } from '../../services/database';
@@ -41,40 +47,97 @@ const ArticleList = ({
         ignoreAndroidSystemSettings: false,
     };
 
-    const LeftActionBookmark = () => {
+    const renderLeftActions = (
+        _progress: Animated.AnimatedInterpolation,
+        dragX: Animated.AnimatedInterpolation,
+    ) => {
+        const trans = dragX.interpolate({
+            inputRange: [0, 50, 100],
+            outputRange: [0, 0.5, 1],
+            extrapolate: 'clamp',
+        });
         return (
-            <View style={styles.left_action_container}>
-                <Icon type="fontawesome" name="bookmark" color="white">
-                    Bookmark
-                </Icon>
-                <Text style={styles.left_action_title}> Bookmark</Text>
-            </View>
+            <TouchableOpacity
+                style={styles.leftAction}
+                onPress={LeftActionOpenBookmark}>
+                <Animated.View
+                    style={{
+                        opacity: trans,
+                        transform: [{ scale: trans }],
+                    }}>
+                    <Icon type="fontawesome" name="bookmark" color="white">
+                        Bookmark
+                    </Icon>
+
+                    <Animated.Text style={[styles.actionText]}>
+                        Bookmark
+                    </Animated.Text>
+                </Animated.View>
+            </TouchableOpacity>
         );
     };
 
-    const RightActionReadLater = () => {
+    const renderRightActions = (
+        _progress: Animated.AnimatedInterpolation,
+        dragX: Animated.AnimatedInterpolation,
+    ) => {
+        const trans = dragX.interpolate({
+            inputRange: [-100, -50, 0],
+            outputRange: [1, 0.5, 0],
+            extrapolate: 'clamp',
+        });
+
         return (
-            <View style={styles.right_action_container}>
-                <Text style={styles.left_action_title}>Read Later </Text>
-                <Icon type="fontawesome" name="book" color="white">
-                    Book
-                </Icon>
-            </View>
+            <TouchableOpacity
+                style={styles.rightAction}
+                onPress={RightActionOpenReadLater}>
+                <Animated.View
+                    style={{
+                        opacity: trans,
+                        transform: [{ scale: trans }],
+                    }}>
+                    <Icon type="fontawesome" name="book" color="white"></Icon>
+
+                    <Animated.Text style={[styles.actionText]}>
+                        Read Later
+                    </Animated.Text>
+                </Animated.View>
+            </TouchableOpacity>
         );
     };
 
-    const RightActionDelete = () => {
+    const renderRightDelete = (
+        _progress: Animated.AnimatedInterpolation,
+        dragX: Animated.AnimatedInterpolation,
+    ) => {
+        const trans = dragX.interpolate({
+            inputRange: [-100, -50, 0],
+            outputRange: [1, 0.5, 0],
+            extrapolate: 'clamp',
+        });
         return (
-            <View style={styles.right_action_delete_container}>
-                <Text style={styles.right_action_title}>Delete</Text>
-            </View>
+            <TouchableOpacity
+                style={styles.rightActionDelete}
+                onPress={RightActionOpenDelete}>
+                <Animated.View
+                    style={{
+                        opacity: trans,
+                        transform: [{ scale: trans }],
+                    }}>
+                    <Icon type="fontawesome" name="delete" color="white"></Icon>
+
+                    <Animated.Text style={[styles.actionText]}>
+                        Delete
+                    </Animated.Text>
+                </Animated.View>
+            </TouchableOpacity>
         );
     };
 
     const LeftActionOpenBookmark = async () => {
         ReactNativeHapticFeedback.trigger('selection', options);
+
         try {
-            swipeableRow.close();
             const value = await databaseAPI.addBookmark(articleItem);
             if (value) {
                 ReactNativeHapticFeedback.trigger(
@@ -90,6 +153,7 @@ const ArticleList = ({
         } catch (err) {
             ReactNativeHapticFeedback.trigger('notificationError', options);
         }
+        swipeableRow.close();
     };
 
     const RightActionOpenDelete = async () => {
@@ -122,7 +186,6 @@ const ArticleList = ({
     const RightActionOpenReadLater = async () => {
         ReactNativeHapticFeedback.trigger('selection', options);
         try {
-            swipeableRow.close();
             const value = await databaseAPI.addReadLater(articleItem);
             if (value) {
                 ReactNativeHapticFeedback.trigger(
@@ -138,26 +201,21 @@ const ArticleList = ({
         } catch (err) {
             ReactNativeHapticFeedback.trigger('notificationError', options);
         }
+        swipeableRow.close();
     };
 
     return (
         <Swipeable
             ref={updateRef}
-            friction={1.25}
-            renderLeftActions={isSavedData ? undefined : LeftActionBookmark}
-            onSwipeableLeftOpen={
-                isSavedData ? undefined : LeftActionOpenBookmark
-            }
+            friction={2}
+            enableTrackpadTwoFingerGesture
+            renderLeftActions={isSavedData ? undefined : renderLeftActions}
             renderRightActions={
-                isSavedData ? RightActionDelete : RightActionReadLater
+                isSavedData ? renderRightDelete : renderRightActions
             }
-            onSwipeableRightOpen={
-                isSavedData ? RightActionOpenDelete : RightActionOpenReadLater
-            }
-            leftThreshold={isSavedData ? 10000 : 140}
-            rightThreshold={isSavedData ? 200 : 140}
-            
-            >
+            leftThreshold={50}
+            rightThreshold={50}
+            containerStyle={{ backgroundColor: 'white' }}>
             <ListItem bottomDivider>
                 <ArticleListItem
                     imageSource={imageSource}
@@ -173,39 +231,27 @@ const ArticleList = ({
 export default ArticleList;
 
 const styles = StyleSheet.create({
-    left_action_container: {
-        display: 'flex',
-        flexDirection: 'row',
+    leftAction: {
         flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        paddingLeft: 16,
-        backgroundColor: '#810000',
-    },
-    left_action_title: {
-        fontFamily: SFProDisplayBold,
-        fontSize: 16,
-        color: 'white',
-    },
-    right_action_container: {
-        flexDirection: 'row',
-
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        paddingRight: 16,
-        backgroundColor: '#007580',
-    },
-    right_action_title: {
-        fontFamily: SFProDisplayBold,
-        fontSize: 16,
-        color: 'white',
-    },
-    right_action_delete_container: {
-        flex: 1,
+        backgroundColor: '#497AFC',
         justifyContent: 'center',
-        alignItems: 'flex-end',
-        paddingRight: 16,
+    },
+    actionText: {
+        color: 'white',
+        fontSize: 16,
+        backgroundColor: 'transparent',
+        paddingHorizontal: 20,
+    },
+    rightAction: {
+        alignItems: 'center',
+        flex: 1,
+        backgroundColor: '#007580',
+        justifyContent: 'center',
+    },
+    rightActionDelete: {
+        alignItems: 'center',
+        flex: 1,
         backgroundColor: 'red',
+        justifyContent: 'center',
     },
 });
