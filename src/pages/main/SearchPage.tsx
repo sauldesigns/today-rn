@@ -66,7 +66,7 @@ const SearchPage = () => {
                         data={data?.articles}
                         style={styles.container}
                         ref={ref}
-                        maxToRenderPerBatch={5}
+                        initialNumToRender={5}
                         keyboardShouldPersistTaps="handled"
                         keyboardDismissMode="on-drag"
                         refreshControl={

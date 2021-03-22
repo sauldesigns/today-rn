@@ -46,7 +46,7 @@ const HomePage = () => {
                     data={data?.articles}
                     ref={ref}
                     style={styles.container}
-                    maxToRenderPerBatch={5}
+                    initialNumToRender={5}
                     refreshControl={
                         <RefreshControl
                             refreshing={pullToRefresh}
