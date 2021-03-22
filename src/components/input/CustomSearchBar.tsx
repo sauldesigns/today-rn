@@ -10,13 +10,16 @@ interface CustomSearchBarProps {
 
 const CustomSearchBar = ({
     refetch,
-    onSubmit = () => { },
+    onSubmit = () => {},
 }: CustomSearchBarProps) => {
     const [search, setSearch] = useState('');
     return (
         <SearchBar
             round
-            containerStyle={{ paddingTop: isAndroid ? 40 : 50, backgroundColor: black }}
+            containerStyle={{
+                // paddingTop: isAndroid ? 18 : 18,
+                backgroundColor: black,
+            }}
             inputContainerStyle={{ backgroundColor: 'white' }}
             inputStyle={{ color: black }}
             placeholder="Search Here..."

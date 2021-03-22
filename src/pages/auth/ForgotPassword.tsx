@@ -25,6 +25,7 @@ const options = {
     enableVibrateFallback: true,
     ignoreAndroidSystemSettings: false,
 };
+
 const ForgotPassword = () => {
     const authService = new FirebaseAPI();
     const { control, handleSubmit } = useForm();
@@ -71,6 +72,8 @@ const ForgotPassword = () => {
                             render={({ onChange, onBlur }) => (
                                 <MainInput
                                     placeholder="E-mail"
+                                    placeholderTextColor="rgba(255,255,255,0.3)"
+                                    style={{ color: 'white' }}
                                     keyboardType="email-address"
                                     textContentType="emailAddress"
                                     onBlur={onBlur}
@@ -116,7 +119,7 @@ const styles = StyleSheet.create({
     },
     content: {
         marginHorizontal: 28,
-        paddingTop: isAndroid ? 18 : 65,
+        paddingTop: isAndroid ? 18 : 35,
     },
     input_container: {
         marginBottom: 26,

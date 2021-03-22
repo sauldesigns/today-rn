@@ -47,7 +47,7 @@ interface SecureInputProps {
 
 const SecureInput = ({
     placeholder = 'Password',
-    placeholderTextColor = 'white',
+    placeholderTextColor,
     style,
     textContentType = 'none',
     onBlur,

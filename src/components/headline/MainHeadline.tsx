@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import TimeAgo from 'react-native-timeago';
@@ -27,6 +27,23 @@ const MainHeadline = ({
 }: MainHeadlineProps) => {
     const inAppBrowser = new InAppBrowserAPI();
     const databaseAPI = new DatabaseAPI();
+    const [bookmarked, setIsBookmarked] = useState<boolean | null>(null);
+
+    useEffect(() => {
+        const subscribe = databaseAPI
+            .getTopHeadlineBookmark()
+            .where('title', '==', article?.title ?? '')
+            .onSnapshot((doc) => {
+                if (doc.docs.length === 0) {
+                    setIsBookmarked(false);
+                } else {
+                    setIsBookmarked(true);
+                }
+            });
+
+        return () => subscribe();
+    }, [article]);
+
     const handleOnPress = async () => {
         ReactNativeHapticFeedback.trigger('impactMedium', options);
         inAppBrowser.openLink(article?.url ?? 'http://google.com');
@@ -35,16 +52,26 @@ const MainHeadline = ({
     const handleLongPress = async () => {
         ReactNativeHapticFeedback.trigger('selection', options);
         try {
-            const value = await databaseAPI.addBookmark(article);
+            const value = await databaseAPI.toggleHeadlineBookmark(
+                article,
+                bookmarked ?? false,
+            );
+
             if (value) {
                 ReactNativeHapticFeedback.trigger(
                     'notificationSuccess',
                     options,
                 );
                 Snackbar.show({
-                    text: 'Successfully added to bookmarks.',
+                    text: 'Successfully added to bookmark.',
                     duration: Snackbar.LENGTH_LONG,
                     backgroundColor: 'green',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Successfully removed bookmark.',
+                    duration: Snackbar.LENGTH_LONG,
+                    backgroundColor: 'red',
                 });
             }
         } catch (err) {
@@ -82,7 +109,7 @@ const MainHeadline = ({
                             onPress={handleLongPress}
                             type="fontawesome"
                             name="bookmark"
-                            color="white"
+                            color={!bookmarked ? 'white' : 'red'}
                             style={styles.source}>
                             Author: {article?.author}
                         </Icon>
@@ -102,10 +129,10 @@ const styles = StyleSheet.create({
         minHeight: 300,
         backgroundColor: '#000',
         paddingHorizontal: 16,
-        paddingTop: isAndroid ? 18 : 50,
+        paddingTop: isAndroid ? 18 : 18,
         paddingBottom: 16,
     },
-    
+
     header: {
         flex: 1,
         justifyContent: 'center',

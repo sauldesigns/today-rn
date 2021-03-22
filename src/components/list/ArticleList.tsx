@@ -250,6 +250,7 @@ const styles = StyleSheet.create({
     },
     rightActionDelete: {
         alignItems: 'center',
+        minWidth: 100,
         flex: 1,
         backgroundColor: 'red',
         justifyContent: 'center',

@@ -116,6 +116,7 @@ const SavedPage = () => {
             <FlatList
                 keyExtractor={(item) => item.id}
                 data={bookmarks}
+                maxToRenderPerBatch={5}
                 ListEmptyComponent={() => {
                     return (
                         <View

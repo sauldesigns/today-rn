@@ -1,7 +1,13 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
+import {
+    ActivityIndicator,
+    Platform,
+    StyleSheet,
+    useColorScheme,
+    View,
+} from 'react-native';
 import { Icon } from 'react-native-elements';
 import firestore from '@react-native-firebase/firestore';
 import { black } from '../constants/colors';
@@ -22,7 +28,7 @@ const TabStack = createBottomTabNavigator();
 const Landing = () => {
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState<FirebaseAuthTypes.User | null>();
-
+    const colorScheme = useColorScheme();
     const [, dispatch] = useStateValue();
     const [needsUserInfo, setNeedsUserInfo] = useState(false);
 
@@ -37,7 +43,6 @@ const Landing = () => {
     }, []);
 
     useEffect(() => {
-
         const subscriber = firestore()
             .collection('users')
             .doc(user?.uid)
@@ -57,8 +62,6 @@ const Landing = () => {
             });
 
         return () => subscriber();
-
-
     }, [user]);
 
     if (initializing)
@@ -84,7 +87,10 @@ const Landing = () => {
 
     return (
         <TabStack.Navigator
-            tabBarOptions={{ activeTintColor: black, showLabel: false }}
+            tabBarOptions={{
+                activeTintColor: colorScheme === 'dark' ? 'white' : black,
+                showLabel: false,
+            }}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ color, size }) => {
                     let iconName: string = '';

@@ -1,6 +1,6 @@
 import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import React from 'react';
-import { StatusBar, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import UserDetails from '../../components/profile/UserDetails';
@@ -96,41 +96,44 @@ const AccountPage = () => {
 
     return (
         <>
-            <StatusBar barStyle="light-content" animated />
-            <FlatList
-                ref={ref}
-                ListHeaderComponent={() => {
-                    return (
-                        <>
-                            <View
-                                style={{
-                                    flex: 1,
-                                    paddingTop: 60,
-                                    backgroundColor: black,
-                                    paddingBottom: 36,
-                                }}>
-                                <UserDetails
-                                    username={userObj?.username ?? ''}
-                                    location={userObj?.bio ?? ''}
-                                />
-                            </View>
-                        </>
-                    );
-                }}
-                keyExtractor={(_, index) => index.toString()}
-                data={settings_list}
-                renderItem={({ item }) => {
-                    return (
-                        <ListItem onPress={() => item?.onPress()} bottomDivider>
-                            <Icon name={item?.icon} />
-                            <ListItem.Content>
-                                <ListItem.Title>{item?.title}</ListItem.Title>
-                            </ListItem.Content>
-                            <ListItem.Chevron />
-                        </ListItem>
-                    );
-                }}
-            />
+            <SafeAreaView style={{ flex: 0, backgroundColor: black }} />
+            <SafeAreaView style={{ flex: 1 }}>
+                <StatusBar barStyle="light-content" animated />
+                <View
+                    style={{
+                        // paddingTop: 18,
+                        backgroundColor: black,
+                        paddingBottom: 26,
+                    }}>
+                    <UserDetails
+                        username={userObj?.username ?? ''}
+                        location={userObj?.bio ?? ''}
+                    />
+                </View>
+                <FlatList
+                    ref={ref}
+                    // ListHeaderComponent={() => {
+                    //     return <></>;
+                    // }}
+                    keyExtractor={(_, index) => index.toString()}
+                    data={settings_list}
+                    renderItem={({ item }) => {
+                        return (
+                            <ListItem
+                                onPress={() => item?.onPress()}
+                                bottomDivider>
+                                <Icon name={item?.icon} />
+                                <ListItem.Content>
+                                    <ListItem.Title>
+                                        {item?.title}
+                                    </ListItem.Title>
+                                </ListItem.Content>
+                                <ListItem.Chevron />
+                            </ListItem>
+                        );
+                    }}
+                />
+            </SafeAreaView>
         </>
     );
 };

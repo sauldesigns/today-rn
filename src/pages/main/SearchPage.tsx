@@ -3,6 +3,7 @@ import {
     ActivityIndicator,
     ImageSourcePropType,
     RefreshControl,
+    SafeAreaView,
     StatusBar,
     StyleSheet,
     View,
@@ -17,6 +18,7 @@ import ErrorView from '../../components/error/ErrorView';
 import NoArticlesView from '../../components/error/NoArticlesView';
 import CustomSearchBar from '../../components/input/CustomSearchBar';
 import { useScrollToTop } from '@react-navigation/native';
+import { black } from '../../constants/colors';
 
 const SearchPage = () => {
     const newsAPI = new NewsAPI();
@@ -45,71 +47,75 @@ const SearchPage = () => {
     };
 
     return (
-        <View style={styles.container}>
-            <StatusBar barStyle="light-content" animated />
-            <CustomSearchBar
-                onSubmit={(v: string) => {
-                    getSearchValue(v);
-                }}
-            />
-
-            {(isLoading || isFetching) && !pullToRefresh ? (
-                <View style={styles.loading}>
-                    <ActivityIndicator color="black" />
-                </View>
-            ) : (
-                <FlatList
-                    data={data?.articles}
-                    style={styles.container}
-                    ref={ref}
-                    keyboardShouldPersistTaps="handled"
-                    keyboardDismissMode="on-drag"
-                    refreshControl={
-                        <RefreshControl
-                            colors={['black']}
-                            tintColor="black"
-                            refreshing={pullToRefresh}
-                            onRefresh={async () => {
-                                ReactNativeHapticFeedback.trigger(
-                                    'selection',
-                                    options,
-                                );
-                                setPullToRefresh(true);
-                                await refetch();
-                                setPullToRefresh(false);
-                            }}
-                        />
-                    }
-                    keyExtractor={(_, index) => index.toString()}
-                    renderItem={({ item, index }) => {
-                        const articleItem: ArticleElement = item;
-                        // Article will sometimes return "" instead of null
-                        // This will handle the case
-                        const imageSource: ImageSourcePropType = newsAPI.handleImages(
-                            articleItem.urlToImage,
-                        );
-                        return (
-                            <ArticleList
-                                articleItem={articleItem}
-                                imageSource={imageSource}
-                                showSource
-                            />
-                        );
-                    }}
-                    ListEmptyComponent={() => {
-                        return isError ? (
-                            <View style={{ paddingTop: 100 }}>
-                                <ErrorView errorMessage={error} />
-                            </View>
-                        ) : isLoading ? (
-                            <></>
-                        ) : (
-                            <NoArticlesView />
-                        );
+        <>
+            <SafeAreaView style={{ flex: 0, backgroundColor: black }} />
+            <SafeAreaView style={styles.container}>
+                <StatusBar barStyle="light-content" animated />
+                <CustomSearchBar
+                    onSubmit={(v: string) => {
+                        getSearchValue(v);
                     }}
                 />
-            )}
-        </View>
+
+                {(isLoading || isFetching) && !pullToRefresh ? (
+                    <View style={styles.loading}>
+                        <ActivityIndicator color="black" />
+                    </View>
+                ) : (
+                    <FlatList
+                        data={data?.articles}
+                        style={styles.container}
+                        ref={ref}
+                        maxToRenderPerBatch={5}
+                        keyboardShouldPersistTaps="handled"
+                        keyboardDismissMode="on-drag"
+                        refreshControl={
+                            <RefreshControl
+                                // colors={['black']}
+                                // tintColor="black"
+                                refreshing={pullToRefresh}
+                                onRefresh={async () => {
+                                    ReactNativeHapticFeedback.trigger(
+                                        'selection',
+                                        options,
+                                    );
+                                    setPullToRefresh(true);
+                                    await refetch();
+                                    setPullToRefresh(false);
+                                }}
+                            />
+                        }
+                        keyExtractor={(_, index) => index.toString()}
+                        renderItem={({ item, index }) => {
+                            const articleItem: ArticleElement = item;
+                            // Article will sometimes return "" instead of null
+                            // This will handle the case
+                            const imageSource: ImageSourcePropType = newsAPI.handleImages(
+                                articleItem.urlToImage,
+                            );
+                            return (
+                                <ArticleList
+                                    articleItem={articleItem}
+                                    imageSource={imageSource}
+                                    showSource
+                                />
+                            );
+                        }}
+                        ListEmptyComponent={() => {
+                            return isError ? (
+                                <View style={{ paddingTop: 100 }}>
+                                    <ErrorView errorMessage={error} />
+                                </View>
+                            ) : isLoading ? (
+                                <></>
+                            ) : (
+                                <NoArticlesView />
+                            );
+                        }}
+                    />
+                )}
+            </SafeAreaView>
+        </>
     );
 };
 

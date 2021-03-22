@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 16,
         display: 'flex',
-        flex: 1,
+        paddingVertical: 30,
+        // flex: 1,
         // alignItems: 'center',
         // justifyContent: 'center',
     },

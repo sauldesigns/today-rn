@@ -66,12 +66,40 @@ export class DatabaseAPI {
         try {
             if (item) {
                 const result = await this.readLaterCollection
-                    .where('title', '==', item.title)
+                    .where('title', '==', item?.title)
                     .get();
                 return result.empty;
             }
         } catch (err) {
             console.log(err?.code);
+            return false;
+        }
+    }
+
+    getTopHeadlineBookmark() {
+        return this.bookmarksCollection;
+    }
+
+    async toggleHeadlineBookmark(
+        item: ArticleElement | undefined,
+        toggle: boolean,
+    ) {
+        try {
+            if (toggle) {
+                const result = await this.bookmarksCollection
+                    .where('title', '==', item?.title)
+                    .get();
+
+                await this.deleteSaved(result?.docs[0]?.id, true);
+
+                return false;
+            } else {
+                await this.addBookmark(item);
+                return true;
+            }
+        } catch (err) {
+            console.log(err);
+            console.log('error');
             return false;
         }
     }

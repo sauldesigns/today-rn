@@ -72,8 +72,10 @@ const Login = () => {
                         render={({ onChange, onBlur }) => (
                             <MainInput
                                 placeholder="E-mail"
+                                placeholderTextColor="rgba(255,255,255,0.3)"
                                 keyboardType="email-address"
                                 textContentType="emailAddress"
+                                style={{color: 'white'}}
                                 onBlur={onBlur}
                                 onChange={onChange}
                             />
@@ -92,6 +94,7 @@ const Login = () => {
                         render={({ onChange, onBlur }) => (
                             <SecureInput
                                 textContentType="password"
+                                placeholderTextColor="rgba(255,255,255,0.3)"
                                 onBlur={onBlur}
                                 onChange={onChange}
                             />

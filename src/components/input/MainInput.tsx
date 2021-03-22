@@ -69,7 +69,7 @@ interface MainInputProps {
 const MainInput = ({
     style,
     placeholder = 'Enter here...',
-    placeholderTextColor = 'white',
+    placeholderTextColor,
     autoCorrect = false,
     keyboardType = 'default',
     autoCapitalize = 'none',
@@ -87,11 +87,7 @@ const MainInput = ({
 }: MainInputProps) => {
     return (
         <Input
-            style={
-                style
-                    ? style
-                    : { ...styles.input_style, color: dark ? black : 'white' }
-            }
+            style={style ? style : { ...styles.input_style }}
             label={label}
             disabled={disabled}
             placeholderTextColor={placeholderTextColor}

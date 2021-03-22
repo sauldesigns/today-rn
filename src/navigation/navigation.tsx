@@ -42,8 +42,7 @@ export const AuthNavigation = () => {
                             useNativeDrivers: true,
                         };
                     }
-                }
-                else if (isAndroid) {
+                } else if (isAndroid) {
                     return {
                         cardOverlayEnabled: true,
                         gestureEnabled: true,
@@ -56,10 +55,7 @@ export const AuthNavigation = () => {
                     useNativeDrivers: true,
                     ...TransitionPresets.ModalPresentationIOS,
                 };
-                // }
-                // return {};
-            }
-            }>
+            }}>
             <AuthStack.Screen
                 name={AUTH_NAVIGATION.Login}
                 component={Login}
@@ -98,8 +94,7 @@ export const SetUserNavigation = () => {
                             useNativeDrivers: true,
                         };
                     }
-                }
-                else if (isAndroid) {
+                } else if (isAndroid) {
                     return {
                         cardOverlayEnabled: true,
                         gestureEnabled: true,
@@ -112,10 +107,7 @@ export const SetUserNavigation = () => {
                     useNativeDrivers: true,
                     ...TransitionPresets.ModalPresentationIOS,
                 };
-                // }
-                // return {};
-            }
-            }>
+            }}>
             <SetUserStack.Screen
                 name={SETUSER_NAVIGATION.SetUserInfo}
                 component={SetUserInfo}

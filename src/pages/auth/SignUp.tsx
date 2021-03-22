@@ -73,6 +73,8 @@ const SignUp = () => {
                             render={({ onChange, onBlur }) => (
                                 <MainInput
                                     placeholder="Username"
+                                    placeholderTextColor="rgba(255,255,255,0.3)"
+                                    style={{ color: 'white' }}
                                     keyboardType="default"
                                     textContentType="username"
                                     onBlur={onBlur}
@@ -92,6 +94,8 @@ const SignUp = () => {
                             render={({ onChange, onBlur }) => (
                                 <MainInput
                                     placeholder="E-mail"
+                                    placeholderTextColor="rgba(255,255,255,0.3)"
+                                    style={{ color: 'white' }}
                                     keyboardType="email-address"
                                     textContentType="emailAddress"
                                     onBlur={onBlur}
@@ -112,6 +116,8 @@ const SignUp = () => {
                             render={({ onChange, onBlur }) => (
                                 <SecureInput
                                     textContentType="password"
+                                    placeholderTextColor="rgba(255,255,255,0.3)"
+                                    style={{ color: 'white' }}
                                     onBlur={onBlur}
                                     onChange={onChange}
                                 />
@@ -154,7 +160,7 @@ const styles = StyleSheet.create({
     },
     content: {
         marginHorizontal: 28,
-        paddingTop: isAndroid ? 18 : 65,
+        paddingTop: isAndroid ? 18 : 35,
     },
     input_container: {
         marginBottom: 26,

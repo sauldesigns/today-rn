@@ -55,7 +55,7 @@ const EditProfilePage = () => {
                         <MainInput
                             label="Username"
                             placeholder="Enter Username Here..."
-                            placeholderTextColor={black}
+                            // placeholderTextColor={black}
                             dark
                             textContentType="username"
                             value={value}
@@ -76,7 +76,7 @@ const EditProfilePage = () => {
                         <MainInput
                             label="E-mail"
                             placeholder="Enter E-mail Here..."
-                            placeholderTextColor={black}
+                            // placeholderTextColor={black}
                             dark
                             keyboardType="email-address"
                             textContentType="emailAddress"
@@ -100,7 +100,7 @@ const EditProfilePage = () => {
                         <MainInput
                             label="Bio"
                             placeholder="Enter Bio Here..."
-                            placeholderTextColor={black}
+                            // placeholderTextColor={black}
                             dark
                             maxLength={180}
                             textContentType="username"
