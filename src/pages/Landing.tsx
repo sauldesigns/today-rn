@@ -98,7 +98,7 @@ const Landing = () => {
                     if (route.name === MAIN_NAVIGATION_TABS.Home) {
                         iconName = 'home';
                     } else if (route.name === MAIN_NAVIGATION_TABS.Account) {
-                        iconName = 'person';
+                        iconName = 'user';
                     } else if (route.name === MAIN_NAVIGATION_TABS.Search) {
                         iconName = 'search';
                     } else if (route.name === MAIN_NAVIGATION_TABS.Saved) {
@@ -108,7 +108,7 @@ const Landing = () => {
                     // You can return any component that you like here!
                     return (
                         <Icon
-                            type="fontawesome"
+                            type="font-awesome"
                             name={iconName}
                             size={size}
                             color={color}

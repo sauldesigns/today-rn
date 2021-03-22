@@ -20,7 +20,7 @@ const ErrorView = ({
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-            <Icon name="error" type="fontawesome" color="red" size={50} />
+            <Icon name="error" type="font-awesome" color="red" size={50} />
             <Text
                 style={{
                     textAlign: 'center',

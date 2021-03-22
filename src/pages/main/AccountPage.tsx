@@ -41,7 +41,7 @@ const AccountPage = () => {
         },
         {
             title: 'Privacy Policy',
-            icon: 'policy',
+            icon: 'file',
             onPress: async () => {
                 try {
                     await inAppBrowserAPI.openLink(privacy_policy_link);
@@ -76,7 +76,7 @@ const AccountPage = () => {
         },
         {
             title: 'Sign Out',
-            icon: 'logout',
+            icon: 'sign-out',
             onPress: async () => {
                 try {
                     await firebaseAPI.signOut();
@@ -122,7 +122,7 @@ const AccountPage = () => {
                             <ListItem
                                 onPress={() => item?.onPress()}
                                 bottomDivider>
-                                <Icon name={item?.icon} />
+                                <Icon type="font-awesome" name={item?.icon} />
                                 <ListItem.Content>
                                     <ListItem.Title>
                                         {item?.title}

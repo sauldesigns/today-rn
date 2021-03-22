@@ -107,7 +107,7 @@ const MainHeadline = ({
                         </Text>
                         <Icon
                             onPress={handleLongPress}
-                            type="fontawesome"
+                            type="font-awesome"
                             name="bookmark"
                             color={!bookmarked ? 'white' : 'red'}
                             style={styles.source}>

@@ -6,7 +6,7 @@ import { SFProDisplayRegular } from '../../constants/font';
 const NoArticlesView = () => {
     return (
         <View style={styles.no_articles_container}>
-            <Icon name="article" type="fontawesome" color="black" size={50} />
+            <Icon name="article" type="font-awesome" color="black" size={50} />
             <Text style={styles.no_articles_text}>There are no articles.</Text>
         </View>
     );

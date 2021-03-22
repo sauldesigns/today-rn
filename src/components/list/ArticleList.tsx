@@ -65,7 +65,7 @@ const ArticleList = ({
                         opacity: trans,
                         transform: [{ scale: trans }],
                     }}>
-                    <Icon type="fontawesome" name="bookmark" color="white">
+                    <Icon type="font-awesome" name="bookmark" color="white">
                         Bookmark
                     </Icon>
 
@@ -96,7 +96,7 @@ const ArticleList = ({
                         opacity: trans,
                         transform: [{ scale: trans }],
                     }}>
-                    <Icon type="fontawesome" name="book" color="white"></Icon>
+                    <Icon type="font-awesome" name="book" color="white"></Icon>
 
                     <Animated.Text style={[styles.actionText]}>
                         Read Later
@@ -124,7 +124,7 @@ const ArticleList = ({
                         opacity: trans,
                         transform: [{ scale: trans }],
                     }}>
-                    <Icon type="fontawesome" name="delete" color="white"></Icon>
+                    <Icon type="font-awesome" name="trash" color="white"></Icon>
 
                     <Animated.Text style={[styles.actionText]}>
                         Delete
