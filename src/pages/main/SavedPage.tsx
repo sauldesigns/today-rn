@@ -18,6 +18,7 @@ import { ArticleElement } from '../../models/articles';
 import { FlatList } from 'react-native-gesture-handler';
 import ArticleList from '../../components/list/ArticleList';
 import { NewsAPI } from '../../services/api';
+import AdComponent from '../../components/ad/AdComponent';
 
 const SavedPage = () => {
     const buttons = ['Bookmarks', 'Read Later'];
@@ -116,7 +117,6 @@ const SavedPage = () => {
             <FlatList
                 keyExtractor={(item) => item.id}
                 data={bookmarks}
-                initialNumToRender={5}
                 ListEmptyComponent={() => {
                     return (
                         <View
@@ -138,18 +138,25 @@ const SavedPage = () => {
                         </View>
                     );
                 }}
-                renderItem={({ item }) => {
+                renderItem={({ item, index }) => {
                     const imageSource: ImageSourcePropType = newsAPI.handleImages(
                         item?.urlToImage,
                     );
                     return (
-                        <ArticleList
-                            articleItem={item}
-                            imageSource={imageSource}
-                            showSource
-                            isSavedData
-                            isBookmark={buttonIndex === 0 ? true : false}
-                        />
+                        <>
+                            {index % 10 === 0 && index !== 0 ? (
+                                <AdComponent />
+                            ) : (
+                                <></>
+                            )}
+                            <ArticleList
+                                articleItem={item}
+                                imageSource={imageSource}
+                                showSource
+                                isSavedData
+                                isBookmark={buttonIndex === 0 ? true : false}
+                            />
+                        </>
                     );
                 }}
             />

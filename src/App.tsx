@@ -13,6 +13,7 @@ import { GoogleSignin } from '@react-native-community/google-signin';
 import { GOOGLE_API_KEY } from '@env';
 import { useColorScheme } from 'react-native';
 import { ThemeProvider } from 'react-native-elements';
+import admob, { MaxAdContentRating } from '@react-native-firebase/admob';
 
 GoogleSignin.configure({
     webClientId: GOOGLE_API_KEY,
@@ -21,6 +22,21 @@ GoogleSignin.configure({
 const queryClient = new QueryClient();
 
 const App = () => {
+    admob()
+        .setRequestConfiguration({
+            // Update all future requests suitable for parental guidance
+            maxAdContentRating: MaxAdContentRating.PG,
+
+            // Indicates that you want your content treated as child-directed for purposes of COPPA.
+            tagForChildDirectedTreatment: true,
+
+            // Indicates that you want the ad request to be handled in a
+            // manner suitable for users under the age of consent.
+            tagForUnderAgeOfConsent: true,
+        })
+        .then(() => {
+            // Request config successfully set!
+        });
     let colorScheme = useColorScheme();
 
     return (

@@ -5,7 +5,6 @@ import {
     SafeAreaView,
     StatusBar,
     StyleSheet,
-    useColorScheme,
     View,
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
@@ -18,6 +17,7 @@ import ErrorView from '../../components/error/ErrorView';
 import NoArticlesView from '../../components/error/NoArticlesView';
 import { useScrollToTop } from '@react-navigation/native';
 import { black } from '../../constants/colors';
+import AdComponent from '../../components/ad/AdComponent';
 
 const HomePage = () => {
     const newsAPI = new NewsAPI();
@@ -46,7 +46,6 @@ const HomePage = () => {
                     data={data?.articles}
                     ref={ref}
                     style={styles.container}
-                    initialNumToRender={5}
                     refreshControl={
                         <RefreshControl
                             refreshing={pullToRefresh}
@@ -82,10 +81,17 @@ const HomePage = () => {
                         );
                         if (index !== 0) {
                             return (
-                                <ArticleList
-                                    articleItem={articleItem}
-                                    imageSource={imageSource}
-                                />
+                                <>
+                                    {index % 10 === 0 && index !== 0 ? (
+                                        <AdComponent />
+                                    ) : (
+                                        <></>
+                                    )}
+                                    <ArticleList
+                                        articleItem={articleItem}
+                                        imageSource={imageSource}
+                                    />
+                                </>
                             );
                         } else {
                             return <></>;

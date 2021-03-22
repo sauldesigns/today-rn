@@ -19,6 +19,7 @@ import NoArticlesView from '../../components/error/NoArticlesView';
 import CustomSearchBar from '../../components/input/CustomSearchBar';
 import { useScrollToTop } from '@react-navigation/native';
 import { black } from '../../constants/colors';
+import AdComponent from '../../components/ad/AdComponent';
 
 const SearchPage = () => {
     const newsAPI = new NewsAPI();
@@ -66,7 +67,6 @@ const SearchPage = () => {
                         data={data?.articles}
                         style={styles.container}
                         ref={ref}
-                        initialNumToRender={5}
                         keyboardShouldPersistTaps="handled"
                         keyboardDismissMode="on-drag"
                         refreshControl={
@@ -94,11 +94,18 @@ const SearchPage = () => {
                                 articleItem.urlToImage,
                             );
                             return (
-                                <ArticleList
-                                    articleItem={articleItem}
-                                    imageSource={imageSource}
-                                    showSource
-                                />
+                                <>
+                                    {index % 10 === 0 && index !== 0 ? (
+                                        <AdComponent />
+                                    ) : (
+                                        <></>
+                                    )}
+                                    <ArticleList
+                                        articleItem={item}
+                                        imageSource={imageSource}
+                                        showSource
+                                    />
+                                </>
                             );
                         }}
                         ListEmptyComponent={() => {

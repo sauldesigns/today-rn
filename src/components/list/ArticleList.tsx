@@ -1,16 +1,9 @@
-import React from 'react';
-import {
-    Animated,
-    ImageSourcePropType,
-    StyleSheet,
-    Text,
-    View,
-} from 'react-native';
+import React, { useState } from 'react';
+import { Animated, ImageSourcePropType, StyleSheet } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
 import { ArticleElement } from '../../models/articles';
 import { InAppBrowserAPI } from '../../services/in-app-browser';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
-import { SFProDisplayBold } from '../../constants/font';
 import { Swipeable, TouchableOpacity } from 'react-native-gesture-handler';
 import ArticleListItem from './ArticleListItem';
 import Snackbar from 'react-native-snackbar';
@@ -22,6 +15,7 @@ interface ArticleListProps {
     showSource?: boolean;
     isSavedData?: boolean;
     isBookmark?: boolean;
+    index?: number;
 }
 
 const ArticleList = ({
@@ -30,9 +24,11 @@ const ArticleList = ({
     showSource = false,
     isSavedData = false,
     isBookmark = false,
+    index,
 }: ArticleListProps) => {
     const inAppBrowser = new InAppBrowserAPI();
     const databaseAPI = new DatabaseAPI();
+
     let swipeableRow: Swipeable;
 
     const updateRef = (ref: Swipeable) => {
@@ -205,26 +201,28 @@ const ArticleList = ({
     };
 
     return (
-        <Swipeable
-            ref={updateRef}
-            friction={2}
-            enableTrackpadTwoFingerGesture
-            renderLeftActions={isSavedData ? undefined : renderLeftActions}
-            renderRightActions={
-                isSavedData ? renderRightDelete : renderRightActions
-            }
-            leftThreshold={50}
-            rightThreshold={50}
-            containerStyle={{ backgroundColor: 'white' }}>
-            <ListItem bottomDivider>
-                <ArticleListItem
-                    imageSource={imageSource}
-                    articleItem={articleItem}
-                    showSource={showSource}
-                    handleOnPress={handleOnPress}
-                />
-            </ListItem>
-        </Swipeable>
+        <>
+            <Swipeable
+                ref={updateRef}
+                friction={2}
+                enableTrackpadTwoFingerGesture
+                renderLeftActions={isSavedData ? undefined : renderLeftActions}
+                renderRightActions={
+                    isSavedData ? renderRightDelete : renderRightActions
+                }
+                leftThreshold={50}
+                rightThreshold={50}
+                containerStyle={{ backgroundColor: 'white' }}>
+                <ListItem bottomDivider>
+                    <ArticleListItem
+                        imageSource={imageSource}
+                        articleItem={articleItem}
+                        showSource={showSource}
+                        handleOnPress={handleOnPress}
+                    />
+                </ListItem>
+            </Swipeable>
+        </>
     );
 };
 

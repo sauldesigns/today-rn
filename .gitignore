@@ -65,3 +65,4 @@ buck-out/
 .env
 ios/today/GoogleService-Info.plist
 android/app/google-services.json
+firebase.json
