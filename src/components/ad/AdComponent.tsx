@@ -19,9 +19,9 @@ const AdComponent = () => {
                     // onAdLoaded={() => {
                     //     setHasAd(true);
                     // }}
-                    // onAdFailedToLoad={() => {
-                    //     setHasAd(false);
-                    // }}
+                    onAdFailedToLoad={(err) => {
+                        console.log(err?.message);
+                    }}
                 />
             }
         </ListItem>
