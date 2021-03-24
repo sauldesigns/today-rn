@@ -101,6 +101,7 @@ Application in progress of being uploaded to both the iOS and Android App store.
 
 ### Todos
   - Add profile pictures
+  - Add Theme Toggle
   - Add smoother transitions/animations. 
   - Add more features
 
