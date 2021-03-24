@@ -31,7 +31,10 @@ The app uses an easy to use UI so that only necessary information is displayed. 
 - [x] Facebook Sign In
 
 ## App Features
-
+- [x] In-App Browser
+- [x] Dynamic Light & Dark Mode
+- [x] Bookmarks and Read Later 
+- [x] Third-Party Auth
 ### How To View The Latest Headlines
   - Start by creating an account.
   - If you used a third party sign in then you will be prompted to enter additional information such as username and an optional bio. This will not be prompted if you created an account using email and password. 
@@ -97,11 +100,8 @@ Today uses a number of open source projects:
 Application in progress of being uploaded to both the iOS and Android App store.
 
 ### Todos
-  - Profile Page 
-  - Write MORE Tests
-  - Implement profile pictures
+  - Add profile pictures
   - Add smoother transitions/animations. 
-  - Add ability to create bookmarks
   - Add more features
 
   [react native]: <https://reactnative.dev>
