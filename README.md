@@ -82,6 +82,7 @@ You can also:
 Today uses a number of open source projects:
 
   - [React Native] - React Native combines the best parts of native development with React, a best-in-class JavaScript library for building user interfaces.
+  - [React Navigation] - Routing and navigation for React Native apps
   - [React Native Firebase] - React Native Firebase is the officially recommended collection of packages that brings React Native support for all Firebase services on both Android and iOS apps.
   - [React Native Elements] - Cross Platform React Native UI Toolkit
   - [React Hook Form] - Performant, flexible and extensible forms with easy-to-use vali
@@ -89,7 +90,7 @@ Today uses a number of open source projects:
   - [Axios] - Promise based HTTP client for the browser and node.js
   - [React Native Snackbar] - Material Design "Snackbar" component for Android and iOS. Supports custom colors, fonts, and languages.
   - [React Native Timeago] - An auto-updating timeago component for React Native using moment.js.
-  - [Moment] - A JavaScript date library for parsing, validating, manipulating, and formatting dates.
+
   - And Others...
 ### Mobile Application Installation
 
@@ -114,5 +115,8 @@ Application in progress of being uploaded to both the iOS and Android App store.
   [react native snackbar]: <https://github.com/cooperka/react-native-snackbar>
   [react native timeago]: <https://github.com/TylerLH/react-native-timeago>
   [moment]: <https://github.com/moment/moment>
+  [react navigation]: <https://reactnavigation.org/>
+  [react native in app browser]: <https://github.com/proyecto26/react-native-inappbrowser>
+  [react native haptic feedback]: <https://github.com/junina-de/react-native-haptic-feedback>
 
   
