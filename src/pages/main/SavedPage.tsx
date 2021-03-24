@@ -19,6 +19,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import ArticleList from '../../components/list/ArticleList';
 import { NewsAPI } from '../../services/api';
 import AdComponent from '../../components/ad/AdComponent';
+import { adRecurance } from '../../constants/misc';
 
 const SavedPage = () => {
     const buttons = ['Bookmarks', 'Read Later'];
@@ -145,7 +146,7 @@ const SavedPage = () => {
                     );
                     return (
                         <>
-                            {index % 10 === 0 && index !== 0 ? (
+                            {index % adRecurance === 0 && index !== 0 ? (
                                 <AdComponent />
                             ) : (
                                 <></>

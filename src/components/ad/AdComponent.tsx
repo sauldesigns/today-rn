@@ -6,7 +6,10 @@ import { ListItem } from 'react-native-elements';
 
 const AdComponent = () => {
     return (
-        <ListItem bottomDivider style={{ maxHeight: 230 }}>
+        <ListItem
+            bottomDivider
+            style={{ maxHeight: 230 }}
+            containerStyle={{ paddingLeft: 0 }}>
             {
                 //@ts-ignore
                 <BannerAd
@@ -19,9 +22,9 @@ const AdComponent = () => {
                     // onAdLoaded={() => {
                     //     setHasAd(true);
                     // }}
-                    onAdFailedToLoad={(err) => {
-                        console.log(err?.message);
-                    }}
+                    // onAdFailedToLoad={(err) => {
+                    //     console.log(err?.message);
+                    // }}
                 />
             }
         </ListItem>

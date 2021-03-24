@@ -18,6 +18,7 @@ import NoArticlesView from '../../components/error/NoArticlesView';
 import { useScrollToTop } from '@react-navigation/native';
 import { black } from '../../constants/colors';
 import AdComponent from '../../components/ad/AdComponent';
+import { adRecurance } from '../../constants/misc';
 
 const HomePage = () => {
     const newsAPI = new NewsAPI();
@@ -65,12 +66,16 @@ const HomePage = () => {
                     showsVerticalScrollIndicator={false}
                     keyExtractor={(_, index) => index.toString()}
                     ListHeaderComponent={() => {
+                        const imageSource: ImageSourcePropType = newsAPI.handleImages(
+                            data?.articles[0]?.urlToImage ?? '',
+                        );
                         return isError ? (
                             <></>
                         ) : (
                             <MainHeadline
                                 article={data?.articles[0]}
                                 isLoading={isLoading}
+                                imageSource={imageSource}
                             />
                         );
                     }}
@@ -83,7 +88,8 @@ const HomePage = () => {
                         if (index !== 0) {
                             return (
                                 <>
-                                    {index % 10 === 0 && index !== 0 ? (
+                                    {index % adRecurance === 0 &&
+                                    index !== 0 ? (
                                         <AdComponent />
                                     ) : (
                                         <></>

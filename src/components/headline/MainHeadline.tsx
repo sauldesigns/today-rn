@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import {
+    ActivityIndicator,
+    ImageBackground,
+    ImageSourcePropType,
+    StyleSheet,
+    Text,
+    View,
+} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import TimeAgo from 'react-native-timeago';
 import { ArticleElement } from '../../models/articles';
@@ -14,16 +21,19 @@ import { DatabaseAPI } from '../../services/database';
 import { Icon } from 'react-native-elements';
 import Snackbar from 'react-native-snackbar';
 import { isAndroid } from '../../constants/misc';
+import { black } from '../../constants/colors';
 interface MainHeadlineProps {
     article: ArticleElement | undefined;
     isLoading: boolean;
     isFetching?: boolean;
+    imageSource: ImageSourcePropType;
 }
 
 const MainHeadline = ({
     article,
     isLoading,
     isFetching = false,
+    imageSource,
 }: MainHeadlineProps) => {
     const inAppBrowser = new InAppBrowserAPI();
     const databaseAPI = new DatabaseAPI();
@@ -83,40 +93,46 @@ const MainHeadline = ({
         ignoreAndroidSystemSettings: false,
     };
 
-    return (
+    return isLoading || isFetching ? (
         <View style={styles.container}>
-            {isLoading || isFetching ? (
-                <ActivityIndicator />
-            ) : (
-                <>
-                    <Text style={styles.main_title}>Top Headlines</Text>
-                    <View style={styles.header}>
-                        <TouchableOpacity onPress={handleOnPress}>
-                            <Text style={styles.title}>{article?.title}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={handleOnPress}>
-                            <Text style={styles.description}>
-                                {article?.description}
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.footer}>
-                        <Text style={{ ...styles.source, marginRight: 8 }}>
-                            Published{' '}
-                            <TimeAgo time={article?.publishedAt ?? ''} />
-                        </Text>
-                        <Icon
-                            onPress={handleLongPress}
-                            type="font-awesome"
-                            name="bookmark"
-                            color={!bookmarked ? 'white' : 'red'}
-                            style={styles.source}>
-                            Author: {article?.author}
-                        </Icon>
-                    </View>
-                </>
-            )}
+            <ActivityIndicator />
         </View>
+    ) : (
+        <ImageBackground
+            style={{
+                width: '100%',
+                minHeight: 300,
+            }}
+            source={imageSource}
+            resizeMode="cover">
+            <View style={styles.container}>
+                <Text style={styles.main_title}>Top Headlines</Text>
+
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={handleOnPress}>
+                        <Text style={styles.title}>{article?.title}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleOnPress}>
+                        <Text style={styles.description}>
+                            {article?.description}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.footer}>
+                    <Text style={{ ...styles.source, marginRight: 8 }}>
+                        Published <TimeAgo time={article?.publishedAt ?? ''} />
+                    </Text>
+                    <Icon
+                        onPress={handleLongPress}
+                        type="font-awesome"
+                        name="bookmark"
+                        color={!bookmarked ? 'white' : 'red'}
+                        style={styles.source}>
+                        Author: {article?.author}
+                    </Icon>
+                </View>
+            </View>
+        </ImageBackground>
     );
 };
 
@@ -127,7 +143,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         minHeight: 300,
-        backgroundColor: '#000',
+        backgroundColor: 'rgba(0,0,0,0.85)',
         paddingHorizontal: 16,
         paddingTop: isAndroid ? 18 : 18,
         paddingBottom: 16,

@@ -20,6 +20,7 @@ import CustomSearchBar from '../../components/input/CustomSearchBar';
 import { useScrollToTop } from '@react-navigation/native';
 import { black } from '../../constants/colors';
 import AdComponent from '../../components/ad/AdComponent';
+import { adRecurance } from '../../constants/misc';
 
 const SearchPage = () => {
     const newsAPI = new NewsAPI();
@@ -96,7 +97,8 @@ const SearchPage = () => {
                             );
                             return (
                                 <>
-                                    {index % 10 === 0 && index !== 0 ? (
+                                    {index % adRecurance === 0 &&
+                                    index !== 0 ? (
                                         <AdComponent />
                                     ) : (
                                         <></>
