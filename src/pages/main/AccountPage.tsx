@@ -115,6 +115,7 @@ const AccountPage = () => {
                     // ListHeaderComponent={() => {
                     //     return <></>;
                     // }}
+                    showsVerticalScrollIndicator={false}
                     keyExtractor={(_, index) => index.toString()}
                     data={settings_list}
                     renderItem={({ item }) => {

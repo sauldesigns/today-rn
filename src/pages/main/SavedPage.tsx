@@ -117,6 +117,7 @@ const SavedPage = () => {
             <FlatList
                 keyExtractor={(item) => item.id}
                 data={bookmarks}
+                showsVerticalScrollIndicator={false}
                 ListEmptyComponent={() => {
                     return (
                         <View

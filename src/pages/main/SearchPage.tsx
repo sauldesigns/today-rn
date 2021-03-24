@@ -67,6 +67,7 @@ const SearchPage = () => {
                         data={data?.articles}
                         style={styles.container}
                         ref={ref}
+                        showsVerticalScrollIndicator={false}
                         keyboardShouldPersistTaps="handled"
                         keyboardDismissMode="on-drag"
                         refreshControl={

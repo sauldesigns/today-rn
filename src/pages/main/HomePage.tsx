@@ -62,6 +62,7 @@ const HomePage = () => {
                             }}
                         />
                     }
+                    showsVerticalScrollIndicator={false}
                     keyExtractor={(_, index) => index.toString()}
                     ListHeaderComponent={() => {
                         return isError ? (
