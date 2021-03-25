@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         minHeight: 300,
-        backgroundColor: 'rgba(0,0,0,0.85)',
+        backgroundColor: 'rgba(0,0,0,0.70)',
         paddingHorizontal: 16,
         paddingTop: isAndroid ? 18 : 18,
         paddingBottom: 16,
