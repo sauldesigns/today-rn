@@ -29,7 +29,19 @@ const options = {
 };
 const SignUp = () => {
     const authService = new FirebaseAPI();
-    const { control, handleSubmit } = useForm();
+    const {
+        control,
+        handleSubmit,
+        formState: { isValid, errors },
+        
+    } = useForm({
+        mode: 'all',
+        defaultValues: {
+            email: '',
+            password: '',
+            username: '',
+        },
+    });
     const [isLoading, setIsLoading] = useState(false);
     const navigation = useNavigation();
 
@@ -71,36 +83,64 @@ const SignUp = () => {
                         <Controller
                             control={control}
                             render={({ onChange, onBlur }) => (
-                                <MainInput
-                                    placeholder="Username"
-                                    placeholderTextColor="rgba(255,255,255,0.3)"
-                                    style={{ color: 'white' }}
-                                    keyboardType="default"
-                                    textContentType="username"
-                                    onBlur={onBlur}
-                                    onChange={onChange}
-                                />
+                                <>
+                                    <MainInput
+                                        placeholder="Username"
+                                        placeholderTextColor="rgba(255,255,255,0.3)"
+                                        style={{ color: 'white' }}
+                                        keyboardType="default"
+                                        textContentType="username"
+                                        onBlur={onBlur}
+                                        onChange={onChange}
+                                    />
+                                    {errors.username?.type === 'minLength' ? (
+                                        <Text
+                                            style={{
+                                                marginLeft: 8,
+                                                color: 'red',
+                                            }}>
+                                            Please enter a username.
+                                        </Text>
+                                    ) : (
+                                        <></>
+                                    )}
+                                </>
                             )}
                             name="username"
                             rules={{
                                 required: true,
+                                minLength: 1,
                             }}
                             defaultValue=""
                         />
                     </View>
+
                     <View style={styles.input_container}>
                         <Controller
                             control={control}
                             render={({ onChange, onBlur }) => (
-                                <MainInput
-                                    placeholder="E-mail"
-                                    placeholderTextColor="rgba(255,255,255,0.3)"
-                                    style={{ color: 'white' }}
-                                    keyboardType="email-address"
-                                    textContentType="emailAddress"
-                                    onBlur={onBlur}
-                                    onChange={onChange}
-                                />
+                                <>
+                                    <MainInput
+                                        placeholder="E-mail"
+                                        placeholderTextColor="rgba(255,255,255,0.3)"
+                                        style={{ color: 'white' }}
+                                        keyboardType="email-address"
+                                        textContentType="emailAddress"
+                                        onBlur={onBlur}
+                                        onChange={onChange}
+                                    />
+                                    {errors.email?.type === 'pattern' ? (
+                                        <Text
+                                            style={{
+                                                marginLeft: 8,
+                                                color: 'red',
+                                            }}>
+                                            Please enter a valid e-mail.
+                                        </Text>
+                                    ) : (
+                                        <></>
+                                    )}
+                                </>
                             )}
                             name="email"
                             rules={{
@@ -114,13 +154,27 @@ const SignUp = () => {
                         <Controller
                             control={control}
                             render={({ onChange, onBlur }) => (
-                                <SecureInput
-                                    textContentType="password"
-                                    placeholderTextColor="rgba(255,255,255,0.3)"
-                                    style={{ color: 'white' }}
-                                    onBlur={onBlur}
-                                    onChange={onChange}
-                                />
+                                <>
+                                    <SecureInput
+                                        textContentType="password"
+                                        placeholderTextColor="rgba(255,255,255,0.3)"
+                                        style={{ color: 'white' }}
+                                        onBlur={onBlur}
+                                        onChange={onChange}
+                                    />
+                                    {errors.password?.type === 'minLength' ? (
+                                        <Text
+                                            style={{
+                                                marginLeft: 8,
+                                                color: 'red',
+                                            }}>
+                                            Password must be at least 6
+                                            characters long
+                                        </Text>
+                                    ) : (
+                                        <></>
+                                    )}
+                                </>
                             )}
                             name="password"
                             rules={{ required: true, minLength: 6 }}
@@ -128,6 +182,7 @@ const SignUp = () => {
                         />
                     </View>
                     <Button
+                        disabled={!isValid}
                         titleStyle={{ fontFamily: SFProDisplayRegular }}
                         onPress={handleSubmit(onSubmit)}
                         loading={isLoading}

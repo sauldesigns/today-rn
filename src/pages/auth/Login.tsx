@@ -30,7 +30,17 @@ const options = {
 };
 const Login = () => {
     const authService = new FirebaseAPI();
-    const { control, handleSubmit } = useForm();
+    const {
+        control,
+        handleSubmit,
+        formState: { isValid, errors },
+    } = useForm({
+        mode: 'all',
+        defaultValues: {
+            email: '',
+            password: '',
+        },
+    });
     const [isLoading, setIsLoading] = useState(false);
     const navigation = useNavigation();
 
@@ -70,15 +80,28 @@ const Login = () => {
                     <Controller
                         control={control}
                         render={({ onChange, onBlur }) => (
-                            <MainInput
-                                placeholder="E-mail"
-                                placeholderTextColor="rgba(255,255,255,0.3)"
-                                keyboardType="email-address"
-                                textContentType="emailAddress"
-                                style={{color: 'white'}}
-                                onBlur={onBlur}
-                                onChange={onChange}
-                            />
+                            <>
+                                <MainInput
+                                    placeholder="E-mail"
+                                    placeholderTextColor="rgba(255,255,255,0.3)"
+                                    keyboardType="email-address"
+                                    textContentType="emailAddress"
+                                    style={{ color: 'white' }}
+                                    onBlur={onBlur}
+                                    onChange={onChange}
+                                />
+                                {errors.email?.type === 'pattern' ? (
+                                    <Text
+                                        style={{
+                                            marginLeft: 8,
+                                            color: 'red',
+                                        }}>
+                                        Please enter a valid e-mail.
+                                    </Text>
+                                ) : (
+                                    <></>
+                                )}
+                            </>
                         )}
                         name="email"
                         rules={{
@@ -92,12 +115,26 @@ const Login = () => {
                     <Controller
                         control={control}
                         render={({ onChange, onBlur }) => (
-                            <SecureInput
-                                textContentType="password"
-                                placeholderTextColor="rgba(255,255,255,0.3)"
-                                onBlur={onBlur}
-                                onChange={onChange}
-                            />
+                            <>
+                                <SecureInput
+                                    textContentType="password"
+                                    placeholderTextColor="rgba(255,255,255,0.3)"
+                                    onBlur={onBlur}
+                                    onChange={onChange}
+                                />
+                                {errors.password?.type === 'minLength' ? (
+                                    <Text
+                                        style={{
+                                            marginLeft: 8,
+                                            color: 'red',
+                                        }}>
+                                        Password must be at least 6 characters
+                                        long
+                                    </Text>
+                                ) : (
+                                    <></>
+                                )}
+                            </>
                         )}
                         name="password"
                         rules={{ required: true, minLength: 6 }}
@@ -114,6 +151,7 @@ const Login = () => {
                     </Text>
                 </TouchableOpacity>
                 <Button
+                    disabled={!isValid}
                     titleStyle={{ fontFamily: SFProDisplayRegular }}
                     onPress={handleSubmit(onSubmit)}
                     loading={isLoading}
