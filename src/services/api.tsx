@@ -50,7 +50,7 @@ export class NewsAPI {
     }
 
     handleImages(uri: string | null): ImageSourcePropType {
-        if (uri === '') {
+        if (uri === '' || uri === undefined || uri === null) {
             uri = 'https://bit.ly/3sOjwBy';
         }
         const imageSource: ImageSourcePropType = {
