@@ -8,6 +8,7 @@ import { Swipeable, TouchableOpacity } from 'react-native-gesture-handler';
 import ArticleListItem from './ArticleListItem';
 import Snackbar from 'react-native-snackbar';
 import { DatabaseAPI } from '../../services/database';
+import { useTheme } from '@react-navigation/native';
 
 interface ArticleListProps {
     articleItem: ArticleElement;
@@ -28,6 +29,7 @@ const ArticleList = ({
 }: ArticleListProps) => {
     const inAppBrowser = new InAppBrowserAPI();
     const databaseAPI = new DatabaseAPI();
+    const { colors } = useTheme();
 
     let swipeableRow: Swipeable;
 
@@ -212,7 +214,7 @@ const ArticleList = ({
                 }
                 leftThreshold={50}
                 rightThreshold={50}
-                containerStyle={{ backgroundColor: 'white' }}>
+                containerStyle={{ backgroundColor: colors.background }}>
                 <ListItem bottomDivider>
                     <ArticleListItem
                         imageSource={imageSource}

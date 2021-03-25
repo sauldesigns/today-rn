@@ -1,3 +1,4 @@
+import { useTheme } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
@@ -13,6 +14,7 @@ const ErrorView = ({
     onPress,
     showButton = false,
 }: ErrorViewProps) => {
+    const { colors } = useTheme();
     return (
         <View
             style={{
@@ -23,6 +25,7 @@ const ErrorView = ({
             <Icon name="error" type="font-awesome" color="red" size={50} />
             <Text
                 style={{
+                    color: colors.text,
                     textAlign: 'center',
                     marginTop: 16,
                     marginBottom: 26,

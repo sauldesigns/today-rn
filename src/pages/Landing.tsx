@@ -22,6 +22,7 @@ import {
 } from '../navigation/navigation';
 import { actionTypes } from '../context/reducer';
 import SavedPage from './main/SavedPage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const TabStack = createBottomTabNavigator();
 
@@ -29,7 +30,7 @@ const Landing = () => {
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState<FirebaseAuthTypes.User | null>();
     const colorScheme = useColorScheme();
-    const [, dispatch] = useStateValue();
+    const [{ darkMode }, dispatch] = useStateValue();
     const [needsUserInfo, setNeedsUserInfo] = useState(false);
 
     // Handle user state changes
@@ -88,7 +89,7 @@ const Landing = () => {
     return (
         <TabStack.Navigator
             tabBarOptions={{
-                activeTintColor: colorScheme === 'dark' ? 'white' : black,
+                activeTintColor: darkMode ? 'white' : black,
                 showLabel: false,
             }}
             screenOptions={({ route }) => ({

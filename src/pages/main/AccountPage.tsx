@@ -13,6 +13,7 @@ import { privacy_policy_link } from '../../constants/links';
 import { actionTypes } from '../../context/reducer';
 import Snackbar from 'react-native-snackbar';
 import { black } from '../../constants/colors';
+import AsyncStorage from '@react-native-community/async-storage';
 
 interface listItem {
     title: string;
@@ -27,7 +28,7 @@ const AccountPage = () => {
     const userObj: User = user;
     const inAppBrowserAPI = new InAppBrowserAPI();
     const firebaseAPI = new FirebaseAPI();
-    const [_, dispatch] = useStateValue();
+    const [{ darkMode }, dispatch] = useStateValue();
 
     useScrollToTop(ref);
 
@@ -64,6 +65,29 @@ const AccountPage = () => {
                         text: 'A reset link has been sent to your email.',
                         duration: Snackbar.LENGTH_LONG,
                         backgroundColor: 'green',
+                    });
+                } catch (err) {
+                    Snackbar.show({
+                        text: 'An error occured.',
+                        duration: Snackbar.LENGTH_LONG,
+                        backgroundColor: 'red',
+                    });
+                }
+            },
+        },
+        {
+            title: 'Toggle Dark Mode',
+            icon: 'moon-o',
+            onPress: async () => {
+                try {
+                    await AsyncStorage.setItem(
+                        'darkMode',
+                        JSON.stringify(!darkMode),
+                    );
+
+                    dispatch({
+                        type: actionTypes.SET_DARKMODE,
+                        darkMode: !darkMode,
                     });
                 } catch (err) {
                     Snackbar.show({
@@ -119,7 +143,21 @@ const AccountPage = () => {
                     keyExtractor={(_, index) => index.toString()}
                     data={settings_list}
                     renderItem={({ item }) => {
-                        return (
+                        return item?.title === 'Toggle Dark Mode' ? (
+                            <ListItem bottomDivider>
+                                <Icon type="font-awesome" name={item?.icon} />
+                                <ListItem.Content>
+                                    <ListItem.Title>
+                                        {item?.title}
+                                    </ListItem.Title>
+                                </ListItem.Content>
+                                <ListItem.CheckBox
+                                    right
+                                    checked={darkMode}
+                                    onPress={() => item?.onPress()}
+                                />
+                            </ListItem>
+                        ) : (
                             <ListItem
                                 onPress={() => item?.onPress()}
                                 bottomDivider>
@@ -129,7 +167,6 @@ const AccountPage = () => {
                                         {item?.title}
                                     </ListItem.Title>
                                 </ListItem.Content>
-                                <ListItem.Chevron />
                             </ListItem>
                         );
                     }}

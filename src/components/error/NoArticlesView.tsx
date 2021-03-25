@@ -1,13 +1,17 @@
+import { useTheme } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { SFProDisplayRegular } from '../../constants/font';
 
 const NoArticlesView = () => {
+    const { colors } = useTheme();
     return (
         <View style={styles.no_articles_container}>
-            <Icon name="article" type="font-awesome" color="black" size={50} />
-            <Text style={styles.no_articles_text}>There are no articles.</Text>
+            <Icon name="article" color={colors.text} size={50} />
+            <Text style={{ ...styles.no_articles_text, color: colors.text }}>
+                There are no articles.
+            </Text>
         </View>
     );
 };

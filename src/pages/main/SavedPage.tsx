@@ -20,6 +20,7 @@ import ArticleList from '../../components/list/ArticleList';
 import { NewsAPI } from '../../services/api';
 import AdComponent from '../../components/ad/AdComponent';
 import { adRecurance } from '../../constants/misc';
+import NoArticlesView from '../../components/error/NoArticlesView';
 
 const SavedPage = () => {
     const buttons = ['Bookmarks', 'Read Later'];
@@ -135,7 +136,7 @@ const SavedPage = () => {
                             <Text>
                                 {loading
                                     ? 'Loading'
-                                    : 'There are no articles saved.'}
+                                    : <NoArticlesView />}
                             </Text>
                         </View>
                     );
