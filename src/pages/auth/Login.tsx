@@ -91,11 +91,7 @@ const Login = () => {
                                     onChange={onChange}
                                 />
                                 {errors.email?.type === 'pattern' ? (
-                                    <Text
-                                        style={{
-                                            marginLeft: 8,
-                                            color: 'red',
-                                        }}>
+                                    <Text style={styles.error_text}>
                                         Please enter a valid e-mail.
                                     </Text>
                                 ) : (
@@ -123,11 +119,7 @@ const Login = () => {
                                     onChange={onChange}
                                 />
                                 {errors.password?.type === 'minLength' ? (
-                                    <Text
-                                        style={{
-                                            marginLeft: 8,
-                                            color: 'red',
-                                        }}>
+                                    <Text style={styles.error_text}>
                                         Password must be at least 6 characters
                                         long
                                     </Text>
@@ -200,5 +192,10 @@ const styles = StyleSheet.create({
     create_account_button_text: {
         color: 'white',
         fontFamily: SFProDisplayRegular,
+    },
+    error_text: {
+        fontFamily: SFProDisplayRegular,
+        marginLeft: 8,
+        color: 'red',
     },
 });
