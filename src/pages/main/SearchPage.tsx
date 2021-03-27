@@ -105,6 +105,7 @@ const SearchPage = () => {
                                     )}
                                     <ArticleList
                                         articleItem={item}
+                                        index={index}
                                         imageSource={imageSource}
                                         showSource
                                     />

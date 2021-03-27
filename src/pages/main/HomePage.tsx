@@ -96,6 +96,7 @@ const HomePage = () => {
                                     )}
                                     <ArticleList
                                         articleItem={articleItem}
+                                        index={index}
                                         imageSource={imageSource}
                                     />
                                 </>

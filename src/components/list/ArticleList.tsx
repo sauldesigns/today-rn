@@ -9,6 +9,8 @@ import ArticleListItem from './ArticleListItem';
 import Snackbar from 'react-native-snackbar';
 import { DatabaseAPI } from '../../services/database';
 import { useTheme } from '@react-navigation/native';
+import { View } from '@motify/components';
+import { AnimatePresence } from 'framer-motion';
 
 interface ArticleListProps {
     articleItem: ArticleElement;
@@ -203,28 +205,41 @@ const ArticleList = ({
     };
 
     return (
-        <>
-            <Swipeable
-                ref={updateRef}
-                friction={2}
-                enableTrackpadTwoFingerGesture
-                renderLeftActions={isSavedData ? undefined : renderLeftActions}
-                renderRightActions={
-                    isSavedData ? renderRightDelete : renderRightActions
-                }
-                leftThreshold={50}
-                rightThreshold={50}
-                containerStyle={{ backgroundColor: colors.background }}>
-                <ListItem bottomDivider>
-                    <ArticleListItem
-                        imageSource={imageSource}
-                        articleItem={articleItem}
-                        showSource={showSource}
-                        handleOnPress={handleOnPress}
-                    />
-                </ListItem>
-            </Swipeable>
-        </>
+        <AnimatePresence exitBeforeEnter>
+            <View
+                key={articleItem?.title}
+                from={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                    type: 'timing',
+                    duration: 500,
+                    delay: 50 * (index ?? 1),
+                }}
+                exit={{ opacity: 0 }}>
+                <Swipeable
+                    ref={updateRef}
+                    friction={2}
+                    enableTrackpadTwoFingerGesture
+                    renderLeftActions={
+                        isSavedData ? undefined : renderLeftActions
+                    }
+                    renderRightActions={
+                        isSavedData ? renderRightDelete : renderRightActions
+                    }
+                    leftThreshold={50}
+                    rightThreshold={50}
+                    containerStyle={{ backgroundColor: colors.background }}>
+                    <ListItem bottomDivider>
+                        <ArticleListItem
+                            imageSource={imageSource}
+                            articleItem={articleItem}
+                            showSource={showSource}
+                            handleOnPress={handleOnPress}
+                        />
+                    </ListItem>
+                </Swipeable>
+            </View>
+        </AnimatePresence>
     );
 };
 

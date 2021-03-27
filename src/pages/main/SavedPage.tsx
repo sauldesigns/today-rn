@@ -134,9 +134,7 @@ const SavedPage = () => {
                             )}
 
                             <Text>
-                                {loading
-                                    ? 'Loading'
-                                    : <NoArticlesView />}
+                                {loading ? 'Loading' : <NoArticlesView />}
                             </Text>
                         </View>
                     );
@@ -156,6 +154,7 @@ const SavedPage = () => {
                                 articleItem={item}
                                 imageSource={imageSource}
                                 showSource
+                                index={index}
                                 isSavedData
                                 isBookmark={buttonIndex === 0 ? true : false}
                             />

@@ -1,6 +1,6 @@
 import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import React from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import UserDetails from '../../components/profile/UserDetails';
@@ -14,6 +14,8 @@ import { actionTypes } from '../../context/reducer';
 import Snackbar from 'react-native-snackbar';
 import { black } from '../../constants/colors';
 import AsyncStorage from '@react-native-community/async-storage';
+import { View } from '@motify/components';
+import { AnimatePresence } from 'framer-motion';
 
 interface listItem {
     title: string;
@@ -142,32 +144,64 @@ const AccountPage = () => {
                     showsVerticalScrollIndicator={false}
                     keyExtractor={(_, index) => index.toString()}
                     data={settings_list}
-                    renderItem={({ item }) => {
-                        return item?.title === 'Toggle Dark Mode' ? (
-                            <ListItem bottomDivider>
-                                <Icon type="font-awesome" name={item?.icon} />
-                                <ListItem.Content>
-                                    <ListItem.Title>
-                                        {item?.title}
-                                    </ListItem.Title>
-                                </ListItem.Content>
-                                <ListItem.CheckBox
-                                    right
-                                    checked={darkMode}
-                                    onPress={() => item?.onPress()}
-                                />
-                            </ListItem>
-                        ) : (
-                            <ListItem
-                                onPress={() => item?.onPress()}
-                                bottomDivider>
-                                <Icon type="font-awesome" name={item?.icon} />
-                                <ListItem.Content>
-                                    <ListItem.Title>
-                                        {item?.title}
-                                    </ListItem.Title>
-                                </ListItem.Content>
-                            </ListItem>
+                    renderItem={({ item, index }) => {
+                        return (
+                            <AnimatePresence exitBeforeEnter>
+                                {item?.title === 'Toggle Dark Mode' ? (
+                                    <View
+                                        key={item?.title}
+                                        from={{ opacity: 0, translateY: 50 }}
+                                        animate={{ opacity: 1, translateY: 0 }}
+                                        transition={{
+                                            type: 'timing',
+                                            duration: 500,
+                                            delay: 50 * index,
+                                        }}
+                                        exit={{ opacity: 0, translateY: 50 }}>
+                                        <ListItem bottomDivider>
+                                            <Icon
+                                                type="font-awesome"
+                                                name={item?.icon}
+                                            />
+                                            <ListItem.Content>
+                                                <ListItem.Title>
+                                                    {item?.title}
+                                                </ListItem.Title>
+                                            </ListItem.Content>
+                                            <ListItem.CheckBox
+                                                right
+                                                checked={darkMode}
+                                                onPress={() => item?.onPress()}
+                                            />
+                                        </ListItem>
+                                    </View>
+                                ) : (
+                                    <View
+                                        key={item?.title}
+                                        from={{ opacity: 0, translateY: 50 }}
+                                        animate={{ opacity: 1, translateY: 0 }}
+                                        transition={{
+                                            type: 'timing',
+                                            duration: 500,
+                                            delay: 50 * index,
+                                        }}
+                                        exit={{ opacity: 0, translateY: 50 }}>
+                                        <ListItem
+                                            onPress={() => item?.onPress()}
+                                            bottomDivider>
+                                            <Icon
+                                                type="font-awesome"
+                                                name={item?.icon}
+                                            />
+                                            <ListItem.Content>
+                                                <ListItem.Title>
+                                                    {item?.title}
+                                                </ListItem.Title>
+                                            </ListItem.Content>
+                                        </ListItem>
+                                    </View>
+                                )}
+                            </AnimatePresence>
                         );
                     }}
                 />

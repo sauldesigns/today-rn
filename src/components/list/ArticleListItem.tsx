@@ -1,16 +1,20 @@
 import React from 'react';
-import { ActivityIndicator, ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
+import {
+    ActivityIndicator,
+    ImageSourcePropType,
+    StyleSheet,
+} from 'react-native';
 import { Image, ListItem } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import TimeAgo from 'react-native-timeago';
 import { SFProDisplayMedium, SFProDisplayRegular } from '../../constants/font';
 import { ArticleElement } from '../../models/articles';
-
+import { useAnimationState, View } from 'moti';
 interface ArticleListItemProps {
-    handleOnPress: CallableFunction,
-    articleItem: ArticleElement,
-    showSource?: boolean,
-    imageSource: ImageSourcePropType
+    handleOnPress: CallableFunction;
+    articleItem: ArticleElement;
+    showSource?: boolean;
+    imageSource: ImageSourcePropType;
 }
 
 const ArticleListItem = ({
@@ -51,7 +55,7 @@ const styles = StyleSheet.create({
         width: 85,
         height: 85,
         borderRadius: 10,
-        marginLeft: 8
+        marginLeft: 8,
     },
     title: {
         fontFamily: SFProDisplayMedium,

@@ -43,6 +43,8 @@
 	<string>1354579581575041</string>
 	<key>FacebookDisplayName</key>
 	<string>Today</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-1476711081418982~6181076378</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -103,10 +105,11 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-1476711081418982~6181076378</string>
 </dict>
 </plist>
