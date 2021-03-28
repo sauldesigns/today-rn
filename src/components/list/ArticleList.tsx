@@ -9,9 +9,6 @@ import ArticleListItem from './ArticleListItem';
 import Snackbar from 'react-native-snackbar';
 import { DatabaseAPI } from '../../services/database';
 import { useTheme } from '@react-navigation/native';
-import { View } from '@motify/components';
-import { AnimatePresence } from 'framer-motion';
-import FadeInUp from '../animations/FadeInUp';
 import FadeIn from '../animations/FadeIn';
 
 interface ArticleListProps {
@@ -207,32 +204,28 @@ const ArticleList = ({
     };
 
     return (
-        <AnimatePresence exitBeforeEnter>
-            <FadeIn delay={50 * (index ?? 1)}>
-                <Swipeable
-                    ref={updateRef}
-                    friction={2}
-                    enableTrackpadTwoFingerGesture
-                    renderLeftActions={
-                        isSavedData ? undefined : renderLeftActions
-                    }
-                    renderRightActions={
-                        isSavedData ? renderRightDelete : renderRightActions
-                    }
-                    leftThreshold={50}
-                    rightThreshold={50}
-                    containerStyle={{ backgroundColor: colors.background }}>
-                    <ListItem bottomDivider>
-                        <ArticleListItem
-                            imageSource={imageSource}
-                            articleItem={articleItem}
-                            showSource={showSource}
-                            handleOnPress={handleOnPress}
-                        />
-                    </ListItem>
-                </Swipeable>
-            </FadeIn>
-        </AnimatePresence>
+        <FadeIn delay={50 * (index ?? 1)}>
+            <Swipeable
+                ref={updateRef}
+                friction={2}
+                enableTrackpadTwoFingerGesture
+                renderLeftActions={isSavedData ? undefined : renderLeftActions}
+                renderRightActions={
+                    isSavedData ? renderRightDelete : renderRightActions
+                }
+                leftThreshold={50}
+                rightThreshold={50}
+                containerStyle={{ backgroundColor: colors.background }}>
+                <ListItem bottomDivider>
+                    <ArticleListItem
+                        imageSource={imageSource}
+                        articleItem={articleItem}
+                        showSource={showSource}
+                        handleOnPress={handleOnPress}
+                    />
+                </ListItem>
+            </Swipeable>
+        </FadeIn>
     );
 };
 

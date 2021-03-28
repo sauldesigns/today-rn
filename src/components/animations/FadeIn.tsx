@@ -1,5 +1,4 @@
 import { View } from '@motify/components';
-import { duration } from 'moment';
 import React, { ReactChild, ReactChildren, ReactNode } from 'react';
 import { StyleSheet } from 'react-native';
 
