@@ -17,7 +17,7 @@ import { SFProDisplayRegular } from '../../constants/font';
 import ErrorView from '../../components/error/ErrorView';
 import NoArticlesView from '../../components/error/NoArticlesView';
 import CustomSearchBar from '../../components/input/CustomSearchBar';
-import { useScrollToTop } from '@react-navigation/native';
+import { useScrollToTop, useTheme } from '@react-navigation/native';
 import { black } from '../../constants/colors';
 import AdComponent from '../../components/ad/AdComponent';
 import { adRecurance } from '../../constants/misc';
@@ -28,6 +28,7 @@ const SearchPage = () => {
     const [search, setSearch] = useState('');
     const [pullToRefresh, setPullToRefresh] = useState(false);
     useScrollToTop(ref);
+    const { colors } = useTheme();
     const {
         refetch,
         data,
@@ -73,8 +74,8 @@ const SearchPage = () => {
                         keyboardDismissMode="on-drag"
                         refreshControl={
                             <RefreshControl
-                                // colors={['black']}
-                                // tintColor="black"
+                                colors={[colors.text]}
+                                tintColor={colors.text}
                                 refreshing={pullToRefresh}
                                 onRefresh={async () => {
                                     ReactNativeHapticFeedback.trigger(

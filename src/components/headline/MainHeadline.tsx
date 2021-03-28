@@ -23,6 +23,7 @@ import Snackbar from 'react-native-snackbar';
 import { isAndroid } from '../../constants/misc';
 import { black } from '../../constants/colors';
 import FadeInUp from '../animations/FadeInUp';
+import FadeIn from '../animations/FadeIn';
 interface MainHeadlineProps {
     article: ArticleElement | undefined;
     isLoading: boolean;
@@ -99,7 +100,7 @@ const MainHeadline = ({
             <ActivityIndicator />
         </View>
     ) : (
-        <FadeInUp delay={0}>
+        <FadeIn delay={0}>
             <ImageBackground
                 style={{
                     width: '100%',
@@ -136,7 +137,7 @@ const MainHeadline = ({
                     </View>
                 </View>
             </ImageBackground>
-        </FadeInUp>
+        </FadeIn>
     );
 };
 

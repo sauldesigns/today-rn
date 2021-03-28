@@ -15,7 +15,7 @@ import { NewsAPI } from '../../services/api';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import ErrorView from '../../components/error/ErrorView';
 import NoArticlesView from '../../components/error/NoArticlesView';
-import { useScrollToTop } from '@react-navigation/native';
+import { useScrollToTop, useTheme } from '@react-navigation/native';
 import { black } from '../../constants/colors';
 import AdComponent from '../../components/ad/AdComponent';
 import { adRecurance } from '../../constants/misc';
@@ -29,6 +29,7 @@ const HomePage = () => {
     };
     useScrollToTop(ref);
     const [pullToRefresh, setPullToRefresh] = useState(false);
+    const { colors } = useTheme();
 
     const {
         data,
@@ -50,8 +51,8 @@ const HomePage = () => {
                     refreshControl={
                         <RefreshControl
                             refreshing={pullToRefresh}
-                            // colors={['black']}
-                            // tintColor="black"
+                            colors={[colors.text]}
+                            tintColor={colors.text}
                             onRefresh={async () => {
                                 ReactNativeHapticFeedback.trigger(
                                     'selection',

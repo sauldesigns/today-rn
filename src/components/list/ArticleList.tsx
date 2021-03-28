@@ -12,6 +12,7 @@ import { useTheme } from '@react-navigation/native';
 import { View } from '@motify/components';
 import { AnimatePresence } from 'framer-motion';
 import FadeInUp from '../animations/FadeInUp';
+import FadeIn from '../animations/FadeIn';
 
 interface ArticleListProps {
     articleItem: ArticleElement;
@@ -207,7 +208,7 @@ const ArticleList = ({
 
     return (
         <AnimatePresence exitBeforeEnter>
-            <FadeInUp delay={50 * (index ?? 1)}>
+            <FadeIn delay={50 * (index ?? 1)}>
                 <Swipeable
                     ref={updateRef}
                     friction={2}
@@ -230,7 +231,7 @@ const ArticleList = ({
                         />
                     </ListItem>
                 </Swipeable>
-            </FadeInUp>
+            </FadeIn>
         </AnimatePresence>
     );
 };
