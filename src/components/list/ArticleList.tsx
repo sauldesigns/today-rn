@@ -11,6 +11,7 @@ import { DatabaseAPI } from '../../services/database';
 import { useTheme } from '@react-navigation/native';
 import { View } from '@motify/components';
 import { AnimatePresence } from 'framer-motion';
+import FadeInUp from '../animations/FadeInUp';
 
 interface ArticleListProps {
     articleItem: ArticleElement;
@@ -206,16 +207,7 @@ const ArticleList = ({
 
     return (
         <AnimatePresence exitBeforeEnter>
-            <View
-                key={articleItem?.title}
-                from={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{
-                    type: 'timing',
-                    duration: 500,
-                    delay: 50 * (index ?? 1),
-                }}
-                exit={{ opacity: 0 }}>
+            <FadeInUp delay={50 * (index ?? 1)}>
                 <Swipeable
                     ref={updateRef}
                     friction={2}
@@ -238,7 +230,7 @@ const ArticleList = ({
                         />
                     </ListItem>
                 </Swipeable>
-            </View>
+            </FadeInUp>
         </AnimatePresence>
     );
 };

@@ -22,6 +22,7 @@ import { Icon } from 'react-native-elements';
 import Snackbar from 'react-native-snackbar';
 import { isAndroid } from '../../constants/misc';
 import { black } from '../../constants/colors';
+import FadeInUp from '../animations/FadeInUp';
 interface MainHeadlineProps {
     article: ArticleElement | undefined;
     isLoading: boolean;
@@ -98,41 +99,44 @@ const MainHeadline = ({
             <ActivityIndicator />
         </View>
     ) : (
-        <ImageBackground
-            style={{
-                width: '100%',
-                minHeight: 300,
-            }}
-            source={imageSource}
-            resizeMode="cover">
-            <View style={styles.container}>
-                <Text style={styles.main_title}>Top Headlines</Text>
+        <FadeInUp delay={0}>
+            <ImageBackground
+                style={{
+                    width: '100%',
+                    minHeight: 300,
+                }}
+                source={imageSource}
+                resizeMode="cover">
+                <View style={styles.container}>
+                    <Text style={styles.main_title}>Top Headlines</Text>
 
-                <View style={styles.header}>
-                    <TouchableOpacity onPress={handleOnPress}>
-                        <Text style={styles.title}>{article?.title}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={handleOnPress}>
-                        <Text style={styles.description}>
-                            {article?.description}
+                    <View style={styles.header}>
+                        <TouchableOpacity onPress={handleOnPress}>
+                            <Text style={styles.title}>{article?.title}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={handleOnPress}>
+                            <Text style={styles.description}>
+                                {article?.description}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.footer}>
+                        <Text style={{ ...styles.source, marginRight: 8 }}>
+                            Published{' '}
+                            <TimeAgo time={article?.publishedAt ?? ''} />
                         </Text>
-                    </TouchableOpacity>
+                        <Icon
+                            onPress={handleLongPress}
+                            type="font-awesome"
+                            name="bookmark"
+                            color={!bookmarked ? 'white' : 'red'}
+                            style={styles.source}>
+                            Author: {article?.author}
+                        </Icon>
+                    </View>
                 </View>
-                <View style={styles.footer}>
-                    <Text style={{ ...styles.source, marginRight: 8 }}>
-                        Published <TimeAgo time={article?.publishedAt ?? ''} />
-                    </Text>
-                    <Icon
-                        onPress={handleLongPress}
-                        type="font-awesome"
-                        name="bookmark"
-                        color={!bookmarked ? 'white' : 'red'}
-                        style={styles.source}>
-                        Author: {article?.author}
-                    </Icon>
-                </View>
-            </View>
-        </ImageBackground>
+            </ImageBackground>
+        </FadeInUp>
     );
 };
 
