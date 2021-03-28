@@ -16,7 +16,6 @@ import { black } from '../../constants/colors';
 import AsyncStorage from '@react-native-community/async-storage';
 import { View } from '@motify/components';
 import { AnimatePresence } from 'framer-motion';
-import FadeInUp from '../../components/animations/FadeInUp';
 
 interface listItem {
     title: string;
@@ -149,7 +148,16 @@ const AccountPage = () => {
                         return (
                             <AnimatePresence exitBeforeEnter>
                                 {item?.title === 'Toggle Dark Mode' ? (
-                                    <FadeInUp delay={50 * index}>
+                                    <View
+                                        key={item?.title}
+                                        from={{ opacity: 0, translateY: 50 }}
+                                        animate={{ opacity: 1, translateY: 0 }}
+                                        transition={{
+                                            type: 'timing',
+                                            duration: 500,
+                                            delay: 50 * index,
+                                        }}
+                                        exit={{ opacity: 0, translateY: 50 }}>
                                         <ListItem bottomDivider>
                                             <Icon
                                                 type="font-awesome"
@@ -166,9 +174,18 @@ const AccountPage = () => {
                                                 onPress={() => item?.onPress()}
                                             />
                                         </ListItem>
-                                    </FadeInUp>
+                                    </View>
                                 ) : (
-                                    <FadeInUp delay={50 * index}>
+                                    <View
+                                        key={item?.title}
+                                        from={{ opacity: 0, translateY: 50 }}
+                                        animate={{ opacity: 1, translateY: 0 }}
+                                        transition={{
+                                            type: 'timing',
+                                            duration: 500,
+                                            delay: 50 * index,
+                                        }}
+                                        exit={{ opacity: 0, translateY: 50 }}>
                                         <ListItem
                                             onPress={() => item?.onPress()}
                                             bottomDivider>
@@ -182,7 +199,7 @@ const AccountPage = () => {
                                                 </ListItem.Title>
                                             </ListItem.Content>
                                         </ListItem>
-                                    </FadeInUp>
+                                    </View>
                                 )}
                             </AnimatePresence>
                         );
