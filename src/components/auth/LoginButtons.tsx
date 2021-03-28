@@ -23,7 +23,7 @@ const LoginButtons = ({ isLogin = false }: LoginButtonsProps) => {
                 <SocialIcon
                     fontStyle={{ ...styles.font_style, color: black }}
                     title={
-                        isLogin ? 'Sign In With Google' : 'Sign Up With Apple'
+                        isLogin ? 'Sign In With Apple' : 'Sign Up With Apple'
                     }
                     button
                     //@ts-ignore

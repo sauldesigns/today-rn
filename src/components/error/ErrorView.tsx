@@ -22,7 +22,12 @@ const ErrorView = ({
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-            <Icon name="error" type="font-awesome" color="red" size={50} />
+            <Icon
+                name="exclamation-circle"
+                type="font-awesome"
+                color="red"
+                size={50}
+            />
             <Text
                 style={{
                     color: colors.text,
@@ -30,8 +35,9 @@ const ErrorView = ({
                     marginTop: 16,
                     marginBottom: 26,
                 }}>
-                An error occured.{'\n'}Please refresh or try again later.{'\n'}
-                {errorMessage?.message || ''}
+                An error occured.{'\n'}Please pull to refresh or try again
+                later.{'\n'}
+                Error Message: {errorMessage?.message || ''}
             </Text>
             {showButton ? (
                 <Button

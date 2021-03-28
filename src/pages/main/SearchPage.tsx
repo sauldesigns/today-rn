@@ -61,7 +61,7 @@ const SearchPage = () => {
 
                 {(isLoading || isFetching) && !pullToRefresh ? (
                     <View style={styles.loading}>
-                        <ActivityIndicator color="black" />
+                        <ActivityIndicator />
                     </View>
                 ) : (
                     <FlatList
@@ -118,7 +118,9 @@ const SearchPage = () => {
                                     <ErrorView errorMessage={error} />
                                 </View>
                             ) : isLoading ? (
-                                <></>
+                                <View style={styles.loading}>
+                                    <ActivityIndicator />
+                                </View>
                             ) : (
                                 <NoArticlesView />
                             );
