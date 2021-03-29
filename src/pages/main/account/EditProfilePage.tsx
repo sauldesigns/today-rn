@@ -4,6 +4,8 @@ import { Keyboard, StatusBar, StyleSheet, Text, View } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import MainInput from '../../../components/input/MainInput';
+import MainTextArea from '../../../components/input/MainTextArea';
+
 import { black } from '../../../constants/colors';
 import { useStateValue } from '../../../context/StateProvider';
 import { User } from '../../../models/user';
@@ -95,7 +97,7 @@ const EditProfilePage = () => {
                 <Controller
                     control={control}
                     render={({ onChange, onBlur, value }) => (
-                        <MainInput
+                        <MainTextArea
                             label="Bio"
                             placeholder="Enter Bio Here..."
                             // placeholderTextColor={black}

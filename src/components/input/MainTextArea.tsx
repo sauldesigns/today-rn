@@ -1,3 +1,4 @@
+import { useTheme } from '@react-navigation/native';
 import React from 'react';
 import {
     NativeSyntheticEvent,
@@ -6,11 +7,13 @@ import {
     StyleSheet,
     TextInputFocusEventData,
     TextStyle,
+    View,
 } from 'react-native';
-import { Input } from 'react-native-elements';
+import { Input, Text } from 'react-native-elements';
+import { TextInput } from 'react-native-gesture-handler';
 import { SFProDisplayRegular } from '../../constants/font';
 
-interface MainInputProps {
+interface MainTextAreaProps {
     style?: StyleProp<TextStyle>;
     placeholderTextColor?: string | typeof OpaqueColorValue | undefined;
     placeholder?: string | undefined;
@@ -65,54 +68,72 @@ interface MainInputProps {
     onSubmit?: CallableFunction;
 }
 
-const MainInput = ({
+const MainTextArea = ({
     style,
+    label = '',
     placeholder = 'Enter here...',
-    placeholderTextColor,
+    placeholderTextColor = 'rgba(255,255,255,0.5)',
     autoCorrect = false,
     keyboardType = 'default',
     autoCapitalize = 'none',
     textContentType = 'none',
     returnKeyType = 'default',
-    ref,
-    label = '',
-    dark = false,
-    disabled = false,
     maxLength,
     value,
     onSubmit = () => {},
     onBlur,
     onChange = () => {},
-}: MainInputProps) => {
+}: MainTextAreaProps) => {
+    const { colors } = useTheme();
     return (
-        <Input
-            style={style ? style : { ...styles.input_style }}
-            label={label}
-            labelStyle={{ color: '#5e6977' }}
-            disabled={disabled}
-            placeholderTextColor={placeholderTextColor}
-            placeholder={placeholder}
-            autoCorrect={autoCorrect}
-            keyboardType={keyboardType}
-            autoCapitalize={autoCapitalize}
-            textContentType={textContentType}
-            returnKeyType={returnKeyType}
-            maxLength={maxLength ? maxLength : undefined}
-            ref={ref}
-            value={value}
-            onBlur={onBlur}
-            onChangeText={(value) => onChange(value)}
-            onSubmitEditing={() => onSubmit()}
-            blurOnSubmit={true}
-        />
+        <View
+            style={{
+                borderBottomColor: '#5e6977',
+                borderBottomWidth: 1,
+                marginHorizontal: 11,
+            }}>
+            <Text
+                style={{
+                    marginBottom: 9,
+                    fontWeight: 'bold',
+                    color: '#5e6977',
+                    fontSize: 16,
+                }}>
+                {label}
+            </Text>
+            <TextInput
+                style={
+                    style
+                        ? style
+                        : { ...styles.input_style, color: colors.text }
+                }
+                placeholderTextColor={placeholderTextColor}
+                placeholder={placeholder}
+                autoCorrect={autoCorrect}
+                keyboardType={keyboardType}
+                autoCapitalize={autoCapitalize}
+                textContentType={textContentType}
+                returnKeyType={returnKeyType}
+                multiline
+                maxLength={maxLength ? maxLength : undefined}
+                value={value}
+                onBlur={onBlur}
+                onChangeText={(value) => onChange(value)}
+                onSubmitEditing={() => onSubmit()}
+                blurOnSubmit={true}
+            />
+        </View>
     );
 };
 
-export default MainInput;
+export default MainTextArea;
 
 const styles = StyleSheet.create({
     input_style: {
         fontFamily: SFProDisplayRegular,
         borderBottomColor: 'black',
+        minHeight: 80,
+        fontSize: 17,
+        padding: 1,
     },
 });

@@ -57,6 +57,7 @@ const SecureInput = ({
         <Input
             style={style ? style : styles.input_style}
             secureTextEntry
+            labelStyle={{ color: '#5e6977' }}
             placeholderTextColor={placeholderTextColor}
             placeholder={placeholder}
             autoCapitalize={'none'}

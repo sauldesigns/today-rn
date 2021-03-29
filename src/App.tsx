@@ -1,21 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import {
-    NavigationContainer,
-    DefaultTheme,
-    DarkTheme,
-} from '@react-navigation/native';
+import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { StateProvider, useStateValue } from './context/StateProvider';
-import reducer, { actionTypes, initialState } from './context/reducer';
-import Landing from './pages/Landing';
+import { StateProvider } from './context/StateProvider';
+import reducer, { initialState } from './context/reducer';
 import { GoogleSignin } from '@react-native-community/google-signin';
 import { GOOGLE_API_KEY } from '@env';
-import { useColorScheme } from 'react-native';
-import { ThemeProvider } from 'react-native-elements';
 import admob, { MaxAdContentRating } from '@react-native-firebase/admob';
-import AsyncStorage from '@react-native-community/async-storage';
-import { color } from 'react-native-reanimated';
 import ThemePage from './ThemePage';
 
 GoogleSignin.configure({
