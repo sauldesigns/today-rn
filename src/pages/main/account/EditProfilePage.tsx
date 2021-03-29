@@ -57,7 +57,6 @@ const EditProfilePage = () => {
                             placeholder="Enter Username Here..."
                             // placeholderTextColor={black}
                             dark
-                            textContentType="username"
                             value={value}
                             onBlur={onBlur}
                             onChange={onChange}
@@ -79,7 +78,6 @@ const EditProfilePage = () => {
                             // placeholderTextColor={black}
                             dark
                             keyboardType="email-address"
-                            textContentType="emailAddress"
                             disabled
                             value={value}
                             onBlur={onBlur}
@@ -103,7 +101,6 @@ const EditProfilePage = () => {
                             // placeholderTextColor={black}
                             dark
                             maxLength={180}
-                            textContentType="username"
                             value={value}
                             onBlur={onBlur}
                             onChange={onChange}

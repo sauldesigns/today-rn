@@ -4,7 +4,7 @@ Today is a cross-platform cloud-enabled mobile application powered by React Nati
 
 The application was built with simplicity in mind and help deliver the latest news. 
 
-The app uses an easy to use UI so that only necessary information is displayed. Making it easier for one to find the top headlines, or search for news articles in a quick and efficient mannar. 
+The app uses an easy to use UI so that only necessary information is displayed. Making it easier for one to find the top headlines, or search for news articles in a quick and efficient manner. 
 
 | Login                                      | Sign Up                                     |
 | ------------------------------------------ | ------------------------------------------- |
