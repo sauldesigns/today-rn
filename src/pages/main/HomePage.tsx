@@ -49,8 +49,6 @@ const HomePage = () => {
                     ref={ref}
                     removeClippedSubviews={true} // Unmount components when outside of window
                     initialNumToRender={10} // Reduce initial render amount
-                    maxToRenderPerBatch={10} // Reduce number in each render batch
-                    windowSize={8} // Reduce the window size
                     style={styles.container}
                     refreshControl={
                         <RefreshControl
