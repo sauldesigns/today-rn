@@ -206,7 +206,7 @@ const ArticleList = ({
     };
 
     return (
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence>
             <View
                 key={articleItem?.title}
                 from={{ opacity: 0 }}
@@ -215,8 +215,7 @@ const ArticleList = ({
                     type: 'timing',
                     duration: 500,
                     delay: 50 * (index ?? 1),
-                }}
-                exit={{ opacity: 0 }}>
+                }}>
                 <Swipeable
                     ref={updateRef}
                     friction={2}
