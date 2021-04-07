@@ -21,7 +21,7 @@ import { useScrollToTop, useTheme } from '@react-navigation/native';
 import { black } from '../../constants/colors';
 import AdComponent from '../../components/ad/AdComponent';
 import { adRecurance } from '../../constants/misc';
-
+import LottieView from 'lottie-react-native';
 const SearchPage = () => {
     const newsAPI = new NewsAPI();
     const ref = React.useRef(null);
@@ -62,7 +62,12 @@ const SearchPage = () => {
 
                 {(isLoading || isFetching) && !pullToRefresh ? (
                     <View style={styles.loading}>
-                        <ActivityIndicator />
+                        <LottieView
+                            source={require('../../../assets/lottie/bouncy-loader.json')}
+                            autoPlay
+                            loop
+                        />
+                        {/* <ActivityIndicator /> */}
                     </View>
                 ) : (
                     <FlatList
@@ -120,7 +125,12 @@ const SearchPage = () => {
                                 </View>
                             ) : isLoading ? (
                                 <View style={styles.loading}>
-                                    <ActivityIndicator />
+                                    <LottieView
+                                        source={require('../../../assets/lottie/bouncy-loader.json')}
+                                        autoPlay
+                                        loop
+                                    />
+                                    {/* <ActivityIndicator /> */}
                                 </View>
                             ) : (
                                 <NoArticlesView />

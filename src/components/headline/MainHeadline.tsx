@@ -21,6 +21,8 @@ import { DatabaseAPI } from '../../services/database';
 import { Icon } from 'react-native-elements';
 import Snackbar from 'react-native-snackbar';
 import { isAndroid } from '../../constants/misc';
+import LottieView from 'lottie-react-native';
+
 interface MainHeadlineProps {
     article: ArticleElement | undefined;
     isLoading: boolean;
@@ -94,7 +96,12 @@ const MainHeadline = ({
 
     return isLoading || isFetching ? (
         <View style={styles.container}>
-            <ActivityIndicator />
+            <LottieView
+                source={require('../../../assets/lottie/bouncy-loader.json')}
+                autoPlay
+                loop
+            />
+            {/* <ActivityIndicator /> */}
         </View>
     ) : (
         <ImageBackground

@@ -21,7 +21,7 @@ import { NewsAPI } from '../../services/api';
 import AdComponent from '../../components/ad/AdComponent';
 import { adRecurance } from '../../constants/misc';
 import NoArticlesView from '../../components/error/NoArticlesView';
-
+import LottieView from 'lottie-react-native';
 const SavedPage = () => {
     const buttons = ['Bookmarks', 'Read Later'];
     const [buttonIndex, setButtonIndex] = useState(0);
@@ -128,8 +128,13 @@ const SavedPage = () => {
                                 alignItems: 'center',
                             }}>
                             {loading ? (
-                                <ActivityIndicator size="large" color="black" />
+                                <LottieView
+                                    source={require('../../../assets/lottie/bouncy-loader.json')}
+                                    autoPlay
+                                    loop
+                                />
                             ) : (
+                                // <ActivityIndicator size="large" color="black" />
                                 <></>
                             )}
 
