@@ -18,7 +18,7 @@ import SearchPage from '../pages/main/SearchPage';
 import Login from '../pages/auth/Login';
 import SignUp from '../pages/auth/SignUp';
 import SetUserInfo from '../pages/auth/SetUserInfo';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { black } from '../constants/colors';
 import ForgotPassword from '../pages/auth/ForgotPassword';
 import { isAndroid } from '../constants/misc';
@@ -26,36 +26,37 @@ import { isAndroid } from '../constants/misc';
 //------------- AUTH ROUTES -----------------------------
 
 const AuthStack = createStackNavigator();
+const AuthStackNavigationOptions = (route: any) => {
+    const routeName = route.route.name;
+    if (!isAndroid) {
+        if (routeName === 'Login') {
+            return {
+                cardOverlayEnabled: true,
+                gestureEnabled: true,
+                useNativeDrivers: true,
+            };
+        }
+    } else if (isAndroid) {
+        return {
+            cardOverlayEnabled: true,
+            gestureEnabled: true,
+            useNativeDrivers: true,
+        };
+    }
+    return {
+        gestureEnabled: true,
+        cardOverlayEnabled: true,
+        useNativeDrivers: true,
+        ...TransitionPresets.ModalPresentationIOS,
+    };
+};
 
 export const AuthNavigation = () => {
     return (
         <AuthStack.Navigator
             initialRouteName={AUTH_NAVIGATION.Login}
             mode="modal"
-            screenOptions={(route) => {
-                const routeName = route.route.name;
-                if (!isAndroid) {
-                    if (routeName === 'Login') {
-                        return {
-                            cardOverlayEnabled: true,
-                            gestureEnabled: true,
-                            useNativeDrivers: true,
-                        };
-                    }
-                } else if (isAndroid) {
-                    return {
-                        cardOverlayEnabled: true,
-                        gestureEnabled: true,
-                        useNativeDrivers: true,
-                    };
-                }
-                return {
-                    gestureEnabled: true,
-                    cardOverlayEnabled: true,
-                    useNativeDrivers: true,
-                    ...TransitionPresets.ModalPresentationIOS,
-                };
-            }}>
+            screenOptions={AuthStackNavigationOptions}>
             <AuthStack.Screen
                 name={AUTH_NAVIGATION.Login}
                 component={Login}
@@ -78,36 +79,37 @@ export const AuthNavigation = () => {
 //------------- SET USER ROUTES -----------------------------
 
 const SetUserStack = createStackNavigator();
+const UserStackNavigationOptions = (route: any) => {
+    const routeName = route.route.name;
+    if (!isAndroid) {
+        if (routeName === SETUSER_NAVIGATION.SetUserInfo) {
+            return {
+                cardOverlayEnabled: true,
+                gestureEnabled: true,
+                useNativeDrivers: true,
+            };
+        }
+    } else if (isAndroid) {
+        return {
+            cardOverlayEnabled: true,
+            gestureEnabled: true,
+            useNativeDrivers: true,
+        };
+    }
+    return {
+        gestureEnabled: true,
+        cardOverlayEnabled: true,
+        useNativeDrivers: true,
+        ...TransitionPresets.ModalPresentationIOS,
+    };
+};
 
 export const SetUserNavigation = () => {
     return (
         <SetUserStack.Navigator
             initialRouteName={SETUSER_NAVIGATION.SetUserInfo}
             mode="modal"
-            screenOptions={(route) => {
-                const routeName = route.route.name;
-                if (!isAndroid) {
-                    if (routeName === SETUSER_NAVIGATION.SetUserInfo) {
-                        return {
-                            cardOverlayEnabled: true,
-                            gestureEnabled: true,
-                            useNativeDrivers: true,
-                        };
-                    }
-                } else if (isAndroid) {
-                    return {
-                        cardOverlayEnabled: true,
-                        gestureEnabled: true,
-                        useNativeDrivers: true,
-                    };
-                }
-                return {
-                    gestureEnabled: true,
-                    cardOverlayEnabled: true,
-                    useNativeDrivers: true,
-                    ...TransitionPresets.ModalPresentationIOS,
-                };
-            }}>
+            screenOptions={UserStackNavigationOptions}>
             <SetUserStack.Screen
                 name={SETUSER_NAVIGATION.SetUserInfo}
                 component={SetUserInfo}
@@ -152,17 +154,20 @@ export const SearchNavigation = () => {
 
 const AccountStack = createStackNavigator();
 
+const AccountNavigationScreenOptions = () => {
+    return {
+        headerTintColor: 'white',
+        headerPressColorAndroid: 'white',
+        headerTitleStyle: { color: 'white' },
+        headerBackground: () => (
+            <View style={{ flex: 1, backgroundColor: black }} />
+        ),
+    };
+};
+
 export const AccountNavigation = () => {
     return (
-        <AccountStack.Navigator
-            screenOptions={{
-                headerTintColor: 'white',
-                headerPressColorAndroid: 'white',
-                headerTitleStyle: { color: 'white' },
-                headerBackground: () => (
-                    <View style={{ flex: 1, backgroundColor: black }} />
-                ),
-            }}>
+        <AccountStack.Navigator screenOptions={AccountNavigationScreenOptions}>
             <AccountStack.Screen
                 name={ACCOUNT_NAVIGATION.Account}
                 component={AccountPage}

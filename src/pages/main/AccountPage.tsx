@@ -21,6 +21,7 @@ interface listItem {
     title: string;
     icon: string;
     onPress: CallableFunction;
+    onLongPress?: CallableFunction;
 }
 
 const AccountPage = () => {
@@ -87,6 +88,26 @@ const AccountPage = () => {
                         JSON.stringify(!darkMode),
                     );
 
+                    dispatch({
+                        type: actionTypes.SET_DARKMODE,
+                        darkMode: !darkMode,
+                    });
+                } catch (err) {
+                    Snackbar.show({
+                        text: 'An error occured.',
+                        duration: Snackbar.LENGTH_LONG,
+                        backgroundColor: 'red',
+                    });
+                }
+            },
+            onLongPress: async () => {
+                try {
+                    await AsyncStorage.removeItem('darkMode');
+                    Snackbar.show({
+                        text: 'Theme has been set to dynamic.',
+                        duration: Snackbar.LENGTH_LONG,
+                        backgroundColor: 'green',
+                    });
                     dispatch({
                         type: actionTypes.SET_DARKMODE,
                         darkMode: !darkMode,
@@ -172,6 +193,9 @@ const AccountPage = () => {
                                                 right
                                                 checked={darkMode}
                                                 onPress={() => item?.onPress()}
+                                                onLongPress={() =>
+                                                    item?.onLongPress()
+                                                }
                                             />
                                         </ListItem>
                                     </View>
