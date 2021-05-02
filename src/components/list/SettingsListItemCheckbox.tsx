@@ -26,7 +26,11 @@ const SettingsListItemCheckbox = ({
                 delay: 50 * index,
             }}
             exit={{ opacity: 0, translateY: 50 }}>
-            <ListItem bottomDivider>
+            <ListItem
+                onLongPress={() =>
+                    item?.onLongPress ? item?.onLongPress() : () => {}
+                }
+                bottomDivider>
                 <Icon type="font-awesome" name={item?.icon} />
                 <ListItem.Content>
                     <ListItem.Title>{item?.title}</ListItem.Title>
@@ -35,7 +39,6 @@ const SettingsListItemCheckbox = ({
                     right
                     checked={darkMode}
                     onPress={() => item?.onPress()}
-                    onLongPress={() => item?.onLongPress ?? {}}
                 />
             </ListItem>
         </View>

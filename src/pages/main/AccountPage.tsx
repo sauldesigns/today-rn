@@ -1,6 +1,11 @@
 import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import React from 'react';
-import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
+import {
+    SafeAreaView,
+    StatusBar,
+    StyleSheet,
+    useColorScheme,
+} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import UserDetails from '../../components/profile/UserDetails';
 import { ACCOUNT_NAVIGATION } from '../../constants/navigation';
@@ -33,6 +38,7 @@ const AccountPage = () => {
     const inAppBrowserAPI = new InAppBrowserAPI();
     const firebaseAPI = new FirebaseAPI();
     const [{ darkMode }, dispatch] = useStateValue();
+    const colorScheme = useColorScheme();
 
     useScrollToTop(ref);
 
@@ -111,7 +117,7 @@ const AccountPage = () => {
                     });
                     dispatch({
                         type: actionTypes.SET_DARKMODE,
-                        darkMode: !darkMode,
+                        darkMode: colorScheme === 'dark',
                     });
                 } catch (err) {
                     Snackbar.show({
@@ -122,6 +128,7 @@ const AccountPage = () => {
                 }
             },
         },
+
         {
             title: 'Sign Out',
             icon: 'sign-out',
