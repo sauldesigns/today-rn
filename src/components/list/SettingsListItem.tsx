@@ -2,6 +2,7 @@ import { View } from '@motify/components';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
+import { SFProDisplayMedium, SFProDisplayRegular } from '../../constants/font';
 import { SettingsListItemValue } from '../../pages/main/AccountPage';
 
 interface SettingsListItemProps {
@@ -24,7 +25,9 @@ const SettingsListItem = ({ item, index }: SettingsListItemProps) => {
             <ListItem onPress={() => item?.onPress()} bottomDivider>
                 <Icon type="font-awesome" name={item?.icon} />
                 <ListItem.Content>
-                    <ListItem.Title>{item?.title}</ListItem.Title>
+                    <ListItem.Title style={styles.title}>
+                        {item?.title}
+                    </ListItem.Title>
                 </ListItem.Content>
             </ListItem>
         </View>
@@ -33,4 +36,9 @@ const SettingsListItem = ({ item, index }: SettingsListItemProps) => {
 
 export default SettingsListItem;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    title: {
+        fontFamily: SFProDisplayRegular,
+        marginBottom: 8,
+    },
+});

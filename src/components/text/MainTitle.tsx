@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleProp, StyleSheet, Text, TextStyle } from 'react-native';
 import { black } from '../../constants/colors';
-import { SFProDisplayBold } from '../../constants/font';
+import { SFProDisplayBold, SFProDisplayMedium } from '../../constants/font';
 
 interface MainTitleProps {
     style?: StyleProp<TextStyle>;
@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 50,
         marginBottom: 48,
-        fontFamily: SFProDisplayBold,
+        fontFamily: SFProDisplayMedium,
     },
 });
