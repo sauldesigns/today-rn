@@ -69,15 +69,15 @@ const ForgotPassword = () => {
                     <View style={styles.input_container}>
                         <Controller
                             control={control}
-                            render={({ onChange, onBlur }) => (
+                            render={({ field}) => (
                                 <MainInput
                                     placeholder="E-mail"
                                     placeholderTextColor="rgba(255,255,255,0.3)"
                                     style={{ color: 'white' }}
                                     keyboardType="email-address"
                                     textContentType="emailAddress"
-                                    onBlur={onBlur}
-                                    onChange={onChange}
+                                    onBlur={field.onBlur}
+                                    onChange={field.onChange}
                                 />
                             )}
                             name="email"

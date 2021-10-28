@@ -1,7 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
-
-platform :ios, '10.0'
+pod ‘RNFBAdMob’, :path => ‘../node_modules/@react-native-firebase/admob’
+platform :ios, '11.0'
 
  # Define find-and-replace function
  def find_and_replace(dir, findstr, replacestr)
@@ -38,28 +38,28 @@ target 'today' do
     # react_native_post_install(installer)
 
     # # to build for the simulator on Apple M1
-    # installer.pods_project.targets.each do |target|
-    #   target.build_configurations.each do |config|
-    #     # disables arm64 builds for the simulator
-    #     config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
-    #   end
-    # end
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        # disables arm64 builds for the simulator
+        config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+      end
+    end
 
 
-    find_and_replace("../node_modules/react-native/React/CxxBridge/RCTCxxBridge.mm",
-    "_initializeModules:(NSArray<id<RCTBridgeModule>> *)modules", "_initializeModules:(NSArray<Class> *)modules")
+  #   find_and_replace("../node_modules/react-native/React/CxxBridge/RCTCxxBridge.mm",
+  #   "_initializeModules:(NSArray<id<RCTBridgeModule>> *)modules", "_initializeModules:(NSArray<Class> *)modules")
 
-  find_and_replace("../node_modules/react-native/ReactCommon/turbomodule/core/platform/ios/RCTTurboModuleManager.mm",
-    "RCTBridgeModuleNameForClass(strongModule))", "RCTBridgeModuleNameForClass(Class(strongModule)))")
-    ## Fix for Flipper-Folly on iOS 14.5
-    find_and_replace("Pods/Flipper-Folly/folly/synchronization/DistributedMutex-inl.h",
-      "atomic_notify_one(state)", "folly::atomic_notify_one(state)")
+  # find_and_replace("../node_modules/react-native/ReactCommon/turbomodule/core/platform/ios/RCTTurboModuleManager.mm",
+  #   "RCTBridgeModuleNameForClass(strongModule))", "RCTBridgeModuleNameForClass(Class(strongModule)))")
+  #   ## Fix for Flipper-Folly on iOS 14.5
+  #   find_and_replace("Pods/Flipper-Folly/folly/synchronization/DistributedMutex-inl.h",
+  #     "atomic_notify_one(state)", "folly::atomic_notify_one(state)")
 
-    find_and_replace("Pods/Headers/Private/RCT-Folly/folly/synchronization/DistributedMutex-inl.h",
-      "atomic_notify_one(state)", "folly::atomic_notify_one(state)")
+  #   find_and_replace("Pods/Headers/Private/RCT-Folly/folly/synchronization/DistributedMutex-inl.h",
+  #     "atomic_notify_one(state)", "folly::atomic_notify_one(state)")
 
-    find_and_replace("Pods/Flipper-Folly/folly/synchronization/DistributedMutex-inl.h",
-      "atomic_wait_until(&state, previous | data, deadline)", "folly::atomic_wait_until(&state, previous | data, deadline)")
+  #   find_and_replace("Pods/Flipper-Folly/folly/synchronization/DistributedMutex-inl.h",
+  #     "atomic_wait_until(&state, previous | data, deadline)", "folly::atomic_wait_until(&state, previous | data, deadline)")
   end
   
 end

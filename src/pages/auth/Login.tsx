@@ -79,7 +79,7 @@ const Login = () => {
                 <View style={styles.input_container}>
                     <Controller
                         control={control}
-                        render={({ onChange, onBlur }) => (
+                        render={({ field }) => (
                             <>
                                 <MainInput
                                     placeholder="E-mail"
@@ -87,8 +87,8 @@ const Login = () => {
                                     keyboardType="email-address"
                                     textContentType="emailAddress"
                                     style={{ color: 'white' }}
-                                    onBlur={onBlur}
-                                    onChange={onChange}
+                                    onBlur={field.onBlur}
+                                    onChange={field.onChange}
                                 />
                                 {errors.email?.type === 'pattern' ? (
                                     <Text style={styles.error_text}>
@@ -110,13 +110,13 @@ const Login = () => {
                 <View style={styles.input_container}>
                     <Controller
                         control={control}
-                        render={({ onChange, onBlur }) => (
+                        render={({ field }) => (
                             <>
                                 <SecureInput
                                     textContentType="password"
                                     placeholderTextColor="rgba(255,255,255,0.3)"
-                                    onBlur={onBlur}
-                                    onChange={onChange}
+                                    onBlur={field.onBlur}
+                                    onChange={field.onChange}
                                 />
                                 {errors.password?.type === 'minLength' ? (
                                     <Text style={styles.error_text}>
@@ -136,7 +136,9 @@ const Login = () => {
                 <TouchableOpacity
                     style={styles.forgot_password_container}
                     onPress={() =>
-                        navigation.navigate(AUTH_NAVIGATION.ForgotPassword)
+                        navigation.navigate(
+                            AUTH_NAVIGATION.ForgotPassword as any,
+                        )
                     }>
                     <Text style={styles.forgot_password_text}>
                         Forgot Password
@@ -150,7 +152,9 @@ const Login = () => {
                     title="Login"
                 />
                 <TouchableOpacity
-                    onPress={() => navigation.navigate(AUTH_NAVIGATION.SignUp)}
+                    onPress={() =>
+                        navigation.navigate(AUTH_NAVIGATION.SignUp as any)
+                    }
                     style={styles.create_account_button}>
                     <Text style={styles.create_account_button_text}>
                         Create an Account

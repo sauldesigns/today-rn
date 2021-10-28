@@ -20,7 +20,6 @@ const SetUserInfo = () => {
     const {
         control,
         handleSubmit,
-        errors,
         formState: { isValid, isDirty },
     } = useForm({ mode: 'all' });
     const [isLoading, setIsLoading] = useState(false);
@@ -86,12 +85,12 @@ const SetUserInfo = () => {
                 <View style={styles.input_container}>
                     <Controller
                         control={control}
-                        render={({ onChange, onBlur }) => (
+                        render={({ field }) => (
                             <MainInput
                                 placeholder="Username"
                                 textContentType="username"
-                                onBlur={onBlur}
-                                onChange={onChange}
+                                onBlur={field.onBlur}
+                                onChange={field.onChange}
                             />
                         )}
                         name="username"
@@ -103,13 +102,13 @@ const SetUserInfo = () => {
                 <View style={styles.input_container}>
                     <Controller
                         control={control}
-                        render={({ onChange, onBlur }) => (
+                        render={({ field }) => (
                             <MainInput
                                 placeholder="Enter bio here... (Optional)"
                                 placeholderTextColor="white"
                                 style={{ color: 'white' }}
-                                onBlur={onBlur}
-                                onChange={onChange}
+                                onBlur={field.onBlur}
+                                onChange={field.onChange}
                             />
                         )}
                         name="bio"

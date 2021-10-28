@@ -14,10 +14,10 @@ export enum SEARCH_NAVIGATION {
 }
 
 export enum MAIN_NAVIGATION_TABS {
-    'Home' = 'Home',
-    'Search' = 'Search',
-    'Saved' = 'Saved',
-    'Account' = 'Account',
+    'Home' = 'Home_Tab',
+    'Search' = 'Search_Tab',
+    'Saved' = 'Saved_Tab',
+    'Account' = 'Account_Tab',
 }
 
 export enum SETUSER_NAVIGATION {

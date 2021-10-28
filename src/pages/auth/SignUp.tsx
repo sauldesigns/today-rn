@@ -81,7 +81,7 @@ const SignUp = () => {
                     <View style={styles.input_container}>
                         <Controller
                             control={control}
-                            render={({ onChange, onBlur }) => (
+                            render={({ field }) => (
                                 <>
                                     <MainInput
                                         placeholder="Username"
@@ -89,8 +89,8 @@ const SignUp = () => {
                                         style={{ color: 'white' }}
                                         keyboardType="default"
                                         textContentType="username"
-                                        onBlur={onBlur}
-                                        onChange={onChange}
+                                        onBlur={field.onBlur}
+                                        onChange={field.onChange}
                                     />
                                     {errors.username?.type === 'minLength' ? (
                                         <Text style={styles.error_text}>
@@ -113,7 +113,7 @@ const SignUp = () => {
                     <View style={styles.input_container}>
                         <Controller
                             control={control}
-                            render={({ onChange, onBlur }) => (
+                            render={({ field }) => (
                                 <>
                                     <MainInput
                                         placeholder="E-mail"
@@ -121,8 +121,8 @@ const SignUp = () => {
                                         style={{ color: 'white' }}
                                         keyboardType="email-address"
                                         textContentType="emailAddress"
-                                        onBlur={onBlur}
-                                        onChange={onChange}
+                                        onBlur={field.onBlur}
+                                        onChange={field.onChange}
                                     />
                                     {errors.email?.type === 'pattern' ? (
                                         <Text style={styles.error_text}>
@@ -144,14 +144,14 @@ const SignUp = () => {
                     <View style={styles.input_container}>
                         <Controller
                             control={control}
-                            render={({ onChange, onBlur }) => (
+                            render={({ field }) => (
                                 <>
                                     <SecureInput
                                         textContentType="password"
                                         placeholderTextColor="rgba(255,255,255,0.3)"
                                         style={{ color: 'white' }}
-                                        onBlur={onBlur}
-                                        onChange={onChange}
+                                        onBlur={field.onBlur}
+                                        onChange={field.onChange}
                                     />
                                     {errors.password?.type === 'minLength' ? (
                                         <Text style={styles.error_text}>

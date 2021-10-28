@@ -47,6 +47,7 @@ const AuthStackNavigationOptions = (route: any) => {
         gestureEnabled: true,
         cardOverlayEnabled: true,
         useNativeDrivers: true,
+        // presentation: 'modal',
         ...TransitionPresets.ModalPresentationIOS,
     };
 };
@@ -55,7 +56,6 @@ export const AuthNavigation = () => {
     return (
         <AuthStack.Navigator
             initialRouteName={AUTH_NAVIGATION.Login}
-            mode="modal"
             screenOptions={AuthStackNavigationOptions}>
             <AuthStack.Screen
                 name={AUTH_NAVIGATION.Login}
@@ -100,6 +100,7 @@ const UserStackNavigationOptions = (route: any) => {
         gestureEnabled: true,
         cardOverlayEnabled: true,
         useNativeDrivers: true,
+
         ...TransitionPresets.ModalPresentationIOS,
     };
 };
@@ -108,7 +109,6 @@ export const SetUserNavigation = () => {
     return (
         <SetUserStack.Navigator
             initialRouteName={SETUSER_NAVIGATION.SetUserInfo}
-            mode="modal"
             screenOptions={UserStackNavigationOptions}>
             <SetUserStack.Screen
                 name={SETUSER_NAVIGATION.SetUserInfo}

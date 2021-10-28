@@ -88,11 +88,10 @@ const Landing = () => {
 
     return (
         <TabStack.Navigator
-            tabBarOptions={{
-                activeTintColor: darkMode ? 'white' : black,
-                showLabel: false,
-            }}
             screenOptions={({ route }) => ({
+                headerShown: false,
+                tabBarActiveTintColor: darkMode ? 'white' : black,
+                tabBarShowLabel: false,
                 tabBarIcon: ({ color, size }) => {
                     let iconName: string = '';
 
@@ -109,6 +108,7 @@ const Landing = () => {
                     // You can return any component that you like here!
                     return (
                         <Icon
+                            tvParallaxProperties={null}
                             type="font-awesome"
                             name={iconName}
                             size={size}
